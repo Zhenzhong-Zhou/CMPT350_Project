@@ -1,0 +1,10 @@
+<h2>All Categories</h2>
+<form action="/admin/categories" method="get">
+    <label>Category Name</label>
+    <input type="text" name="category_name" value="<%=searchOptions.category_name%>">
+    <button type="submit">Search</button>
+</form>
+<br>
+<%categories.forEach(category => {%>
+    <div><%=category.categoryName%></div>
+<%})%>
