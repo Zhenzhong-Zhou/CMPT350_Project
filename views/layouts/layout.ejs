@@ -4,7 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Tian Mao</title>
+    <%if(locals.login != null) {%>
+        <%if (login === "2") {%>
+            <link rel="icon" href="/images/icon/tianmao.jpg">
+            <title>Admin Page</title>
+        <%}else {%>
+            <title>Tian Mao</title>
+        <%}%>
+    <%}%>
 </head>
 <body>
 <%if(locals.login != null) {%>
@@ -20,6 +27,9 @@
     <%- include("../partials/user/footer.ejs");%>
 <%}%>
 <%}%>
-
+Cannot load images
+<img src="/admin.png">
+<br>
+Cannot reorder pages
 </body>
 </html>

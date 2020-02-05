@@ -13,7 +13,7 @@ const adminCategoryRouter = require("./routes/admin/categories");
 
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
-app.set("layout", "layouts/layout", "layouts/layout1");
+app.set("layout", "layouts/layout");
 app.use(expressLayouts);
 app.set(express.static("public"));
 app.use(bodyParser.urlencoded({limit: "10mb", extended: false}));
@@ -29,7 +29,6 @@ app.use("/admin/dashboard", adminIndexRouter);
 app.use("/admin/pages", adminPageRouter);
 app.use("/admin/categories", adminCategoryRouter);
 
-let port = 3000;
-app.listen(process.env.PORT || port, () => {
-    console.log("Connected to Server: " + port)
+app.listen(process.env.PORT || 3000, () => {
+    console.log("Connected to Server......")
 });

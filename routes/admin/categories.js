@@ -15,7 +15,8 @@ router.get("/", async (req, res) => {
         const categories = await Category.find(searchOptions);
         res.render("admin/categories/index", {
             categories: categories,
-            searchOptions: req.query
+            searchOptions: req.query,
+            login: "2"
         });
     }catch (e) {
         res.redirect("/");
@@ -26,7 +27,7 @@ router.get("/", async (req, res) => {
  * GET New Category Route
  */
 router.get("/new", (req, res) => {
-    res.render("admin/categories/new", {category: new Category()});
+    res.render("admin/categories/new", {category: new Category(), login: "2"});
 });
 
 /*
@@ -39,7 +40,8 @@ router.post("/", [
     async (req, res) => {
     const category = new Category({
         categoryName: req.body.category_name,
-        slug: req.body.category_slug
+        slug: req.body.category_slug,
+        login: "2"
     });
     try {
         const newCategory = await category.save();
@@ -55,7 +57,8 @@ router.post("/", [
                 errorMessage: result.array()[0],
                 errorMessage1: result.array()[1],
                 errorMessage2: "",
-                category: category
+                category: category,
+                login: "2"
             });
         }
     }

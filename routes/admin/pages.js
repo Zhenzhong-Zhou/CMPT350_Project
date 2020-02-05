@@ -9,7 +9,7 @@ const { check, validationResult } = require('express-validator');
 router.get("/", async (req, res) => {
     try {
         const pages = await Page.find({});
-        res.render("admin/pages/index", {pages: pages});
+        res.render("admin/pages/index", {pages: pages, login: "2"});
     }catch (e) {
         res.redirect("/");
     }
@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
  * GET New Page Route
  */
 router.get("/new", (req, res) => {
-    res.render("admin/pages/new", {page: new Page()});
+    res.render("admin/pages/new", {page: new Page(), login: "2"});
 });
 
 /*
@@ -51,7 +51,8 @@ router.post("/", [
                 errorMessage: result.array()[0],
                 errorMessage1: result.array()[1],
                 errorMessage2: result.array()[2],
-                page: page
+                page: page,
+                login: "2"
             });
         }
     }
