@@ -1,4 +1,3 @@
-
 <h2>All Pages</h2>
 <form action="/admin/pages" method="get">
     <label>Category Name</label>
@@ -22,18 +21,18 @@
     </thead>
     <tbody>
     <%if (locals.pages != null) {%>
-    <%pages.forEach(page => {%>
-    <tr id="id_<%=page._id%>" class="<%=page.slug%>">
-        <td><%=page.pageTitle%></td>
-        <td><a href="/admin/pages/view_page/<%=page._id%>">View</a></td>
-        <td><a href="/admin/pages/edit_page/<%=page._id%>">Edit</a></td>
-        <%if (page.slug === "home") {%>
-            <td></td>
-        <%}else {%>
-            <a href="#">Delete</a>
-        <%}%>
-    </tr>
-    <%})%>
+        <%pages.forEach(page => {%>
+            <tr id="id_<%=page._id%>" class="<%=page.slug%>">
+                <td><%=page.pageTitle%></td>
+                <td><a href="#">View</a></td>
+                <td><a href="#">Edit</a></td>
+                <%if (page.slug === "home") {%>
+                    <td></td>
+                <%}else {%>
+                    <td><a href="#">Delete</a></td>
+                <%}%>
+            </tr>
+        <%})%>
     <%}%>
     </tbody>
 </table>
@@ -44,7 +43,7 @@
         placeholder: "ui-state-highlight",
         update: function () {
             let ids = $('tbody').sortable("serialize");
-            let url = "/admin/pages/reorder_page";
+            let url = "/admin/pages";
             $.post(url, ids);
         }
     });

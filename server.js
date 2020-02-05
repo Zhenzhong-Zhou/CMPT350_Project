@@ -13,7 +13,7 @@ const adminCategoryRouter = require("./routes/admin/categories");
 
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
-app.set("layout", "layouts/layout");
+app.set("layout", "layouts/layout", "layouts/layout1");
 app.use(expressLayouts);
 app.set(express.static("public"));
 app.use(bodyParser.urlencoded({limit: "10mb", extended: false}));

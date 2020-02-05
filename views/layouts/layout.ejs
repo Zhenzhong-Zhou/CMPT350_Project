@@ -7,9 +7,19 @@
     <title>Tian Mao</title>
 </head>
 <body>
-<%- include("../partials/admin/header.ejs");%>
-<%- include("../partials/errorMessage.ejs");%>
-<%- body%>
-<%- include("../partials/admin/footer.ejs");%>
+<%if(locals.login != null) {%>
+<%if (login === "2") {%>
+    <%- include("../partials/admin/header.ejs");%>
+    <%- include("../partials/errorMessage.ejs");%>
+    <%- body%>
+    <%- include("../partials/admin/footer.ejs");%>
+<%}else {%>
+    <%- include("../partials/user/header.ejs");%>
+    <%- include("../partials/errorMessage.ejs");%>
+    <%- body%>
+    <%- include("../partials/user/footer.ejs");%>
+<%}%>
+<%}%>
+
 </body>
 </html>

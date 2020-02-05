@@ -60,7 +60,7 @@ router.post("/", [
 /*
  *  POST reorder pages
  */
-router.post("/reorder_page", (req, res) => {
+router.post("/", async (req) => {
     let ids = req.body['id[]'];
     let count = 0;
     for (let i = 0; i < ids.length; i++) {
