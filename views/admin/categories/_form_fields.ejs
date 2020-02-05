@@ -1,9 +1,11 @@
-<div>
-    <label>Category Name</label>
-    <input type="text" name="category_name" placeholder="Category" value="<%=category.name%>">
-</div>
+<%if (locals.category != null) {%>
+    <div>
+        <label>Category Name</label>
+        <input type="text" name="category_name" placeholder="Category" value="<%=category.name%>">
+    </div>
 
-<div>
-    <label>Category Slug</label>
-    <input type="text" name="category_slug" placeholder="Slug" value="<%=category.slug%>">
-</div>
+    <div>
+        <label>Category Slug</label>
+        <input type="text" name="category_slug" placeholder="Slug" value="<%=category.slug%>">
+    </div>
+<%}%>
