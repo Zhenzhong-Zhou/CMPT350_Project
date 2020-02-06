@@ -22,7 +22,7 @@ app.use(expressLayouts);
 app.set(express.static("public"));
 app.use(bodyParser.urlencoded({limit: "10mb", extended: false}));
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: "secret",
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -43,6 +43,12 @@ app.use("/sign_up", registerSignUpRouter);
 app.use("/admin/dashboard", adminIndexRouter);
 app.use("/admin/pages", adminPageRouter);
 app.use("/admin/categories", adminCategoryRouter);
+
+// The Last Middleware: 404 Page
+app.use((req, res, next) => {
+    res.render("404", {login: "4"});
+    next();
+});
 
 app.listen(process.env.PORT || 3000, () => {
     console.log("Connected to Server......")

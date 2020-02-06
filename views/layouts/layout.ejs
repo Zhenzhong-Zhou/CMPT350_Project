@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="main.css">
+<!--    <link rel="stylesheet" type="text/css" href="main.css">-->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
     <%if(locals.login != null) {%>
         <%if (login === "2") {%>
             <link rel="icon" href="/images/icon/tianmao.jpg">
@@ -26,7 +27,12 @@
         <%- include("../partials/errorMessage.ejs");%>
         <%- body%>
         <%- include("../partials/admin/footer.ejs");%>
+    <%}else if (login === "3"){%>
+        <%- include("../partials/errorMessage.ejs");%>
+        <%- body%>
+        <%- include("../partials/user/footer.ejs");%>
     <%}else {%>
+        <%- include("../partials/user/header.ejs");%>
         <%- include("../partials/errorMessage.ejs");%>
         <%- body%>
         <%- include("../partials/user/footer.ejs");%>
