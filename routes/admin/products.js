@@ -20,8 +20,21 @@ const { check, validationResult } = require('express-validator');
  * GET Products Route
  */
 router.get("/", async (req, res) => {
+    let query = Product.find();
+    if (req.query.product_name != null && req.query.product_name !== "") {
+        query = query.regex("productName", new RegExp(req.query.product_name, "i"));
+    }
+    if (req.query.author != null && req.query.author !== "") {
+        query = query.regex("author", new RegExp(req.query.author, "i"));
+    }
+    if (req.query.product_publishBefore != null && req.query.product_publishBefore !== "") {
+       query = query.lte("publishDate", req.query.product_publishBefore)
+    }
+    if (req.query.product_publishAfter != null && req.query.product_publishAfter !== "") {
+        query = query.gte("publishDate", req.query.product_publishAfter)
+    }
     try {
-        const products = await Product.find({});
+        const products = await query.exec();
         res.render("admin/products/index", {
             products: products,
             searchOptions: req.query,
@@ -36,17 +49,6 @@ router.get("/", async (req, res) => {
  * GET New Product Route
  */
 router.get("/new", async (req, res) => {
-    // try {
-    //     const categories = await Category.find({});
-    //     const product = new Product();
-    //     res.render("admin/products/new", {
-    //         categories: categories,
-    //         product: product,
-    //         login: "2"
-    //     })
-    // }catch (e) {
-    //     res.redirect("/");
-    // }
     await renderNewPage(res, new Product())
 });
 
