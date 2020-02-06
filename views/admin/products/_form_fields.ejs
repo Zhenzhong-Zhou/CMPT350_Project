@@ -1,0 +1,48 @@
+<div>
+    <label>Product Name</label>
+    <input type="text" name="product_name" placeholder="Product" value="<%=product.productName%>">
+</div>
+
+<div>
+    <label>Category</label>
+    <select name="category">
+        <%categories.forEach(category => {%>
+            <%if (category.id === product.category) {%>
+                <option selected label="<%=category.categoryName%>" value="<%=category.id%>"></option>
+            <%}else{%>
+                <option label="<%=category.categoryName%>" value="<%=category.id%>"></option>
+            <%}%>
+        <%})%>
+    </select>
+</div>
+
+<div>
+    <label>Product Slug</label>
+    <input type="text" name="product_slug" placeholder="Slug" value="<%=product.slug%>">
+</div>
+
+<div>
+    <label>Product Price</label>
+    <input type="number" name="product_price" placeholder="Price" min="0" step="0.01" value="<%=product.price%>">
+</div>
+
+<div>
+    <label>Product Publish Date</label>
+    <input type="date" name="product_publishDate"
+           value="<%=product.publishDate == null ? "" : product.publishDate.toString().split("T")[0]%>">
+</div>
+
+<div>
+    <label>Product Page Count</label>
+    <input type="number" name="product_pageCount" placeholder="Page Count" min="1" step="1" value="<%=product.pageCount%>">
+</div>
+
+<div>
+    <label>Product Cover Image</label>
+    <input type="file" name="cover">
+</div>
+
+<div>
+    <label>Product Description</label>
+    <textarea name="product_description" cols="30" rows="10" placeholder="Description"><%=product.description%></textarea>
+</div>
