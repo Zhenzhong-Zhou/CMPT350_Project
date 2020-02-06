@@ -35,7 +35,7 @@ router.get("/new", async (req, res) => {
             login: "2"
         })
     }catch (e) {
-        res.redirect("/admin/products");
+        res.redirect("/");
     }
 });
 
@@ -57,7 +57,7 @@ router.post("/", upload.single("cover"), async (req, res, next) => {
     try {
         const newProduct = await product.save();
         // res.redirect(`admin/products/${newProducts.id}`);
-        res.redirect("admin/products");
+        res.redirect("products");
     }catch (e) {
         await renderNewPage(res, product, true);
     }
