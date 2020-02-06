@@ -20,6 +20,8 @@ const { check, validationResult } = require('express-validator');
  */
 router.get("/", async (req, res) => {
     res.send("All Products");
+    // const product = await Product.find({});
+    // res.render("admin/products/new", {product: product, categories: Category.find({})})
 });
 
 /*

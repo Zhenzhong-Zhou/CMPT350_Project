@@ -7,9 +7,17 @@ const { check, validationResult } = require('express-validator');
  * GET Pages Route
  */
 router.get("/", async (req, res) => {
+    let searchOptions = {};
+    if (req.query.page_title != null && req.query.page_title !== "") {
+        searchOptions.pageTitle = new RegExp(req.query.page_title, "i");
+    }
     try {
-        const pages = await Page.find({});
-        res.render("admin/pages/index", {pages: pages, login: "2"});
+        const pages = await Page.find(searchOptions);
+        res.render("admin/pages/index", {
+            pages: pages,
+            searchOptions: req.query,
+            login: "2"
+        });
     }catch (e) {
         res.redirect("/");
     }
