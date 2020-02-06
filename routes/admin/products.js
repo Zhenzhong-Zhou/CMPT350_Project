@@ -5,7 +5,7 @@ const path = require("path");
 const Category = require("../../models/category");
 const Product = require("../../models/product");
 const uploadPath = path.join("public", Product.coverImageBasePath);
-const imageMimeTypes = ["image/jpg", "image/png", "images/gif"];
+const imageMimeTypes = ["image/jpg", "image/jpeg", "image/png", "images/gif"];
 const upload = multer({
     dest: uploadPath,
     fileFilter: (req, file, callback) => {
@@ -42,7 +42,7 @@ router.get("/new", async (req, res) => {
 /*
  * POST Create Product Route
  */
-router.post("/", upload.single("cover"), async (req, res) => {
+router.post("/", upload.single("cover"), async (req, res, next) => {
     const fileName = req.file != null ? req.file.filename : null;
     const product = new Product({
         productName: req.body.product_name,
@@ -59,7 +59,6 @@ router.post("/", upload.single("cover"), async (req, res) => {
         // res.redirect(`admin/products/${newProducts.id}`);
         res.redirect("admin/products");
     }catch (e) {
-        console.log(e);
         await renderNewPage(res, product, true);
     }
 });

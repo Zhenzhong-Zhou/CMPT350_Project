@@ -43,8 +43,11 @@
         placeholder: "ui-state-highlight",
         update: function () {
             let ids = $('tbody').sortable("serialize");
-            let url = "/admin/pages";
-            $.post(url, ids);
+            let url = "/admin/pages/reorder";
+            $.post(url, ids, () => console.log('updated'))
+                .fail(function() {
+                    alert( "error update" );
+                });
         }
     });
 </script>

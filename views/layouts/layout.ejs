@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-<!--    <link rel="stylesheet" type="text/css" href="main.css">-->
-    <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+    <link rel="stylesheet" type="text/css" href="/public/stylesheets/main.css">
     <%if(locals.login != null) {%>
-        <%if (login === "2") {%>
-            <link rel="icon" href="/images/icon/tianmao.jpg">
-            <title>Admin Page</title>
-        <%}else {%>
+        <%if (login === "1") {%>
+            <link rel="icon" type="image/x-icon" href="public/images/icon/tianmao.jpg">
             <title>Tian Mao</title>
+        <%}else if (login === "2"){%>
+            <link rel="icon" type="image/x-icon" href="public/images/icon/admin.png">
+            <title>Admin Page</title>
         <%}%>
     <%}%>
 </head>
@@ -38,14 +38,10 @@
         <%- include("../partials/user/footer.ejs");%>
     <%}%>
 <%}%>
-Cannot load images
-<img src="../admin.png"/>
-<img src="">
+Cannot load admin page icon
 <br>
 Cannot reorder pages
 <br>
 login should be changed
-<br>
-cannot load css file
 </body>
 </html>
