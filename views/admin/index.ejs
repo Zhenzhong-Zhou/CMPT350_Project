@@ -1,2 +1,29 @@
 <h2>Admin Dashboard Page</h2>
-<h3></h3>
+<br><br><br>
+<h3>Recently Added</h3>
+
+<div>
+    <label>Pages</label>
+    <br><br>
+    <%pages.forEach(page => {%>
+        <div><%=page.pageTitle%></div>
+    <%})%>
+</div>
+<br>
+
+<div>
+    <label>Categories</label>
+    <br><br>
+    <%categories.forEach(category => {%>
+        <div><%=category.categoryName%></div>
+    <%})%>
+</div>
+<br>
+
+<div>
+    <label>Products</label>
+    <br><br>
+    <%products.forEach(product => {%>
+        <img height="150" width="100" src="<%=product.coverImagePath%>" alt="product cover image">
+    <%})%>
+</div>
