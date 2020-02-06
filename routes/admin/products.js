@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
 const Category = require("../../models/category");
 const Product = require("../../models/product");
 const uploadPath = path.join("public", Product.coverImageBasePath);
@@ -28,17 +29,18 @@ router.get("/", async (req, res) => {
  * GET New Product Route
  */
 router.get("/new", async (req, res) => {
-    try {
-        const categories = await Category.find({});
-        const product = new Product();
-        res.render("admin/products/new", {
-            categories: categories,
-            product: product,
-            login: "2"
-        })
-    }catch (e) {
-        res.redirect("/");
-    }
+    // try {
+    //     const categories = await Category.find({});
+    //     const product = new Product();
+    //     res.render("admin/products/new", {
+    //         categories: categories,
+    //         product: product,
+    //         login: "2"
+    //     })
+    // }catch (e) {
+    //     res.redirect("/");
+    // }
+    await renderNewPage(res, new Product())
 });
 
 /*
@@ -61,9 +63,18 @@ router.post("/", upload.single("cover"), async (req, res, next) => {
         // res.redirect(`admin/products/${newProducts.id}`);
         res.redirect("products");
     }catch (e) {
+        if (product.coverImageName != null) {
+            await removeProductCover(product.coverImageName);
+        }
         await renderNewPage(res, product, true);
     }
 });
+
+function removeProductCover(fileName) {
+    fs.unlink(path.join(uploadPath, fileName), err => {
+        if (err) console.error(err);
+    });
+}
 
 async function renderNewPage(res, product, hasError = false) {
     try{
@@ -78,7 +89,7 @@ async function renderNewPage(res, product, hasError = false) {
         if (hasError) params.errorMessage2 = "";
         res.render("admin/products/new", params)
     }catch (e) {
-        res.redirect("admin/products");
+        res.redirect("/");
     }
 }
 
