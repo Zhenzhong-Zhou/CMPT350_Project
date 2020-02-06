@@ -1,10 +1,26 @@
-<h2>All Products</h2>
+<h2>Search Product</h2>
 <form action="/admin/products" method="get">
-    <label>Product Name</label>
-    <input type="text" name="product_name">
+    <div>
+        <label>Product Name</label>
+        <input type="text" name="product_name" value="<%=searchOptions.product_name%>">
+    </div>
+    <div>
+        <label>Author</label>
+        <input type="text" name="author" value="<%=searchOptions.author%>">
+    </div>
+    <div>
+        <label>Publish After</label>
+        <input type="text" name="product_publishAfter" value="<%=searchOptions.product_publishAfter%>">
+    </div>
+    <div>
+        <label>Publish Before</label>
+        <input type="text" name="product_publishBefore" value="<%=searchOptions.product_publishBefore%>">
+    </div>
     <button type="submit">Search</button>
 </form>
 <br>
-<%products.forEach(product => {%>
-    1
-<%})%>
+<div>
+    <%products.forEach(product => {%>
+        <img height="150" width="100" src="<%=product.coverImagePath%>" alt="product cover image">
+    <%})%>
+</div>

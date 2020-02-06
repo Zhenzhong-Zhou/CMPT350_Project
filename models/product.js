@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const path = require("path");
 
 const coverImageBasePath = "upload/productCovers";
 
@@ -10,6 +11,9 @@ const productSchema = new mongoose.Schema({
     slug: {
         type: String,
         required: true
+    },
+    author: {
+        type: String
     },
     description: {
         type: String
@@ -37,6 +41,12 @@ const productSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: "Category"
+    }
+});
+
+productSchema.virtual("coverImagePath").get(function () {
+    if (this.coverImageName != null) {
+        return path.join("/public", coverImageBasePath, this.coverImageName);
     }
 });
 

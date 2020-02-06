@@ -20,9 +20,16 @@ const { check, validationResult } = require('express-validator');
  * GET Products Route
  */
 router.get("/", async (req, res) => {
-    res.send("All Products");
-    // const product = await Product.find({});
-    // res.render("admin/products/new", {product: product, categories: Category.find({})})
+    try {
+        const products = await Product.find({});
+        res.render("admin/products/index", {
+            products: products,
+            searchOptions: req.query,
+            login: "2"
+        })
+    }catch (e) {
+        res.redirect("/");
+    }
 });
 
 /*
@@ -52,6 +59,7 @@ router.post("/", upload.single("cover"), async (req, res, next) => {
         productName: req.body.product_name,
         category: req.body.category,
         slug: req.body.product_slug,
+        author: req.body.author,
         price: req.body.product_price,
         publishDate: new Date(req.body.product_publishDate),
         pageCount: req.body.product_pageCount,
