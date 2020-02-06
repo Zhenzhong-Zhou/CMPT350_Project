@@ -5,7 +5,6 @@ const express = require("express");
 const app = express();
 const expressLayouts = require("express-ejs-layouts");
 const bodyParser = require("body-parser");
-const session = require("express-session");
 
 const indexRouter = require("./routes/index");
 const registerIndexRouter = require("./routes/register/index");
@@ -21,14 +20,6 @@ app.set("layout", "layouts/layout");
 app.use(expressLayouts);
 app.set(express.static("public"));
 app.use(bodyParser.urlencoded({limit: "10mb", extended: false}));
-app.use(session({
-    secret: "secret",
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-        secure: false
-    }
-}));
 
 const mongoose = require("mongoose");
 mongoose.connect(process.env.DATABASE_URL, { useUnifiedTopology: true, useNewUrlParser: true });
