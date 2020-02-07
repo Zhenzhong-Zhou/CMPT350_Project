@@ -6,6 +6,14 @@ const app = express();
 const expressLayouts = require("express-ejs-layouts");
 const bodyParser = require("body-parser");
 
+// Register
+const cookieParser = require("cookie-parser");
+const flash = require("connect-flash");
+const session = require("express-session");
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+// End Register
+
 const indexRouter = require("./routes/index");
 const registerIndexRouter = require("./routes/register/index");
 const registerLoginRouter = require("./routes/register/login");
@@ -21,6 +29,25 @@ app.set("layout", "layouts/layout");
 app.use(expressLayouts);
 app.use("/public", express.static("public"));
 app.use(bodyParser.urlencoded({limit: "10mb", extended: false}));
+
+// Register
+app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(session({
+    secret: "secret",
+    resave: false,
+    saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash("success_msg");
+    res.locals.error_msg = req.flash("error_msg");
+    res.locals.error = req.flash("error");
+    next();
+});
+// End Register
 
 const mongoose = require("mongoose");
 mongoose.connect(process.env.DATABASE_URL, { useUnifiedTopology: true, useNewUrlParser: true });
@@ -43,6 +70,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.listen(process.env.PORT || 3000, () => {
-    console.log("Connected to Server......")
+app.set("port", process.env.PORT || 3000);
+app.listen(app.get("port"), () => {
+    console.log("Connected to Server on port " + app.get("port"));
 });

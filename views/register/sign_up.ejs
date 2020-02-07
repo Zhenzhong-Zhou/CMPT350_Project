@@ -1,18 +1,31 @@
 <h1>Register</h1>
+<a href="/">I DO NOT want to register this shiit website</a>
 <form action="/sign_up" method="post">
     <div>
         <label for="name">Username</label>
-        <input type="text" id="name" name="name" required>
+        <input type="text" id="username" name="username" required="required"
+               oninvalid="this.setCustomValidity('Username is required.')"
+               oninput="this.setCustomValidity('')">
     </div>
 
     <div>
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="email" required="required"
+               oninvalid="this.setCustomValidity('Email is required.')"
+               oninput="this.setCustomValidity('')">
     </div>
 
     <div>
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" required>
+        <input type="password" id="password" name="password" required="required"
+               oninvalid="this.setCustomValidity('Password is required.')"
+               oninput="this.setCustomValidity('')">
+    </div>
+    <div>
+        <label for="password">Confirm Password</label>
+        <input type="password" id="password2" name="password2" required="required"
+               oninvalid="this.setCustomValidity('Passwords do not match.')"
+               oninput="this.setCustomValidity('')">
     </div>
     <button type="submit">Register</button>
 </form>

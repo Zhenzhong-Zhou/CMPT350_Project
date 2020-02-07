@@ -1,4 +1,21 @@
 <h1>Login</h1>
+<a href="/">I DO NOT want to register this shiit website</a>
+<br>
+<div>
+    <%if (success_msg != null) {%>
+        <%=success_msg%>
+    <%}%>
+</div>
+<div>
+    <%if (error_msg != null) {%>
+    <%=error_msg%>
+    <%}%>
+</div>
+<div>
+    <%if (error != null) {%>
+    <%=error%>
+    <%}%>
+</div>
 <form action="/login" method="post">
     <div>
         <label for="email">Email</label>
