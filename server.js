@@ -58,6 +58,7 @@ db.once("open", () => console.log("Connected to Mongoose......"));
 app.use("/", indexRouter);
 app.use("/index", registerIndexRouter);
 app.use("/login", registerLoginRouter);
+app.use("/logout", registerLoginRouter);
 app.use("/sign_up", registerSignUpRouter);
 app.use("/admin/dashboard", adminIndexRouter);
 app.use("/admin/pages", adminPageRouter);
