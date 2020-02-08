@@ -6,9 +6,10 @@
             <li><a href="#">Category</a></li>
             <li><a href="#">Books</a></li>
             <li><a href="/markets">WANT TO BE A SELLER?</a></li>
+            <li><a><i class="fas fa-shopping-cart"></i> Sopping Cart </a></li>
             <%if (locals.user != null) {%>
                 <%if (user) {%>
-                    <li><a href="#">Dropdown menu: User Management</a></li>
+            <li><a href="#"><i class="fas fa-user" aria-hidden="true"></i>Dropdown menu: User Management</a></li>
                     <li>Welcome, <%=user.username%></li>
                     <li>Settings</li>
                     <li><a href="/logout">Logout</a></li>

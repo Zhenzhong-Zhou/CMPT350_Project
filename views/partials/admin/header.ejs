@@ -10,7 +10,7 @@
             <li><a href="/admin/products">Products</a></li>
             <li><a href="/admin/products/new">Add Product</a></li>
             <%if (locals.user && locals.user.admin == 1) {%>
-                <li>Welcome Home, <%=user.username%></li>
+            <li>Welcome Home, <%=user.username%> <i class="fas fa-user-cog"></i></li>
                 <li><a href="/logout">Logout</a></li>
             <%}%>
         </ul>

@@ -3,8 +3,10 @@ const router = express.Router();
 const {isUser} = require("../config/auth");
 
 router.get("/", isUser, (req, res) => {
+    const views = req.session.views++;
     res.render("index", {
         user: req.user,
+        views: views,
         login: "1"
     })
 });
