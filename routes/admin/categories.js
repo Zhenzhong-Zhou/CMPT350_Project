@@ -7,7 +7,7 @@ const { check, validationResult } = require('express-validator');
 /*
  * GET Categories Route
  */
-router.get("/", async (req, res) => {
+router.get("/", isAdmin, async (req, res) => {
     let searchOptions = {};
     if (req.query.category_name != null && req.query.category_name !== "") {
         searchOptions.categoryName = new RegExp(req.query.category_name, "i");
@@ -27,7 +27,7 @@ router.get("/", async (req, res) => {
 /*
  * GET New Category Route
  */
-router.get("/new", (req, res) => {
+router.get("/new", isAdmin, (req, res) => {
     res.render("admin/categories/new", {category: new Category(), login: "2"});
 });
 

@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const Page = require("../../models/page");
+const {isAdmin} = require("../../config/auth");
 const { check, validationResult } = require('express-validator');
 
 /*
  * GET Pages Route
  */
-router.get("/", async (req, res) => {
+router.get("/", isAdmin, async (req, res) => {
     let searchOptions = {};
     if (req.query.page_title != null && req.query.page_title !== "") {
         searchOptions.pageTitle = new RegExp(req.query.page_title, "i");
@@ -26,7 +27,7 @@ router.get("/", async (req, res) => {
 /*
  * GET New Page Route
  */
-router.get("/new", (req, res) => {
+router.get("/new", isAdmin, (req, res) => {
     res.render("admin/pages/new", {page: new Page(), login: "2"});
 });
 
