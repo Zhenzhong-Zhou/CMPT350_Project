@@ -16,7 +16,7 @@ db.on("error", error => console.error(error));
 db.once("open", () => console.log("Connected to Mongoose......"));
 
 const indexRouter = require("./routes/index");
-const registerIndexRouter = require("./routes/register/index");
+const sellerRouter = require("./routes/user/sellers");
 const registerSignUpRouter = require("./routes/register/sign_up");
 const registerLoginRouter = require("./routes/register/login");
 const registerLogoutRouter = require("./routes/register/logout");
@@ -49,7 +49,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/", indexRouter);
-app.use("/index", registerIndexRouter);
+app.use("/markets", sellerRouter);
 app.use("/login", registerLoginRouter);
 app.use("/logout", registerLogoutRouter);
 app.use("/sign_up", registerSignUpRouter);

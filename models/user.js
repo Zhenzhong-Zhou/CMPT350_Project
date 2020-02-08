@@ -30,7 +30,7 @@ module.exports.createUser = function (newUser, callback) {
     });
 };
 
-module.exports.getUserByEmail= function (email, callback) {
+module.exports.getUserByEmail = function (email, callback) {
     const query = {email: email};
     User.findOne(query, callback);
 };
