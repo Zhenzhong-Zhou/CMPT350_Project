@@ -1,7 +1,7 @@
 <header>
     <nav>
         <a href="/admin/dashboard">Admin Area</a>
-        <a style="float: right; padding-right: 800px" href="/">Tian Mao - Remove Later</a>
+        <a style="float: right; padding-right: 800px" href="/">Tian Mao</a>
         <ul>
             <li><a href="/admin/pages">Pages</a></li>
             <li><a href="/admin/pages/new">Add Page</a></li>
@@ -9,6 +9,9 @@
             <li><a href="/admin/categories/new">Add Category</a></li>
             <li><a href="/admin/products">Products</a></li>
             <li><a href="/admin/products/new">Add Product</a></li>
+            <%if (locals.user && locals.user.admin == 1) {%>
+                <li>Welcome Home, <%=user.username%></li>
+            <%}%>
             <li><a href="/logout">Logout</a></li>
         </ul>
     </nav>
