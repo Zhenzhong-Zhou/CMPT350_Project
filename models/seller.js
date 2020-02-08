@@ -14,6 +14,10 @@ const sellerSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    portrait: {
+        type: String,
+        required: true
+    },
     password: {
         type: String,
         required: true

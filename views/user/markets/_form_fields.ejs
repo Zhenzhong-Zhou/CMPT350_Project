@@ -1,11 +1,63 @@
 <div>
-    <label>Seller Name</label>
-    <input type="text" name="seller_name" placeholder="Seller Name" value="">
+    <label>Name</label>
+    <input type="text" id="sellerName" name="sellerName" placeholder="Name" value=""
+           required="required">
 </div>
 
 <div>
-    <label>Page Slug</label>
-    <input type="text" name="page_slug" placeholder="Slug" value="">
+    <label>Gender</label>
+    <input type="text" id="gender" name="gender" placeholder="Gender" value=""
+           required="required">
 </div>
 
+<div>
+    <label>Age</label>
+    <input type="number" id="age" name="age" min="18" placeholder="Age" value=""
+           required="required">
+</div>
 
+<div>
+    <label>Portrait</label>
+    <input type="file" name="portrait">
+</div>
+
+<div>
+    <label>Category</label>
+    <select name="category">
+
+    </select>
+</div>
+
+<div>
+    <label>Phone Number</label>
+    <input type="tel" id="phoneNumber" name="phoneNumber"  minlength="10" maxlength="19" size="20"
+           placeholder="Phone Number" value="(000)-(000)-(0000)"
+           required="required">
+</div>
+
+<div>
+    <label>Address</label>
+    <textarea id="address" name="address" placeholder="Address" cols="30" rows="10"
+              required="required"></textarea>
+</div>
+
+<div>
+    <label>User</label>
+    <select name="user">
+
+    </select>
+</div>
+
+<div>
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" placeholder="Password" required="required"
+           oninvalid="this.setCustomValidity('Password is required.')"
+           oninput="this.setCustomValidity('')">
+</div>
+
+<div>
+    <label for="password">Confirm Password</label>
+    <input type="password" id="password2" name="password2" placeholder="Confirm Password" required="required"
+           oninvalid="this.setCustomValidity('Passwords do not match.')"
+           oninput="this.setCustomValidity('')">
+</div>
