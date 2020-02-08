@@ -11,8 +11,8 @@
             <li><a href="/admin/products/new">Add Product</a></li>
             <%if (locals.user && locals.user.admin == 1) {%>
                 <li>Welcome Home, <%=user.username%></li>
+                <li><a href="/logout">Logout</a></li>
             <%}%>
-            <li><a href="/logout">Logout</a></li>
         </ul>
     </nav>
 </header>
