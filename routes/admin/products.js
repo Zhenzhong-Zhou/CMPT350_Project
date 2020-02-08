@@ -9,7 +9,7 @@ const { check, validationResult } = require('express-validator');
 /*
  * GET Products Route
  */
-router.get("/", async (req, res) => {
+router.get("/", isAdmin,async (req, res) => {
     let query = Product.find();
     if (req.query.product_name != null && req.query.product_name !== "") {
         query = query.regex("productName", new RegExp(req.query.product_name, "i"));
@@ -38,7 +38,7 @@ router.get("/", async (req, res) => {
 /*
  * GET New Product Route
  */
-router.get("/new", async (req, res) => {
+router.get("/new", isAdmin,async (req, res) => {
     await renderNewPage(res, new Product())
 });
 

@@ -8,7 +8,7 @@ const { check, validationResult } = require('express-validator');
 /*
  * GET Categories Route
  */
-router.get("/", async (req, res) => {
+router.get("/",isAdmin, async (req, res) => {
     let searchOptions = {};
     if (req.query.category_name != null && req.query.category_name !== "") {
         searchOptions.categoryName = new RegExp(req.query.category_name, "i");
@@ -28,7 +28,7 @@ router.get("/", async (req, res) => {
 /*
  * GET New Category Route
  */
-router.get("/new", (req, res) => {
+router.get("/new", isAdmin,(req, res) => {
     res.render("admin/categories/new", {category: new Category(), login: "2"});
 });
 
@@ -66,7 +66,7 @@ router.post("/", [
 /*
  * GET Show Category Route
  */
-router.get("/:id", async (req, res) => {
+router.get("/:id", isAdmin,async (req, res) => {
     try{
         let category = await Category.findById(req.params.id);
         let products = await Product.find({category: category.id}).limit(10).exec();
@@ -83,7 +83,7 @@ router.get("/:id", async (req, res) => {
 /*
  * GET Edit Category Route
  */
-router.get("/:id/edit", async (req, res) => {
+router.get("/:id/edit", isAdmin,async (req, res) => {
     try {
         const category = await Category.findById(req.params.id);
         res.render("admin/categories/edit", {category: category, login: "2"});
@@ -95,7 +95,7 @@ router.get("/:id/edit", async (req, res) => {
 /*
  * PUT Category Route
  */
-router.put("/:id", [
+router.put("/:id", isAdmin,[
         check("category_name").notEmpty().withMessage("Category name MUST have a value"),
         check("category_slug").notEmpty().withMessage("Category slug MUST have a value")
     ],
