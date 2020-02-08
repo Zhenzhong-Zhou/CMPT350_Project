@@ -8,7 +8,6 @@ const flash = require("connect-flash");
 const session = require("express-session");
 const passport = require("passport");
 const app = express();
-// require('./config/passport');
 
 const mongoose = require("mongoose");
 mongoose.connect(process.env.DATABASE_URL, { useUnifiedTopology: true, useNewUrlParser: true });

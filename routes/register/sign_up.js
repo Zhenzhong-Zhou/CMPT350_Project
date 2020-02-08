@@ -2,9 +2,10 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const User = require("../../models/user");
+const {forwardAuthenticated} = require("../../config/auth");
 const { check, validationResult } = require('express-validator');
 
-router.get("/", (req, res) => {
+router.get("/", forwardAuthenticated, (req, res) => {
     res.render("register/sign_up", {login: "3"})
 });
 

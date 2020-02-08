@@ -6,10 +6,17 @@
             <li><a href="/">Home</a></li>
             <li><a href="#">Category</a></li>
             <li><a href="#">Books</a></li>
-            <li><a href="#">User Management</a></li>
-            <li><a href="/login">Sign In</a></li>
-            <li><a href="/sign_up">Sign Up</a></li>
-            <li><a href="/logout">Logout</a></li>
+            <%if (locals.user != null) {%>
+                <%if (user) {%>
+                    <li><a href="#">Dropdown menu: User Management</a></li>
+                    <li>Welcome, <%=user.username%></li>
+                    <li>Settings</li>
+                    <li><a href="/logout">Logout</a></li>
+                <%}%>
+            <%}else {%>
+                <li><a href="/login">Sign In</a></li>
+                <li><a href="/sign_up">Sign Up</a></li>
+            <%}%>
         </ul>
     </nav>
 </header>
