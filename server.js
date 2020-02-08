@@ -2,22 +2,25 @@ if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
 }
 const express = require("express");
-const app = express();
 const expressLayouts = require("express-ejs-layouts");
 const bodyParser = require("body-parser");
-
-// Register
-const cookieParser = require("cookie-parser");
 const flash = require("connect-flash");
 const session = require("express-session");
 const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
-// End Register
+const app = express();
+// require('./config/passport');
+
+const mongoose = require("mongoose");
+mongoose.connect(process.env.DATABASE_URL, { useUnifiedTopology: true, useNewUrlParser: true });
+const db = mongoose.connection;
+db.on("error", error => console.error(error));
+db.once("open", () => console.log("Connected to Mongoose......"));
 
 const indexRouter = require("./routes/index");
 const registerIndexRouter = require("./routes/register/index");
-const registerLoginRouter = require("./routes/register/login");
 const registerSignUpRouter = require("./routes/register/sign_up");
+const registerLoginRouter = require("./routes/register/login");
+const registerLogoutRouter = require("./routes/register/logout");
 const adminIndexRouter = require("./routes/admin/index");
 const adminPageRouter = require("./routes/admin/pages");
 const adminCategoryRouter = require("./routes/admin/categories");
@@ -29,10 +32,7 @@ app.set("layout", "layouts/layout");
 app.use(expressLayouts);
 app.use("/public", express.static("public"));
 app.use(bodyParser.urlencoded({limit: "10mb", extended: false}));
-
-// Register
 app.use(bodyParser.json());
-app.use(cookieParser());
 app.use(session({
     secret: "secret",
     resave: false,
@@ -47,18 +47,11 @@ app.use((req, res, next) => {
     res.locals.error = req.flash("error");
     next();
 });
-// End Register
-
-const mongoose = require("mongoose");
-mongoose.connect(process.env.DATABASE_URL, { useUnifiedTopology: true, useNewUrlParser: true });
-const db = mongoose.connection;
-db.on("error", error => console.error(error));
-db.once("open", () => console.log("Connected to Mongoose......"));
 
 app.use("/", indexRouter);
 app.use("/index", registerIndexRouter);
 app.use("/login", registerLoginRouter);
-app.use("/logout", registerLoginRouter);
+app.use("/logout", registerLogoutRouter);
 app.use("/sign_up", registerSignUpRouter);
 app.use("/admin/dashboard", adminIndexRouter);
 app.use("/admin/pages", adminPageRouter);
