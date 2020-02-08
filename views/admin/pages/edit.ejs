@@ -1,0 +1,6 @@
+<h3>Edit Page</h3>
+<form action="/admin/pages/<%=page.id%>?_method=PUT" method="post">
+    <%- include("_form_fields.ejs"); %>
+    <a href="/admin/pages/<%=page.id%>">Cancel</a>
+    <button type="submit">Update</button>
+</form>

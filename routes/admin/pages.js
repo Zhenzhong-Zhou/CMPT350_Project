@@ -7,7 +7,7 @@ const { check, validationResult } = require('express-validator');
 /*
  * GET Pages Route
  */
-router.get("/", isAdmin, async (req, res) => {
+router.get("/", async (req, res) => {
     let searchOptions = {};
     if (req.query.page_title != null && req.query.page_title !== "") {
         searchOptions.pageTitle = new RegExp(req.query.page_title, "i");
@@ -27,7 +27,7 @@ router.get("/", isAdmin, async (req, res) => {
 /*
  * GET New Page Route
  */
-router.get("/new", isAdmin, (req, res) => {
+router.get("/new", (req, res) => {
     res.render("admin/pages/new", {page: new Page(), login: "2"});
 });
 
@@ -48,18 +48,15 @@ router.post("/", [
     });
     try {
         const newPage = await page.save();
-        // res.redirect(`admin/pages/${newPage.id}`);
-        res.redirect("pages");
+        res.redirect(`/admin/pages/${newPage.id}`);
     }catch (e) {
-        const errorFormatter = ({location, msg, param}) => {
-            return `${location}[${param}]: ${msg}`;
+        const errorFormatter = ({msg}) => {
+            return `${msg}`;
         };
         const result = validationResult(req).formatWith(errorFormatter);
         if (!result.isEmpty()) {
             return res.render("admin/pages/new", {
-                errorMessage: result.array()[0],
-                errorMessage1: result.array()[1],
-                errorMessage2: result.array()[2],
+                errorMessage: result.array(),
                 page: page,
                 login: "2"
             });
@@ -85,6 +82,87 @@ router.post("/reorder", async (req) => {
                 });
             });
         })(count);
+    }
+});
+
+/*
+ * GET Show Page Route
+ */
+router.get("/:id", async (req, res) => {
+    try{
+        let page = await Page.findById(req.params.id).limit(10).exec();
+        res.render("admin/pages/show", {
+            page: page,
+            login: "2"
+        })
+    }catch (e) {
+        res.redirect("/")
+    }
+});
+
+/*
+ * GET Edit Page Route
+ */
+router.get("/:id/edit", async (req, res) => {
+    try {
+        const page = await Page.findById(req.params.id);
+        res.render("admin/pages/edit", {page: page, login: "2"});
+    }catch (e) {
+        res.redirect("/admin/pages");
+    }
+});
+
+/*
+ * PUT Category Route
+ */
+router.put("/:id", [
+        check("page_title").notEmpty().withMessage("Page Title MUST have a value"),
+        check("page_slug").notEmpty().withMessage("Page slug MUST have a value"),
+        check("page_content").notEmpty().withMessage("Page content MUST have a value")
+    ],
+    async (req, res) => {
+        let page;
+        try {
+            page = await Page.findById(req.params.id);
+            page.pageTitle = req.body.page_title;
+            page.slug = req.body.page_slug;
+            page.content = req.body.page_content;
+            await page.save();
+            res.redirect(`/admin/pages/${page.id}`);
+        }catch (e) {
+            if (page == null) {
+                res.redirect("/")
+            }else {
+                const errorFormatter = ({msg}) => {
+                    return `${msg}`;
+                };
+                const result = validationResult(req).formatWith(errorFormatter);
+                if (!result.isEmpty()) {
+                    return res.render("admin/pages/new", {
+                        errorMessage: result.array(),
+                        page: page,
+                        login: "2"
+                    });
+                }
+            }
+        }
+    });
+
+/*
+ * DELETE Show Page Route
+ */
+router.delete("/:id", async (req, res) => {
+    let page;
+    try {
+        page = await Page.findById(req.params.id);
+        await page.remove();
+        res.redirect("/admin/pages");
+    }catch (e) {
+        if (page == null) {
+            res.redirect("/");
+        }else {
+            res.redirect(`/admin/pages/${page.id}`);
+        }
     }
 });
 

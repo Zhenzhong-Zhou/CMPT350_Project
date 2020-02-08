@@ -1,0 +1,15 @@
+<a href="/admin/pages">Return Back</a>
+<h2><%=page.pageTitle%></h2>
+<label>Slug: </label>
+<p><%=page.slug%></p>
+<label>Content: </label>
+<p><%=page.content%></p>
+<label>Sorting: </label>
+<p><%=page.sorting%></p>
+<a href="/admin/pages/<%=page.id%>/edit">Edit</a>
+<%if (page.slug === "home") {%>
+    <td></td>
+<%}else {%>
+    <%- include("../../partials/deleteForm.ejs", {url: `/admin/pages/${page.id}`}); -%>
+<%}%>
+

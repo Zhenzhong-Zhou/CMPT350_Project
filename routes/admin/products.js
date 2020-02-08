@@ -66,6 +66,34 @@ router.post("/", async (req, res, next) => {
     }
 });
 
+/*
+ * GET Show Product Route
+ */
+router.get("/:id", async (req, res) => {
+    res.send("Show Product: " + req.params.id);
+});
+
+/*
+ * GET Edit Product Route
+ */
+router.get("/:id/edit", async (req, res) => {
+    res.send("Edit Product: " + req.params.id);
+});
+
+/*
+ * PUT Product Route
+ */
+router.put("/:id", async (req, res) => {
+    res.send("Put Product: " + req.params.id);
+});
+
+/*
+ * DELETE Show Product Route
+ */
+router.delete("/:id", async (req, res) => {
+    res.send("Delete Product: " + req.params.id);
+});
+
 async function renderNewPage(res, product, hasError = false) {
     try{
         const categories = await Category.find({});
@@ -75,8 +103,6 @@ async function renderNewPage(res, product, hasError = false) {
             login: "2"
         };
         if (hasError) params.errorMessage = "Error Creating Product";
-        if (hasError) params.errorMessage1 = "";
-        if (hasError) params.errorMessage2 = "";
         res.render("admin/products/new", params)
     }catch (e) {
         res.redirect("/");

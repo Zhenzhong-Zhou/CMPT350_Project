@@ -1,0 +1,12 @@
+<a href="/admin/categories">Return Back</a>
+<h2><%=category.categoryName%></h2>
+<a href="/admin/categories/<%=category.id%>/edit">Edit</a>
+<%- include("../../partials/deleteForm.ejs", {url: `/admin/categories/${category.id}`}); -%>
+<%if (productsByCategory.length > 0) {%>
+    <h2>Products By Category</h2>
+    <%productsByCategory.forEach(product => {%>
+        <img height="150" width="100" src="<%=product.coverImagePath%>" alt="product cover image">
+    <%})%>
+<%}else {%>
+    <h2>This category does not have anything. Please upload it.</h2>
+<%}%>

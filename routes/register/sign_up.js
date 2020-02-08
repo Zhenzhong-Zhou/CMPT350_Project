@@ -21,14 +21,12 @@ router.post("/", [
     const password = req.body.password;
 
     const errorFormatter = ({location, msg, param}) => {
-        return `${location}[${param}]: ${msg}`;
+        return `${msg}`;
     };
     const result = validationResult(req).formatWith(errorFormatter);
     if (!result.isEmpty()) {
         return res.render("register/sign_up", {
-            errorMessage: result.array()[0],
-            errorMessage1: result.array()[1],
-            errorMessage2: result.array()[2],
+            errorMessage: result.array(),
             login: "3"
         });
     }

@@ -1,13 +1,7 @@
-<%if (locals.errorMessage != null || locals.errorMessage1 != null || locals.errorMessage2 != null) {%>
-   <div>
-       <%=errorMessage%>
-   </div>
-
-   <div>
-       <%=errorMessage1%>
-   </div>
-
-   <div>
-       <%=errorMessage2%>
-   </div>
+<%if (locals.errorMessage != null) {%>
+    <%errorMessage.forEach(message => {%>
+       <div>
+           <%=message%>
+       </div>
+    <%})%>
 <%}%>

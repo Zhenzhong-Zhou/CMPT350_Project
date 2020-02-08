@@ -7,4 +7,7 @@
 <br>
 <%categories.forEach(category => {%>
     <div><%=category.categoryName%></div>
+    <a href="/admin/categories/<%=category.id%>">View</a>
+    <a href="/admin/categories/<%=category.id%>/edit">Edit</a>
+    <%- include("../../partials/deleteForm.ejs", {url: `/admin/categories/${category.id}`}); -%>
 <%})%>
