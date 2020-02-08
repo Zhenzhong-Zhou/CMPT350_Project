@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Category = require("../../models/category");
+const {isAdmin} = require("../../config/auth");
 const { check, validationResult } = require('express-validator');
 
 /*

@@ -36,7 +36,8 @@ router.post("/", [
     const user = new User({
         username: username,
         email: email,
-        password: password
+        password: password,
+        admin: 0
     });
     User.createUser(user, function (err) {
         if (err) throw err;

@@ -1,7 +1,6 @@
 <header>
     <nav>
         <a href="/">Tian Mao</a>
-        <a style="float:right;padding-right: 800px" href="/admin/dashboard">Admin Area - Remove Later</a>
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="#">Category</a></li>
@@ -16,6 +15,9 @@
             <%}else {%>
                 <li><a href="/login">Sign In</a></li>
                 <li><a href="/sign_up">Sign Up</a></li>
+            <%}%>
+            <%if (locals.user && locals.user.admin == 1) {%>
+                <li><a href="/admin/dashboard">Admin Area - Remove Later</a></li>
             <%}%>
         </ul>
     </nav>
