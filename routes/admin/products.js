@@ -1,26 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const multer = require("multer");
-const path = require("path");
-const fs = require("fs");
 const Category = require("../../models/category");
 const Product = require("../../models/product");
 const {isAdmin} = require("../../config/auth");
-const uploadPath = path.join("public", Product.coverImageBasePath);
 const imageMimeTypes = ["image/jpg", "image/jpeg", "image/png", "images/gif"];
-const upload = multer({
-    dest: uploadPath,
-    fileFilter: (req, file, callback) => {
-        callback(null, imageMimeTypes.includes(file.mimetype));
-    }
-});
-
 const { check, validationResult } = require('express-validator');
 
 /*
  * GET Products Route
  */
-router.get("/", isAdmin, async (req, res) => {
+router.get("/", async (req, res) => {
     let query = Product.find();
     if (req.query.product_name != null && req.query.product_name !== "") {
         query = query.regex("productName", new RegExp(req.query.product_name, "i"));
@@ -49,15 +38,14 @@ router.get("/", isAdmin, async (req, res) => {
 /*
  * GET New Product Route
  */
-router.get("/new", isAdmin, async (req, res) => {
+router.get("/new", async (req, res) => {
     await renderNewPage(res, new Product())
 });
 
 /*
  * POST Create Product Route
  */
-router.post("/", upload.single("cover"), async (req, res, next) => {
-    const fileName = req.file != null ? req.file.filename : null;
+router.post("/", async (req, res, next) => {
     const product = new Product({
         productName: req.body.product_name,
         category: req.body.category,
@@ -66,26 +54,17 @@ router.post("/", upload.single("cover"), async (req, res, next) => {
         price: req.body.product_price,
         publishDate: new Date(req.body.product_publishDate),
         pageCount: req.body.product_pageCount,
-        coverImageName: fileName,
         description: req.body.product_description
     });
+    saveCover(product, req.body.cover);
     try {
         const newProduct = await product.save();
         // res.redirect(`admin/products/${newProducts.id}`);
         res.redirect("products");
     }catch (e) {
-        if (product.coverImageName != null) {
-            await removeProductCover(product.coverImageName);
-        }
         await renderNewPage(res, product, true);
     }
 });
-
-function removeProductCover(fileName) {
-    fs.unlink(path.join(uploadPath, fileName), err => {
-        if (err) console.error(err);
-    });
-}
 
 async function renderNewPage(res, product, hasError = false) {
     try{
@@ -101,6 +80,15 @@ async function renderNewPage(res, product, hasError = false) {
         res.render("admin/products/new", params)
     }catch (e) {
         res.redirect("/");
+    }
+}
+
+function saveCover(book, coverEncoded) {
+    if (coverEncoded == null) return;
+    const cover = JSON.parse(coverEncoded);
+    if (cover != null && imageMimeTypes.includes(cover.type)) {
+        book.coverImage = new Buffer.from(cover.data, "base64");
+        book.coverImageType = cover.type;
     }
 }
 

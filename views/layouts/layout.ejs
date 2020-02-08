@@ -4,8 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+    <script defer src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+    <script defer src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
+    <script defer src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+    <script defer src="https://unpkg.com/filepond/dist/filepond.js"></script>
+    <script defer src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script defer src="/public/javascripts/fileUpload.js"></script>
     <link rel="stylesheet" type="text/css" href="/public/stylesheets/main.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <%if(locals.login != null) {%>
         <%if (login === "1") {%>
             <link rel="icon" type="image/x-icon" href="public/images/icon/tianmao.jpg">
