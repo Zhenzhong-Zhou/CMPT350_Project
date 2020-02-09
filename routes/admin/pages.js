@@ -48,6 +48,13 @@ router.post("/", [
     });
     try {
         const newPage = await page.save();
+        Page.find({}).sort({sorting: 1}).exec((err, pages) => {
+            if (err) {
+                console.log(err);
+            }else {
+                req.app.locals.pages = pages;
+            }
+        });
         res.redirect(`/admin/pages/${newPage.id}`);
     }catch (e) {
         const errorFormatter = ({msg}) => {
@@ -67,22 +74,17 @@ router.post("/", [
 /*
  *  POST reorder pages
  */
-router.post("/reorder", function(req, res) {
+router.post("/reorder", function(req) {
     let ids = req.body['id[]'];
-    let count = 0;
-    console.log("reorder: ", ids);
-    for (let i = 0; i < ids.length; i++) {
-        let id = ids[i];
-        count++;
-        (function (count) {
-            Page.findById(id, (err, page) => {
-                page.sorting = count;
-                page.save(err => {
-                    if (err) return console.log(err);
-                });
-            });
-        })(count);
-    }
+    sortPage(ids, function () {
+        Page.find({}).sort({sorting: 1}).exec((err, pages) => {
+            if (err) {
+                console.log(err);
+            }else {
+                req.app.locals.pages = pages;
+            }
+        });
+    })
 });
 
 /*
@@ -128,6 +130,13 @@ router.put("/:id", [
             page.slug = req.body.page_slug;
             page.content = req.body.page_content;
             await page.save();
+            Page.find({}).sort({sorting: 1}).exec((err, pages) => {
+                if (err) {
+                    console.log(err);
+                }else {
+                    req.app.locals.pages = pages;
+                }
+            });
             res.redirect(`/admin/pages/${page.id}`);
         }catch (e) {
             if (page == null) {
@@ -156,6 +165,13 @@ router.delete("/:id", async (req, res) => {
     try {
         page = await Page.findById(req.params.id);
         await page.remove();
+        Page.find({}).sort({sorting: 1}).exec((err, pages) => {
+            if (err) {
+                console.log(err);
+            }else {
+                req.app.locals.pages = pages;
+            }
+        });
         res.redirect("/admin/pages");
     }catch (e) {
         if (page == null) {
@@ -165,5 +181,24 @@ router.delete("/:id", async (req, res) => {
         }
     }
 });
+
+// Sort  pages function
+function sortPage(ids, callback) {
+    let count = 0;
+    for (let i = 0; i < ids.length; i++) {
+        let id = ids[i];
+        count++;
+        (function (count) {
+            Page.findById(id, (err, page) => {
+                page.sorting = count;
+                page.save(err => {
+                    if (err) return console.log(err);
+                    ++count;
+                    if (count >= ids.length) callback();
+                });
+            });
+        })(count);
+    }
+}
 
 module.exports = router;

@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {isUser} = require("../config/auth");
 
-router.get("/", isUser, (req, res) => {
+router.get("/", (req, res) => {
     const views = req.session.views++;
     res.render("index", {
         user: req.user,
