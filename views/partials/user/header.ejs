@@ -16,11 +16,11 @@
             <li><a href="#"><i class="fas fa-user" aria-hidden="true"></i>Dropdown menu: User Management</a></li>
                     <li>Welcome, <%=user.username%></li>
                     <li>Settings</li>
-                    <li><a href="/logout">Logout</a></li>
+                    <li><a href="/user/logout">Logout</a></li>
                 <%}%>
             <%}else {%>
-                <li><a href="/login">Sign In</a></li>
-                <li><a href="/sign_up">Sign Up</a></li>
+                <li><a href="/user/login">Sign In</a></li>
+                <li><a href="/user/sign_up">Sign Up</a></li>
             <%}%>
             <%if (locals.user && locals.user.admin == 1) {%>
                 <li><a href="/admin/dashboard">Admin Area</a></li>

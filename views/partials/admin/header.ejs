@@ -12,7 +12,7 @@
             <li><a href="/admin/products/new">Add Product</a></li>
             <%if (locals.user && locals.user.admin == 1) {%>
             <li>Welcome Home, <%=user.username%> <i class="fas fa-user-cog"></i></li>
-                <li><a href="/logout">Logout</a></li>
+                <li><a href="/user/logout">Logout</a></li>
             <%}%>
         </ul>
     </nav>

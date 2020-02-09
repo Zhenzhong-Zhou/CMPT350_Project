@@ -71,11 +71,11 @@ Category.find((err, categories) => {
 });
 
 app.use("/", indexRouter);
-app.use("/products", productRouter);
+app.use("/categories", productRouter);
 app.use("/markets", sellerRouter);
-app.use("/login", registerLoginRouter);
-app.use("/logout", registerLogoutRouter);
-app.use("/sign_up", registerSignUpRouter);
+app.use("/user/login", registerLoginRouter);
+app.use("/user/logout", registerLogoutRouter);
+app.use("/user/sign_up", registerSignUpRouter);
 app.use("/admin/dashboard", adminIndexRouter);
 app.use("/admin/pages", adminPageRouter);
 app.use("/admin/categories", adminCategoryRouter);

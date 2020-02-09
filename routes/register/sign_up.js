@@ -20,7 +20,7 @@ router.post("/", [
     const email = req.body.email;
     const password = req.body.password;
 
-    const errorFormatter = ({location, msg, param}) => {
+    const errorFormatter = ({msg}) => {
         return `${msg}`;
     };
     const result = validationResult(req).formatWith(errorFormatter);
@@ -41,7 +41,7 @@ router.post("/", [
         if (err) throw err;
     });
     req.flash("success_msg", "You are registered and can now login.");
-    res.redirect("/login");
+    res.redirect("/user/login");
 });
 
 module.exports = router;
