@@ -71,8 +71,8 @@ Category.find((err, categories) => {
 });
 
 app.use("/", indexRouter);
-app.use("/categories", productRouter);
-app.use("/markets", sellerRouter);
+app.use("/categories/products", productRouter);
+app.use("/markets/sellers", sellerRouter);
 app.use("/user/login", registerLoginRouter);
 app.use("/user/logout", registerLogoutRouter);
 app.use("/user/sign_up", registerSignUpRouter);

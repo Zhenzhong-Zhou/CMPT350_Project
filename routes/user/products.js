@@ -7,7 +7,7 @@ const { check, validationResult } = require('express-validator');
 /*
  * GET All Products Route
  */
-router.get("/products", (req, res) => {
+router.get("/", (req, res) => {
     console.log("111");
     // res.send("hello")
     // res.render("user/index")
