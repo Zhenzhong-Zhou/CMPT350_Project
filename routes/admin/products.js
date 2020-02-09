@@ -66,6 +66,22 @@ router.post("/", async (req, res, next) => {
 });
 
 /*
+ * GET List of Products Route
+ */
+router.get("/list", async (req, res) => {
+    try {
+        const products = await Product.find({});
+        res.render("admin/products/list", {
+            products: products,
+            searchOptions: req.query,
+            login: "2"
+        })
+    }catch (e) {
+        res.redirect("/");
+    }
+});
+
+/*
  * GET Show Product Route
  */
 router.get("/:id", async (req, res) => {

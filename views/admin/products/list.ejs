@@ -1,0 +1,33 @@
+<h3>List of Products</h3>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Author</th>
+        <th>Product Image</th>
+        <th>View</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%if (locals.products.length > 0) {%>
+        <%products.forEach(product => {%>
+        <tr>
+            <td><%=product.productName%></td>
+            <td><%=product.price%></td>
+            <td><%=product.category%></td>
+            <td><%=product.author%></td>
+            <td><img height="150" width="100" src="<%=product.coverImagePath%>"></td>
+            <td><a href="/admin/products/<%=product.id%>">View</a></td>
+            <td><a href="/admin/products/<%=product.id%>/edit">Edit</a></td>
+            <td><%- include("../../partials/deleteForm.ejs", {url: `/admin/products/${product.id}`}); -%></td>
+        </tr>
+        <%})%>
+    <%}else {%>
+        <h3>There is no product. Please upload it.</h3>
+    <%}%>
+    </tbody>
+</table>
