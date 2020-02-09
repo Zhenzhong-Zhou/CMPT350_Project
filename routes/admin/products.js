@@ -73,7 +73,6 @@ router.get("/list", async (req, res) => {
         const products = await Product.find({});
         res.render("admin/products/list", {
             products: products,
-            searchOptions: req.query,
             login: "2"
         })
     }catch (e) {
