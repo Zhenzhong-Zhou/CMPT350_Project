@@ -51,6 +51,15 @@ app.use((req, res, next) => {
     next();
 });
 
+const Page = require("./models/page");
+Page.find({}).sort({sorting: 1}).exec((err, pages) => {
+    if (err) {
+        console.log(err);
+    }else {
+        app.locals.pages = pages;
+    }
+});
+
 app.use("/", indexRouter);
 app.use("/markets", sellerRouter);
 app.use("/login", registerLoginRouter);
