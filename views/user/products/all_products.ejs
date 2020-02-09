@@ -1,16 +1,13 @@
-<h1>User Home Page</h1>
-
-<h1>Views: <%=views%></h1>
-
 <div>
-    <h3>Page Content</h3>
-    <%=content%>
-</div>
-
-<h3>Categories</h3>
-<ul>
-    <li><a href="/products">All Products</a></li>
-    <%categories.forEach(category => {%>
-        <li><a href="/products/<%=category.slug%>"><%=category.categoryName%></a></li>
+    <%products.forEach(product => {%>
+    <div>
+        <a href="/products/<%=product.categoryName%>/<%=product.slug%>">
+            <img src="<%=product.coverImagePath%>" alt="products images">
+        </a>
+        <h3><%=product.productName%></h3>
+        <h3><%=product.price%></h3>
+        <a href="/products/<%=product.categoryName%>/<%=product.slug%>">View Details</a>
+    </div>
     <%})%>
-</ul>
+</div>
+<%=title%>

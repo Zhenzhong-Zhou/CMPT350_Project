@@ -17,6 +17,7 @@ db.on("error", error => console.error(error));
 db.once("open", () => console.log("Connected to Mongoose......"));
 
 const indexRouter = require("./routes/index");
+const productRouter = require("./routes/user/products");
 const sellerRouter = require("./routes/user/sellers");
 const registerSignUpRouter = require("./routes/register/sign_up");
 const registerLoginRouter = require("./routes/register/login");
@@ -70,6 +71,7 @@ Category.find((err, categories) => {
 });
 
 app.use("/", indexRouter);
+app.use("/products", productRouter);
 app.use("/markets", sellerRouter);
 app.use("/login", registerLoginRouter);
 app.use("/logout", registerLogoutRouter);

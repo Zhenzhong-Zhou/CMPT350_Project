@@ -6,7 +6,7 @@ const Category = require("../../models/category");
 /*
  * GET Sellers Route
  */
-router.get("/", isUser, (req, res) => {
+router.get("/", (req, res) => {
     res.render("user/markets/index", {
         login: "1"
     })
@@ -17,7 +17,7 @@ router.get("/", isUser, (req, res) => {
  */
 router.get("/new", async (req, res) => {
     res.render("user/markets/new", {
-        login: "2"
+        login: "1"
     })
 });
 
