@@ -11,6 +11,6 @@
 <ul>
     <li><a href="/categories/products">All Products</a></li>
     <%categories.forEach(category => {%>
-        <li><a href="/products/<%=category.slug%>"><%=category.categoryName%></a></li>
+        <li><a href="/categories/products/<%=category.slug%>"><%=category.categoryName%></a></li>
     <%})%>
 </ul>
