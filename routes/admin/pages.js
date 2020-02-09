@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
         searchOptions.pageTitle = new RegExp(req.query.page_title, "i");
     }
     try {
-        const pages = await Page.find(searchOptions);
+        const pages = await Page.find(searchOptions).sort({sorting: 1}).exec();
         res.render("admin/pages/index", {
             pages: pages,
             searchOptions: req.query,
