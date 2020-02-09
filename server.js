@@ -60,6 +60,15 @@ Page.find({}).sort({sorting: 1}).exec((err, pages) => {
     }
 });
 
+const Category = require("./models/category");
+Category.find((err, categories) => {
+    if (err) {
+        console.log(err);
+    }else {
+        app.locals.categories = categories;
+    }
+});
+
 app.use("/", indexRouter);
 app.use("/markets", sellerRouter);
 app.use("/login", registerLoginRouter);

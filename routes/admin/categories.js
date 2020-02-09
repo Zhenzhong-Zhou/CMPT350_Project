@@ -47,6 +47,13 @@ router.post("/", [
     });
     try {
         const newCategory = await category.save();
+        Category.find((err, categories) => {
+            if (err) {
+                console.log(err);
+            }else {
+                req.app.locals.categories = categories;
+            }
+        });
         res.redirect(`/admin/categories/${newCategory.id}`);
     }catch (e) {
         const errorFormatter = ({msg}) => {
@@ -106,6 +113,13 @@ router.put("/:id", [
             category.categoryName = req.body.category_name;
             category.slug = req.body.category_slug;
             await category.save();
+            Category.find((err, categories) => {
+                if (err) {
+                    console.log(err);
+                }else {
+                    req.app.locals.categories = categories;
+                }
+            });
             res.redirect(`/admin/categories/${category.id}`);
         }catch (e) {
             if (category == null) {
@@ -135,6 +149,13 @@ router.delete("/:id", async (req, res) => {
     try {
         category = await Category.findById(req.params.id);
         await category.remove();
+        Category.find((err, categories) => {
+            if (err) {
+                console.log(err);
+            }else {
+                req.app.locals.categories = categories;
+            }
+        });
         res.redirect("/admin/categories");
     }catch (e) {
         if (category == null) {
