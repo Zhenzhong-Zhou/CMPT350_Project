@@ -67,10 +67,10 @@ router.post("/", [
 /*
  *  POST reorder pages
  */
-router.post("/reorder", async (req) => {
+router.post("/reorder", function(req, res) {
     let ids = req.body['id[]'];
     let count = 0;
-    console.log(ids);
+    console.log("reorder: ", ids);
     for (let i = 0; i < ids.length; i++) {
         let id = ids[i];
         count++;
