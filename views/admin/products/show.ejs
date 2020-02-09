@@ -1,0 +1,15 @@
+<a href="/admin/products">Return Back</a>
+<h2><%=product.productName%></h2>
+<img width="100" height="150" src="<%=product.coverImagePath%>" alt="product cover image">
+<div>Product: <%=product.productName%></div>
+<div>Category: <%=product.category.categoryName%></div>
+<div>Author: <%=product.author%></div>
+<div>Slug: <%=product.slug%></div>
+<div>Price: <%=product.price%></div>
+<div>Publish Date: <%=product.publishDate.toDateString()%></div>
+<div>Page Count: <%=product.pageCount%></div>
+<div>Description: <%=product.description%></div>
+
+<a href="/admin/products/<%=product.id%>/edit">Edit</a>
+<%- include("../../partials/deleteForm.ejs", {url: `/admin/products/${product.id}`}); -%>
+<a href="/admin/products/<%=product.category.id%>">View Product</a>

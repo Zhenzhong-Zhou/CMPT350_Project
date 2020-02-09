@@ -34,7 +34,7 @@
 <div>
     <label>Product Publish Date</label>
     <input type="date" name="product_publishDate"
-           value="<%=product.publishDate == null ? "" : product.publishDate.toString().split("T")[0]%>">
+           value="<%=product.publishDate == null ? "" : product.publishDate.toISOString().split("T")[0]%>">
 </div>
 
 <div>

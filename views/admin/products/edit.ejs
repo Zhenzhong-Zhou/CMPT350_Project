@@ -1,0 +1,6 @@
+<h3>Edit Product</h3>
+<form action="/admin/products/<%=product.id%>?_method=PUT" method="post">
+    <%- include("_form_fields.ejs"); %>
+    <a href="/admin/products">Cancel</a>
+    <button type="submit">Update</button>
+</form>

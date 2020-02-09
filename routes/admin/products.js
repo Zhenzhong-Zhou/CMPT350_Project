@@ -9,7 +9,7 @@ const { check, validationResult } = require('express-validator');
 /*
  * GET Products Route
  */
-router.get("/", isAdmin,async (req, res) => {
+router.get("/", async (req, res) => {
     let query = Product.find();
     if (req.query.product_name != null && req.query.product_name !== "") {
         query = query.regex("productName", new RegExp(req.query.product_name, "i"));
@@ -38,8 +38,8 @@ router.get("/", isAdmin,async (req, res) => {
 /*
  * GET New Product Route
  */
-router.get("/new", isAdmin,async (req, res) => {
-    await renderNewPage(res, new Product())
+router.get("/new", async (req, res) => {
+    await renderNewPage(res, new Product());
 });
 
 /*
@@ -59,8 +59,7 @@ router.post("/", async (req, res, next) => {
     saveCover(product, req.body.cover);
     try {
         const newProduct = await product.save();
-        // res.redirect(`admin/products/${newProducts.id}`);
-        res.redirect("products");
+        res.redirect(`/admin/products/${newProduct.id}`);
     }catch (e) {
         await renderNewPage(res, product, true);
     }
@@ -70,31 +69,90 @@ router.post("/", async (req, res, next) => {
  * GET Show Product Route
  */
 router.get("/:id", async (req, res) => {
-    res.send("Show Product: " + req.params.id);
+    try{
+        const product = await Product.findById(req.params.id).populate("category").exec();
+        res.render("admin/products/show", {
+            product: product,
+            login: "2"
+        })
+    }catch (e) {
+        res.redirect("/");
+    }
 });
 
 /*
  * GET Edit Product Route
  */
 router.get("/:id/edit", async (req, res) => {
-    res.send("Edit Product: " + req.params.id);
+    try {
+        const product = await Product.findById(req.params.id);
+        await renderEditPage(res, product);
+    }catch (e) {
+     res.redirect("/");
+    }
 });
 
 /*
  * PUT Product Route
  */
 router.put("/:id", async (req, res) => {
-    res.send("Put Product: " + req.params.id);
+    let product;
+    try {
+        product = await Product.findById(req.params.id);
+        product.productName = req.body.product_name;
+        product.category = req.body.category;
+        product.author = req.body.author;
+        product.slug = req.body.product_slug;
+        product.price = req.body.product_price;
+        product.publishDate = new Date(req.body.product_publishDate);
+        product.pageCount = req.body.product_pageCount;
+        product.description = req.body.product_description;
+        if (req.body.cover != null && req.body.cover !== "") {
+            saveCover(product, req.body.cover)
+        }
+        await product.save();
+        res.redirect(`/admin/products/${product.id}`);
+    }catch (e) {
+        console.log(e);
+        if (product != null) {
+            await renderEditPage(res, product, true);
+        }
+        res.redirect("/");
+    }
 });
 
 /*
  * DELETE Show Product Route
  */
 router.delete("/:id", async (req, res) => {
-    res.send("Delete Product: " + req.params.id);
+    let product;
+    try{
+        product = await Product.findById(req.params.id);
+        await product.remove();
+        res.redirect("/admin/products");
+    }catch (e) {
+        console.log(e);
+        if (product != null) {
+            res.render("admin/products/show", {
+                product: product,
+                errorMessage: "Could not remove product",
+                login: "2"
+            });
+        }else {
+            res.redirect("/");
+        }
+    }
 });
 
 async function renderNewPage(res, product, hasError = false) {
+    await renderFormPage(res, product, "new", hasError)
+}
+
+async function renderEditPage(res, product, hasError = false) {
+    await renderFormPage(res, product, "edit", hasError)
+}
+
+async function renderFormPage(res, product, form, hasError = false) {
     try{
         const categories = await Category.find({});
         const params = {
@@ -102,8 +160,14 @@ async function renderNewPage(res, product, hasError = false) {
             product: product,
             login: "2"
         };
-        if (hasError) params.errorMessage = "Error Creating Product";
-        res.render("admin/products/new", params)
+        if (hasError) {
+            if (form === "edit") {
+                params.errorMessage = "Error Editing Product";
+            }else {
+                params.errorMessage = "Error Creating Product";
+            }
+        }
+        res.render(`admin/products/${form}`, params)
     }catch (e) {
         res.redirect("/");
     }

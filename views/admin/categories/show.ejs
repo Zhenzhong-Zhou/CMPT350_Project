@@ -5,7 +5,9 @@
 <%if (productsByCategory.length > 0) {%>
     <h2>Products By Category</h2>
     <%productsByCategory.forEach(product => {%>
-        <img height="150" width="100" src="<%=product.coverImagePath%>" alt="product cover image">
+        <a href="/admin/products/<%=product.id%>">
+            <img height="150" width="100" src="<%=product.coverImagePath%>" alt="product cover image">
+        </a>
     <%})%>
 <%}else {%>
     <h2>This category does not have anything. Please upload it.</h2>

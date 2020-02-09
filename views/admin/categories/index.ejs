@@ -5,9 +5,13 @@
     <button type="submit">Search</button>
 </form>
 <br>
-<%categories.forEach(category => {%>
-    <div><%=category.categoryName%></div>
-    <a href="/admin/categories/<%=category.id%>">View</a>
-    <a href="/admin/categories/<%=category.id%>/edit">Edit</a>
-    <%- include("../../partials/deleteForm.ejs", {url: `/admin/categories/${category.id}`}); -%>
-<%})%>
+<%if (locals.categories.length > 0) {%>
+    <%categories.forEach(category => {%>
+        <div><%=category.categoryName%></div>
+        <a href="/admin/categories/<%=category.id%>">View</a>
+        <a href="/admin/categories/<%=category.id%>/edit">Edit</a>
+        <%- include("../../partials/deleteForm.ejs", {url: `/admin/categories/${category.id}`}); -%>
+    <%})%>
+<%}else {%>
+    <h3>There is no category. Please add one.</h3>
+<%}%>

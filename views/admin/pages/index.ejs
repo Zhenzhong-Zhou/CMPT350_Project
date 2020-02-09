@@ -5,16 +5,22 @@
     <button type="submit">Search</button>
 </form>
 <br>
-<%pages.forEach(page => {%>
-    <div><%=page.pageTitle%></div>
-    <a href="/admin/pages/<%=page.id%>">View</a>
-    <a href="/admin/pages/<%=page.id%>/edit">Edit</a>
-    <%if (page.slug === "home") {%>
-        <td></td>
-    <%}else {%>
-        <%- include("../../partials/deleteForm.ejs", {url: `/admin/pages/${page.id}`}); -%>
-    <%}%>
-<%})%>
+<%if (locals.pages.length > 0) {%>
+    <%pages.forEach(page => {%>
+        <div><%=page.pageTitle%></div>
+        <a href="/admin/pages/<%=page.id%>">View</a>
+        <a href="/admin/pages/<%=page.id%>/edit">Edit</a>
+        <%if (page.slug === "home") {%>
+            <td></td>
+        <%}else {%>
+            <%- include("../../partials/deleteForm.ejs", {url: `/admin/pages/${page.id}`}); -%>
+        <%}%>
+    <%})%>
+<%}else {%>
+    <h3>There is no page. Please add one.</h3>
+<%}%>
+
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <table class="sorting">

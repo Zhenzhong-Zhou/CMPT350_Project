@@ -20,7 +20,13 @@
 </form>
 <br>
 <div>
-    <%products.forEach(product => {%>
-        <img height="150" width="100" src="<%=product.coverImagePath%>" alt="product cover image">
-    <%})%>
+    <%if (locals.products.length > 0) {%>
+        <%products.forEach(product => {%>
+            <a href="/admin/products/<%=product.id%>">
+                <img height="150" width="100" src="<%=product.coverImagePath%>" alt="product cover image">
+            </a>
+        <%})%>
+    <%}else {%>
+        <h3>There is no product. Please upload it.</h3>
+    <%}%>
 </div>
