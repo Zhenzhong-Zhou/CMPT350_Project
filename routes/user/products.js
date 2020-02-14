@@ -26,10 +26,13 @@ router.get("/:category", async (req, res) => {
     const categorySlug = req.params.category;
     try {
         const category = await Category.findOne({slug: categorySlug});
-        const products = await Product.find({categoryName: categorySlug}).exec();
+        console.log(category);
+        // const products = await Product.find({productName: categorySlug}).exec();
+        const product = await Product.findById(req.params.id).populate("category").exec();
+        console.log(product);
         res.render("user/products/category_products", {
             title: category.categoryName,
-            products: products,
+            product: product,
             login: "1"
         });
     }catch (e) {
@@ -38,6 +41,7 @@ router.get("/:category", async (req, res) => {
     // Category.findOne({slug: categorySlug}, (err, category) => {
     //     if (err) console.log(err);
     //    Product.find({categoryName: categorySlug}, (err, products) => {
+    //        console.log(products);
     //         if (err) console.log(err);
     //         res.render("user/products/category_products", {
     //             title: category.categoryName,
