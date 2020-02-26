@@ -3,12 +3,12 @@
     <%if (locals.products != null) {%>
         <%products.forEach(product => {%>
             <div>
-                <a href="/categories/products/<%=product.categoryName%>/<%=product.slug%>">
+                <a href="/categories/products/<%=product.category%>/<%=product.slug%>">
                     <img height="150" width="100" src="<%=product.coverImagePath%>" alt="products images">
                 </a>
                 <h3><%=product.productName%></h3>
                 <h3>$ <%=parseFloat(product.price).toFixed(2)%></h3>
-                <a href="/categories/products/<%=product.categoryName%>/<%=product.slug%>">View Details</a>
+                <a href="/categories/products/<%=product.category%>/<%=product.slug%>">View Details</a>
             </div>
         <%})%>
     <%}%>
