@@ -1,4 +1,11 @@
 <div>
-    <h1>You get a right link. Using product ref ObjectId.</h1>
-    <%=product.price%>
+    <h1><%=product.productName%></h1>
+    <div>
+        <li><img height="150" width="100" src="<%=product.coverImagePath%>" alt="products images"></li>
+        <li>Author: <%=product.author%></li>
+        <li>Page Count: <%=product.pageCount%></li>
+        <li>Publish Date: <%=product.publishDate.toDateString()%></li>
+        <li>Price: $ <%=parseFloat(product.price).toFixed(2)%></li>
+        <li>Description: <%=product.description%></li>
+    </div>
 </div>
