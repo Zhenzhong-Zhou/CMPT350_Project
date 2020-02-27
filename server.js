@@ -53,10 +53,6 @@ app.use((req, res, next) => {
     next();
 });
 
-// app.get("*", (req, res, next) => {
-//     res.locals.c
-// });
-
 const Page = require("./models/page");
 Page.find({}).sort({sorting: 1}).exec((err, pages) => {
     if (err) {
