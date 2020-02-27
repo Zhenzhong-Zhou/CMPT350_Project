@@ -10,7 +10,11 @@
                 <%}%>
             <%})%>
             <li><a href="/markets/sellers">WANT TO BE A SELLER?</a></li>
-            <li><a><i class="fas fa-shopping-cart"></i> Sopping Cart </a></li>
+            <%if (typeof cart !== "undefined") {%>
+                <li><a href="/cart/checkout"><i class="fas fa-shopping-cart"></i> Sopping Cart (<%=cart.length%>)</a></li>
+            <%}else {%>
+                <li><a href="/cart/checkout"><i class="fas fa-shopping-cart"></i> Sopping Cart </a></li>
+            <%}%>
             <%if (locals.user != null) {%>
                 <%if (user) {%>
             <li><a href="#"><i class="fas fa-user" aria-hidden="true"></i>Dropdown menu: User Management</a></li>
