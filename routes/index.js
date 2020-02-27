@@ -11,8 +11,8 @@ router.get("/", async (req, res) => {
     await Page.findOne({slug: "home"}, (err, page) => {
         if (err) console.log(err);
         res.render("index", {
-            // title: page.pageTitle,
-            // content: page.content,
+            title: page.pageTitle,
+            content: page.content,
             user: req.user,
             views: views,
             login: "1"
