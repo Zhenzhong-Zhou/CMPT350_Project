@@ -1,10 +1,10 @@
 <div>
-    <label>Product Name</label>
+    <label>Product Name / 产品名称</label>
     <input type="text" name="product_name" placeholder="Product" value="<%=product.productName%>">
 </div>
 
 <div>
-    <label>Category</label>
+    <label>Category / 类别</label>
     <select name="category">
         <%categories.forEach(category => {%>
             <%if (category.id === product.category) {%>
@@ -17,7 +17,7 @@
 </div>
 
 <div>
-    <label>Author</label>
+    <label>Author / 作者</label>
     <input type="text" name="author" placeholder="Author" value="<%=product.author%>">
 </div>
 
@@ -27,27 +27,27 @@
 </div>
 
 <div>
-    <label>Product Price</label>
+    <label>Product Price / 产品价格</label>
     <input type="number" name="product_price" placeholder="Price" min="0" step="0.01" value="<%=product.price%>">
 </div>
 
 <div>
-    <label>Product Publish Date</label>
+    <label>Product Publish Date / 出版日期</label>
     <input type="date" name="product_publishDate"
            value="<%=product.publishDate == null ? "" : product.publishDate.toISOString().split("T")[0]%>">
 </div>
 
 <div>
-    <label>Product Page Count</label>
+    <label>Product Page Count / 产品页数</label>
     <input type="number" name="product_pageCount" placeholder="Page Count" min="1" step="1" value="<%=product.pageCount%>">
 </div>
 
 <div>
-    <label>Product Cover Image</label>
+    <label>Product Cover Image / 产品封面</label>
     <input type="file" name="cover" class="filepond" multiple>
 </div>
 
 <div>
-    <label>Product Description</label>
+    <label>Product Description / 产品描述</label>
     <textarea name="product_description" cols="30" rows="10" placeholder="Description"><%=product.description%></textarea>
 </div>

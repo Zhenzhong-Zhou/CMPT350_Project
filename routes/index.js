@@ -6,10 +6,10 @@ const {isUser} = require("../config/auth");
 /*
  * GET user side page index
  */
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
     const views = req.session.views++;
-    Page.findOne({slug: "home"}, (err, page) => {
-        if (err) console.log(err);
+    try {
+        const page = await Page.findOne({slug: "home"}).exec();
         res.render("index", {
             title: page.pageTitle,
             content: page.content,
@@ -17,17 +17,20 @@ router.get("/", (req, res) => {
             views: views,
             login: "1"
         })
-    });
+    }catch (e) {
+        res.redirect("/");
+    }
 });
 
 /*
  * GET user side page content
  */
-router.get("/:slug", (req, res) => {
+router.get("/:slug", async (req, res) => {
     const views = req.session.views++;
     const slug = req.params.slug;
-    Page.findOne({slug: slug}, (err, page) => {
-        if (err) console.log(err);
+    try {
+        const page = await Page.findOne({slug: slug}).exec();
+        console.log(page);
         if (!page) {
             res.redirect("/");
         }else {
@@ -37,9 +40,11 @@ router.get("/:slug", (req, res) => {
                 user: req.user,
                 views: views,
                 login: "1"
-            })
+            });
         }
-    });
+    }catch (e) {
+        res.redirect("/");
+    }
 });
 
 module.exports = router;
