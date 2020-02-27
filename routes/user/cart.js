@@ -6,7 +6,7 @@ const {isUser} = require("../../config/auth");
 /*
  * GET add product to cart
  */
-router.get("/add/:product", (req, res) => {
+router.get("/add/:product", isUser, (req, res) => {
     const productSlug = req.params.product;
     Product.findOne({slug: req.params.product}, (err, product) => {
         if (err) console.log(err);
@@ -45,7 +45,7 @@ router.get("/add/:product", (req, res) => {
 /*
  * GET checkout page
  */
-router.get("/checkout", (req, res) => {
+router.get("/checkout", isUser, (req, res) => {
     if (req.session.cart && req.session.cart.length === 0) {
         delete req.session.cart;
         res.redirect("/cart/checkout")
@@ -87,6 +87,14 @@ router.get("/update/:product", (req, res) => {
         req.flash("Cart updated");
         res.redirect("/cart/checkout");
     }
+});
+
+/*
+ * GET clear cart
+ */
+router.get("/clear", (req, res) => {
+    delete req.session.cart;
+    res.redirect("/cart/checkout");
 });
 
 module.exports = router;
