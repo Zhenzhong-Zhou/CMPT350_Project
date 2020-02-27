@@ -18,7 +18,8 @@ router.get("/", async (req, res) => {
             login: "1"
         })
     }catch (e) {
-        res.redirect("/");
+        console.log(e);
+        // res.redirect("/");
     }
 });
 
@@ -43,7 +44,8 @@ router.get("/:slug", async (req, res) => {
             });
         }
     }catch (e) {
-        res.redirect("/");
+        console.log(e);
+        // res.redirect("/");
     }
 });
 
