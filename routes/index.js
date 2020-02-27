@@ -8,16 +8,28 @@ const {isUser} = require("../config/auth");
  */
 router.get("/", async (req, res) => {
     const views = req.session.views++;
-    await Page.findOne({slug: "home"}, (err, page) => {
-        if (err) console.log(err);
+    try {
+        const page = await Page.findOne({slug: "home"}).exec();
         res.render("index", {
-            title: page.pageTitle,
+            title: page.title,
             content: page.content,
             user: req.user,
             views: views,
             login: "1"
         })
-    });
+    }catch (e) {
+        console.log(e);
+    }
+    // await Page.findOne({slug: "home"}, (err, page) => {
+    //     if (err) console.log(err);
+    //     res.render("index", {
+    //         title: page.pageTitle,
+    //         content: page.content,
+    //         user: req.user,
+    //         views: views,
+    //         login: "1"
+    //     })
+    // });
 });
 
 /*
