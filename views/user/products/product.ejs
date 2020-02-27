@@ -7,7 +7,7 @@
             <li style="color: red; font-size: 20pt">Category: <%=product.category.categoryName%></li>
             <li>Page Count: <%=product.pageCount%></li>
             <li>Publish Date: <%=product.publishDate.toDateString()%></li>
-            <li>Price: $ <%=parseFloat(product.price).toFixed(2)%></li>
+            <li>Price: CDN$ <%=parseFloat(product.price).toFixed(2)%></li>
             <li>Description: <%=product.description%></li>
         </ul>
         <a href="/cart/add/<%=product.slug%>">Add to Cart</a>
