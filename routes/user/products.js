@@ -11,7 +11,6 @@ const { check, validationResult } = require('express-validator');
 router.get("/", (req, res) => {
     Product.find((err, products) => {
         if (err) console.log(err);
-        console.log(products);
         res.render("user/products/all_products", {
             title: "All products",
             products: products,
@@ -43,8 +42,7 @@ router.get("/:category", async (req, res) => {
  */
 router.get("/:category/:product", async (req, res) => {
     try {
-        const product = await Product.findOne({slug: req.params.product}).exec();
-        console.log(product)
+        const product = await Product.findOne({slug: req.params.product}).populate("category").exec();
         res.render("user/products/product", {
             product: product,
             login: "1"
