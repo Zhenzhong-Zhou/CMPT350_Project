@@ -44,7 +44,6 @@ router.get("/:category", async (req, res) => {
 router.get("/:category/:product", async (req, res) => {
     try {
         const product = await Product.findOne({slug: req.params.product}).exec();
-        console.log(product)
         res.render("user/products/product", {
             product: product,
             login: "1"

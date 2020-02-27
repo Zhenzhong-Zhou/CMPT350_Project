@@ -68,15 +68,6 @@ Category.find((err, categories) => {
         app.locals.categories = categories;
     }
 });
-//
-// const Product = require("./models/product");
-// Product.find((err, products) => {
-//     if (err) {
-//         console.log(err);
-//     }else {
-//         app.locals.products = products;
-//     }
-// });
 
 app.use("/", indexRouter);
 app.use("/categories/products", productRouter);
