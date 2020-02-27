@@ -6,7 +6,7 @@ const {isUser} = require("../../config/auth");
 /*
  * GET add product to cart
  */
-router.get("/add/:product", (req, res) => {
+router.get("/add/:product", isUser, (req, res) => {
     const productSlug = req.params.product;
     Product.findOne({slug: req.params.product}, (err, product) => {
         if (err) console.log(err);
@@ -45,12 +45,56 @@ router.get("/add/:product", (req, res) => {
 /*
  * GET checkout page
  */
-router.get("/checkout", (req, res) => {
-    res.render("user/products/checkout", {
-        title: "Checkout",
-        cart: req.session.cart,
-        login: "1"
-    })
+router.get("/checkout", isUser, (req, res) => {
+    if (req.session.cart && req.session.cart.length === 0) {
+        delete req.session.cart;
+        res.redirect("/cart/checkout")
+    }else {
+        res.render("user/products/checkout", {
+            title: "Checkout",
+            cart: req.session.cart,
+            login: "1"
+        });
+    }
+});
+
+/*
+ * GET update products
+ */
+router.get("/update/:product", (req, res) => {
+    let productSlug = req.params.product;
+    let cart = req.session.cart;
+    let action = req.query.action;
+    for (let i = 0; i < cart.length; i ++) {
+        if (cart[i].title === productSlug) {
+            switch (action) {
+                case "add":
+                    cart[i].qty++;
+                    break;
+                case "remove":
+                    cart[i].qty--;
+                    if (cart[i].qty < 1) cart.splice(i, 1);
+                    break;
+                case "clear":
+                    cart.splice(i, 1);
+                    if (cart.length === 0) delete req.session.cart;
+                    break;
+                default:
+                    console.log("update problem");
+                    break;
+            }
+        }
+        req.flash("Cart updated");
+        res.redirect("/cart/checkout");
+    }
+});
+
+/*
+ * GET clear cart
+ */
+router.get("/clear", (req, res) => {
+    delete req.session.cart;
+    res.redirect("/cart/checkout");
 });
 
 module.exports = router;
