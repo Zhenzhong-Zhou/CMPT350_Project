@@ -17,6 +17,7 @@ db.once("open", () => console.log("Connected to Mongoose......"));
 
 const indexRouter = require("./routes/index");
 const productRouter = require("./routes/user/products");
+const cartRouter = require("./routes/user/cart");
 const sellerRouter = require("./routes/user/sellers");
 const registerSignUpRouter = require("./routes/register/sign_up");
 const registerLoginRouter = require("./routes/register/login");
@@ -48,8 +49,13 @@ app.use((req, res, next) => {
     res.locals.error_msg = req.flash("error_msg");
     res.locals.error = req.flash("error");
     res.locals.user = req.user || null;
+    res.locals.cart = req.session.cart;
     next();
 });
+
+// app.get("*", (req, res, next) => {
+//     res.locals.c
+// });
 
 const Page = require("./models/page");
 Page.find({}).sort({sorting: 1}).exec((err, pages) => {
@@ -71,6 +77,7 @@ Category.find((err, categories) => {
 
 app.use("/", indexRouter);
 app.use("/categories/products", productRouter);
+app.use("/cart", cartRouter);
 app.use("/markets/sellers", sellerRouter);
 app.use("/user/login", registerLoginRouter);
 app.use("/user/logout", registerLogoutRouter);
