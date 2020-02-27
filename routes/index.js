@@ -6,9 +6,9 @@ const {isUser} = require("../config/auth");
 /*
  * GET user side page index
  */
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
     const views = req.session.views++;
-    Page.findOne({slug: "home"}, (err, page) => {
+    await Page.findOne({slug: "home"}, (err, page) => {
         if (err) console.log(err);
         res.render("index", {
             title: page.pageTitle,
