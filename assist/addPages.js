@@ -11,7 +11,8 @@ const pages = [
             "\n development and application of software and " +
             "\n software systems in a wide range of fields from " +
             "\n artificial intelligence and human-computer " +
-            "\n interaction to computational modelling and computer graphics."
+            "\n interaction to computational modelling and computer graphics.",
+        sorting: 0
     }),
     new Page({
         pageTitle: "About us",
@@ -20,14 +21,23 @@ const pages = [
             "and maintenance of software systems, distributed systems, human-computer interaction, " +
             "computational modeling, artificial intelligence, mobile computing, programming languages, " +
             "image processing, and computer graphics. You will learn to combine creative problem solving" +
-            " and analytical skills to create practical and innovative software."
+            " and analytical skills to create practical and innovative software.",
+        sorting: 0
     }),
     new Page({
         pageTitle: "Services",
         slug: "services",
         content: "Our programs are designed to prepare graduates for careers across all sectors of " +
-            "the information technology industry, as well as for graduate studies and research."
+            "the information technology industry, as well as for graduate studies and research.",
+        sorting: 0
     }),
+    new Page({
+        pageTitle: "Contact Us",
+        slug: "contact us",
+        content: "bob.zhou@usask.ca" +
+            "https://github.com/Zhenzhong-Zhou/CMPT350_Project",
+        sorting: 0
+    })
 ];
 
 let done = 0;
