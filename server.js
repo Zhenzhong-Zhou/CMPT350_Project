@@ -36,10 +36,6 @@ app.use("/public", express.static("public"));
 app.use(express.urlencoded({limit: "10mb", extended: false}));
 app.use(express.json());
 app.use(session({
-    cookie:{
-        secure: true,
-        maxAge:60000
-    },
     secret: "secret",
     resave: false,
     saveUninitialized: true
