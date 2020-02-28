@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Page = require("../models/page");
+const Product = require("../models/product");
 const {isUser} = require("../config/auth");
 
 /*
@@ -8,11 +9,23 @@ const {isUser} = require("../config/auth");
  */
 router.get("/", async (req, res) => {
     const views = req.session.views++;
+    let query = Product.find();
+    let name = req.query.product_name;
+    let author = req.query.author;
+    if (name != null && name !== "") {
+        query = query.regex("productName", new RegExp(name, "i"));
+    }
+    if (author!= null && author !== "") {
+        query = query.regex("author", new RegExp(author, "i"));
+    }
     try {
+        const products = await query.exec();
         const page = await Page.findOne({slug: "home"}).exec();
         res.render("index", {
             title: page.pageTitle,
             content: page.content,
+            products: products,
+            searchOptions: req.query,
             user: req.user,
             views: views,
             login: "1"
