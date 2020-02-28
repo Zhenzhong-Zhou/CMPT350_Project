@@ -188,12 +188,12 @@ async function renderFormPage(res, product, form, hasError = false) {
     }
 }
 
-function saveCover(book, coverEncoded) {
+function saveCover(product, coverEncoded) {
     if (coverEncoded == null) return;
     const cover = JSON.parse(coverEncoded);
     if (cover != null && imageMimeTypes.includes(cover.type)) {
-        book.coverImage = new Buffer.from(cover.data, "base64");
-        book.coverImageType = cover.type;
+        product.coverImage = new Buffer.from(cover.data, "base64");
+        product.coverImageType = cover.type;
     }
 }
 

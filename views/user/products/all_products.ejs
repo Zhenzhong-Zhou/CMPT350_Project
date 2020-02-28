@@ -1,7 +1,7 @@
 <h2><%=title%></h2>
-<div style="display: inline-block; height: 200px">
+<div style="display: flex; height: 300px;">
     <%products.forEach(product => {%>
-    <div>
+    <div style="width: 10rem">
         <a href="/categories/products/<%=product.category%>/<%=product.slug%>">
             <img height="150" width="100" src="<%=product.coverImagePath%>" alt="products images">
         </a>
