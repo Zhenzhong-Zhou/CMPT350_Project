@@ -70,7 +70,7 @@ router.post("/", async (req, res, next) => {
  */
 router.get("/list", async (req, res) => {
     try {
-        const products = await Product.find({});
+        const products = await Product.find({}).populate("category").exec();
         res.render("admin/products/list", {
             products: products,
             login: "2"
