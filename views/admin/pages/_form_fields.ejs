@@ -1,14 +1,20 @@
 <div>
     <label>Page Title</label>
-    <input type="text" name="page_title" placeholder="Title" value="<%=page.pageTitle%>">
+    <input type="text" name="page_title" placeholder="Title" value="<%=page.pageTitle%>" required="required"
+           oninvalid="this.setCustomValidity('Title is required.')"
+           oninput="this.setCustomValidity('')">
 </div>
 
 <div>
     <label>Page Slug</label>
-    <input type="text" name="page_slug" placeholder="Slug" value="<%=page.slug%>">
+    <input type="text" name="page_slug" placeholder="Slug" value="<%=page.slug%>" required="required"
+           oninvalid="this.setCustomValidity('Slug is required.')"
+           oninput="this.setCustomValidity('')">
 </div>
 
 <div>
     <label>Page Content</label>
-    <textarea name="page_content" cols="30" rows="10" placeholder="Content"><%=page.content%></textarea>
+    <textarea name="page_content" cols="30" rows="10" placeholder="Content" required="required"
+              oninvalid="this.setCustomValidity('Content is required.')"
+              oninput="this.setCustomValidity('')"><%=page.content%></textarea>
 </div>
