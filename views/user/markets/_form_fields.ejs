@@ -1,13 +1,23 @@
 <div>
-    <label>Name</label>
-    <input type="text" id="sellerName" name="sellerName" placeholder="Name" value=""
-           required="required">
+    <label>User</label>
+    <%=user.username%>
+    <select name="user" hidden>
+        <%if (user.id === seller.user) {%>
+            <option selected label="<%=user.username%>" value="<%=user.id%>"></option>
+        <%}else {%>
+            <option label="<%=user.username%>" value="<%=user.id%>"></option>
+        <%}%>
+    </select>
 </div>
 
 <div>
     <label>Gender</label>
-    <input type="text" id="gender" name="gender" placeholder="Gender" value=""
-           required="required">
+    <select name="gender" required="required">
+        <option>Male</option>
+        <option>Female</option>
+        <option>Others</option>
+        <option>Unknown</option>
+    </select>
 </div>
 
 <div>
@@ -18,14 +28,7 @@
 
 <div>
     <label>Portrait</label>
-    <input type="file" name="portrait">
-</div>
-
-<div>
-    <label>Category</label>
-    <select name="category">
-
-    </select>
+    <input type="file" name="portrait" required>
 </div>
 
 <div>
@@ -39,25 +42,4 @@
     <label>Address</label>
     <textarea id="address" name="address" placeholder="Address" cols="30" rows="10"
               required="required"></textarea>
-</div>
-
-<div>
-    <label>User</label>
-    <select name="user">
-
-    </select>
-</div>
-
-<div>
-    <label for="password">Password</label>
-    <input type="password" id="password" name="password" placeholder="Password" required="required"
-           oninvalid="this.setCustomValidity('Password is required.')"
-           oninput="this.setCustomValidity('')">
-</div>
-
-<div>
-    <label for="password">Confirm Password</label>
-    <input type="password" id="password2" name="password2" placeholder="Confirm Password" required="required"
-           oninvalid="this.setCustomValidity('Passwords do not match.')"
-           oninput="this.setCustomValidity('')">
 </div>
