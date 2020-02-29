@@ -19,7 +19,7 @@ const upload = multer({
  */
 router.get("/", async (req, res) => {
     const sellers = await Seller.find({}).populate("user").exec();
-    res.render("user/markets/index", {
+    res.render("user/sellers/index", {
         sellers: sellers,
         login: "1"
     })
@@ -66,7 +66,7 @@ async function renderNewSeller(req, res, seller, hasError = false) {
             login: "1"
         };
         if (hasError) params.errorMessage = "Wrong";
-        res.render("user/markets/new", params);
+        res.render("user/sellers/new", params);
     }catch (e) {
         console.log(e);
         res.redirect("/market/sellers")
