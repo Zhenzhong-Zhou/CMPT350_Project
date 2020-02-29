@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
     }
     try {
         await views.save();
-        const page_views = await View.find({}).count();
+        const page_views = await View.find({}).countDocuments();
         const products = await query.exec();
         const page = await Page.findOne({slug: "home"}).exec();
         res.render("index", {
@@ -59,7 +59,7 @@ router.get("/:slug", async (req, res) => {
     const slug = req.params.slug;
     try {
         await views.save();
-        const page_views = await View.find({}).count();
+        const page_views = await View.find({}).countDocuments();
         const products = await query.exec();
         const page = await Page.findOne({slug: slug}).exec();
         if (!page) {
