@@ -29,8 +29,7 @@ const sellerSchema = new mongoose.Schema({
         required: true
     },
     seller: {
-        type: Number,
-        required: true
+        type: Number
     }
 });
 

@@ -18,7 +18,9 @@ const upload = multer({
  * GET Sellers Route
  */
 router.get("/", async (req, res) => {
+    const sellers = await Seller.find({}).populate("user").exec();
     res.render("user/markets/index", {
+        sellers: sellers,
         login: "1"
     })
 });
