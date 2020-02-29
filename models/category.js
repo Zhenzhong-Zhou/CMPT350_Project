@@ -9,10 +9,6 @@ const categorySchema = new mongoose.Schema({
     slug: {
         type: String,
         required: true
-    },
-    product: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Product"
     }
 });
 
