@@ -3,16 +3,7 @@ const router = express.Router();
 const User = require("../../models/user");
 const Seller = require("../../models/seller");
 const {isUser} = require("../../config/auth");
-const path = require("path");
-const uploadPath = path.join("public", Seller.portraitBasePath);
-const multer = require("multer");
 const imageMimeTypes = ["image/jpg", "image/jpeg", "image/png", "images/gif"];
-const upload = multer({
-   dest: uploadPath,
-    fileFilter: (req, file, callback) => {
-       callback(null, imageMimeTypes.includes(file.mimetype));
-    }
-});
 
 /*
  * GET Sellers Route
@@ -35,25 +26,31 @@ router.get("/new", async (req, res) => {
 /*
  * POST Create Product Route
  */
-router.post("/", upload.single("portrait"), async (req, res) => {
-    const fileName = req.file != null ? req.file.filename : null;
+router.post("/", async (req, res) => {
     const seller = new Seller({
         user: req.body.user,
         gender: req.body.gender,
         age: req.body.age,
         phoneNumber: req.body.phoneNumber,
         address: req.body.address,
-        portrait: fileName,
         seller: 2
     });
+    savePortrait(seller, req.body.portrait);
     try {
         const newSeller = await seller.save();
         // res.redirect(`markets/sellers/${newSeller.id}`);
         res.redirect("/markets/sellers");
     }catch (e) {
-        console.log(e);
         await renderNewSeller(req, res, seller, true);
     }
+});
+
+router.get("/:id", async (req, res) => {
+    const seller = await Seller.findById(req.params.id).populate("user").exec();
+    res.render("user/sellers/index", {
+        login: "1",
+        seller: seller
+    })
 });
 
 async function renderNewSeller(req, res, seller, hasError = false) {
@@ -70,6 +67,15 @@ async function renderNewSeller(req, res, seller, hasError = false) {
     }catch (e) {
         console.log(e);
         res.redirect("/market/sellers")
+    }
+}
+
+function savePortrait(seller, portraitEncoded) {
+    if (portraitEncoded == null) return;
+    const portrait = JSON.parse(portraitEncoded);
+    if (portrait != null && imageMimeTypes.includes(portrait.type)) {
+        seller.portraitImage = new Buffer.from(portrait.data, "base64");
+        seller.portraitImageType = portrait.type;
     }
 }
 

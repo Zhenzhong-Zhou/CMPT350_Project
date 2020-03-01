@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
 
-const portraitBasePath = "upload/portrait";
-
 const sellerSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -16,7 +14,11 @@ const sellerSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    portrait: {
+    portraitImage: {
+        type: Buffer,
+        required: true
+    },
+    portraitImageType: {
         type: String,
         required: true
     },
@@ -33,5 +35,10 @@ const sellerSchema = new mongoose.Schema({
     }
 });
 
+sellerSchema.virtual("portraitPath").get(function () {
+    if (this.portraitImage != null && this.portraitImageType != null) {
+        return `data:${this.portraitImageType};charset=utf-8;base64,${this.portraitImage.toString("base64")}`
+    }
+});
+
 module.exports = mongoose.model("Seller", sellerSchema);
-module.exports.portraitBasePath = portraitBasePath;
