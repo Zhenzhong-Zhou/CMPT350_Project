@@ -6,7 +6,7 @@
     <%sellers.forEach(seller => {%>
         <li><a href="/markets/sellers/<%=seller.id%>"><%=seller.user.username%></a></li>
         <a href="/markets/sellers/<%=seller.id%>">
-            <img height="50px" width="50" src="<%=seller.portraitPath%>" alt="image">
+            <img height="50px" width="50" style="border-radius: 50px" src="<%=seller.portraitPath%>" alt="image">
         </a>
     <%})%>
 <%}%>
