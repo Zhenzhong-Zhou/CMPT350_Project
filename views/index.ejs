@@ -24,7 +24,7 @@
     <button type="submit">Search</button>
 </form>
 <br>
-<div style="display: flex; height: 500px;">
+<div style="display: flex;">
     <%if (locals.products.length > 0) {%>
     <%products.forEach(product => {%>
     <a href="/categories/products/<%=product.category%>/<%=product.slug%>">
