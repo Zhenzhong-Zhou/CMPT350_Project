@@ -1,5 +1,8 @@
 <div>
     <h1><%=product.productName%></h1>
+    <a href="/markets/sellers/<%=product.seller%>">
+        <p>by <%=product.user.username%></p>
+    </a>
     <div>
         <img height="150" width="100" src="<%=product.coverImagePath%>" alt="products images">
         <ul>
