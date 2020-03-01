@@ -7,7 +7,10 @@
 
 <div>
     <ul>
-        <li><a>Add Product</a></li>
+        <li><a href="/markets/sellers/add">Add Product</a></li>
         <li><a></a></li>
+        <%products.forEach(product => {%>
+            <img height="150px" width="100px" src="<%=product.coverImagePath%>" alt="image">
+        <%})%>
     </ul>
 </div>
