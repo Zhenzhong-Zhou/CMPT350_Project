@@ -9,8 +9,18 @@
                     <li><a href="/<%=page.slug%>"><%=page.pageTitle%></a></li>
                 <%}%>
             <%})%>
-            <li><a href="/markets/sellers">WANT TO BE A SELLER?</a></li>
-            <li><a><i class="fas fa-shopping-cart"></i> Sopping Cart </a></li>
+            <%if (locals.user && locals.user.admin == 2) {%>
+                <%if (locals.seller != null) {%>
+                    <li><a href="/markets/sellers/<%=seller.id%>"><%=user.username%>'s Shop  NOT WORK Properly</a></li>
+                <%}%>
+            <%}else {%>
+                <li><a href="/markets/sellers">WANT TO BE A SELLER?</a></li>
+                <%if (typeof cart !== "undefined") {%>
+                    <li><a href="/cart/checkout"><i class="fas fa-shopping-cart"></i> Sopping Cart (<%=cart.length%>)</a></li>
+                <%}else {%>
+                    <li><a href="/cart/checkout"><i class="fas fa-shopping-cart"></i> Sopping Cart </a></li>
+                <%}%>
+            <%}%>
             <%if (locals.user != null) {%>
                 <%if (user) {%>
             <li><a href="#"><i class="fas fa-user" aria-hidden="true"></i>Dropdown menu: User Management</a></li>
@@ -19,11 +29,11 @@
                     <li><a href="/user/logout">Logout</a></li>
                 <%}%>
             <%}else {%>
-                <li><a href="/user/login">Sign In</a></li>
-                <li><a href="/user/sign_up">Sign Up</a></li>
+                <li><a href="/user/login">Sign In / 登陆</a></li>
+                <li><a href="/user/sign_up">Sign Up / 注册</a></li>
             <%}%>
             <%if (locals.user && locals.user.admin == 1) {%>
-                <li><a href="/admin/dashboard">Admin Area</a></li>
+                <li><a href="/admin/dashboard">Admin Area / 管理员界面</a></li>
             <%}%>
         </ul>
     </nav>

@@ -1,10 +1,12 @@
 <div>
-    <label>Product Name</label>
-    <input type="text" name="product_name" placeholder="Product" value="<%=product.productName%>">
+    <label>Product Name / 产品名称 (*)</label>
+    <input type="text" name="product_name" placeholder="Product" value="<%=product.productName%>" required="required"
+           oninvalid="this.setCustomValidity('Product Name is required.')"
+           oninput="this.setCustomValidity('')" >
 </div>
 
 <div>
-    <label>Category</label>
+    <label>Category / 类别  (*)</label>
     <select name="category">
         <%categories.forEach(category => {%>
             <%if (category.id === product.category) {%>
@@ -17,37 +19,47 @@
 </div>
 
 <div>
-    <label>Author</label>
+    <label>Author / 作者</label>
     <input type="text" name="author" placeholder="Author" value="<%=product.author%>">
 </div>
 
 <div>
-    <label>Product Slug</label>
-    <input type="text" name="product_slug" placeholder="Slug" value="<%=product.slug%>">
+    <label>Product Slug (*)</label>
+    <input type="text" name="product_slug" placeholder="Slug" value="<%=product.slug%>" required="required"
+           oninvalid="this.setCustomValidity('Slug is required.')"
+           oninput="this.setCustomValidity('')">
 </div>
 
 <div>
-    <label>Product Price</label>
-    <input type="number" name="product_price" placeholder="Price" min="0" step="0.01" value="<%=product.price%>">
+    <label>Product Price / 产品价格 (*)</label>
+    <input type="number" name="product_price" placeholder="Price" min="0" step="0.01" value="<%=product.price%>" required="required"
+           oninvalid="this.setCustomValidity('Price is required.')"
+           oninput="this.setCustomValidity('')">
 </div>
 
 <div>
-    <label>Product Publish Date</label>
+    <label>Product Publish Date / 出版日期 (*) why is necessary</label>
     <input type="date" name="product_publishDate"
-           value="<%=product.publishDate == null ? "" : product.publishDate.toISOString().split("T")[0]%>">
+           value="<%=product.publishDate == null ? "" : product.publishDate.toISOString().split("T")[0]%>" required="required"
+           oninvalid="this.setCustomValidity('Date is required.')"
+           oninput="this.setCustomValidity('')">
 </div>
 
 <div>
-    <label>Product Page Count</label>
+    <label>Product Page Count / 产品页数</label>
     <input type="number" name="product_pageCount" placeholder="Page Count" min="1" step="1" value="<%=product.pageCount%>">
 </div>
 
 <div>
-    <label>Product Cover Image</label>
-    <input type="file" name="cover" class="filepond" multiple>
+    <label>Product Cover Image / 产品封面 (*)</label>
+    <input type="file" name="cover" class="filepond" multiple required="required"
+           oninvalid="this.setCustomValidity('Cover Image is required.')"
+           oninput="this.setCustomValidity('')">
 </div>
 
 <div>
-    <label>Product Description</label>
-    <textarea name="product_description" cols="30" rows="10" placeholder="Description"><%=product.description%></textarea>
+    <label>Product Description / 产品描述 (*)</label>
+    <textarea name="product_description" cols="30" rows="10" placeholder="Description" required="required"
+              oninvalid="this.setCustomValidity('Description is required.')"
+              oninput="this.setCustomValidity('')"><%=product.description%></textarea>
 </div>

@@ -5,7 +5,7 @@ const Product = require("../../models/product");
 const {isAdmin} = require("../../config/auth");
 const imageMimeTypes = ["image/jpg", "image/jpeg", "image/png", "images/gif"];
 const { check, validationResult } = require('express-validator');
-
+//test
 /*
  * GET Products Route
  */
@@ -70,7 +70,7 @@ router.post("/", async (req, res, next) => {
  */
 router.get("/list", async (req, res) => {
     try {
-        const products = await Product.find({});
+        const products = await Product.find({}).populate("category").exec();
         res.render("admin/products/list", {
             products: products,
             login: "2"
@@ -188,12 +188,12 @@ async function renderFormPage(res, product, form, hasError = false) {
     }
 }
 
-function saveCover(book, coverEncoded) {
+function saveCover(product, coverEncoded) {
     if (coverEncoded == null) return;
     const cover = JSON.parse(coverEncoded);
     if (cover != null && imageMimeTypes.includes(cover.type)) {
-        book.coverImage = new Buffer.from(cover.data, "base64");
-        book.coverImageType = cover.type;
+        product.coverImage = new Buffer.from(cover.data, "base64");
+        product.coverImageType = cover.type;
     }
 }
 

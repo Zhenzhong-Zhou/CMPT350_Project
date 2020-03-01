@@ -3,7 +3,6 @@ if (process.env.NODE_ENV !== "production") {
 }
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
-const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const flash = require("connect-flash");
 const session = require("express-session");
@@ -18,6 +17,7 @@ db.once("open", () => console.log("Connected to Mongoose......"));
 
 const indexRouter = require("./routes/index");
 const productRouter = require("./routes/user/products");
+const cartRouter = require("./routes/user/cart");
 const sellerRouter = require("./routes/user/sellers");
 const registerSignUpRouter = require("./routes/register/sign_up");
 const registerLoginRouter = require("./routes/register/login");
@@ -33,8 +33,8 @@ app.set("layout", "layouts/layout");
 app.use(expressLayouts);
 app.use(methodOverride("_method"));
 app.use("/public", express.static("public"));
-app.use(bodyParser.urlencoded({limit: "10mb", extended: false}));
-app.use(bodyParser.json());
+app.use(express.urlencoded({limit: "10mb", extended: false}));
+app.use(express.json());
 app.use(session({
     secret: "secret",
     resave: false,
@@ -49,6 +49,7 @@ app.use((req, res, next) => {
     res.locals.error_msg = req.flash("error_msg");
     res.locals.error = req.flash("error");
     res.locals.user = req.user || null;
+    res.locals.cart = req.session.cart;
     next();
 });
 
@@ -69,18 +70,10 @@ Category.find((err, categories) => {
         app.locals.categories = categories;
     }
 });
-//
-// const Product = require("./models/product");
-// Product.find((err, products) => {
-//     if (err) {
-//         console.log(err);
-//     }else {
-//         app.locals.products = products;
-//     }
-// });
 
 app.use("/", indexRouter);
 app.use("/categories/products", productRouter);
+app.use("/cart", cartRouter);
 app.use("/markets/sellers", sellerRouter);
 app.use("/user/login", registerLoginRouter);
 app.use("/user/logout", registerLogoutRouter);

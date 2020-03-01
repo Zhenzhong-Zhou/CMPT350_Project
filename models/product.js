@@ -13,7 +13,8 @@ const productSchema = new mongoose.Schema({
         type: String
     },
     description: {
-        type: String
+        type: String,
+        required: true
     },
     publishDate: {
         type: Date
