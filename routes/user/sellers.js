@@ -71,7 +71,6 @@ router.get("/add", async (req, res) => {
  * POST Create Seller's Product Route
  */
 router.post("/add", async (req, res) => {
-    console.log("111");
     const product = new Product({
         user: req.body.user,
         productName: req.body.product_name,
@@ -99,7 +98,6 @@ router.post("/add", async (req, res) => {
 router.get("/:id", async (req, res) => {
     const seller = await Seller.findById(req.params.id).populate("user").exec();
     const products = await Product.find({seller: req.user});
-    console.log(products);
     res.render("user/sellers/show", {
         login: "1",
         seller: seller,

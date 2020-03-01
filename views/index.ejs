@@ -24,11 +24,12 @@
     <button type="submit">Search</button>
 </form>
 <br>
-<div>
+<div style="display: flex; height: 500px;">
     <%if (locals.products.length > 0) {%>
     <%products.forEach(product => {%>
     <a href="/categories/products/<%=product.category%>/<%=product.slug%>">
         <img height="150" width="100" src="<%=product.coverImagePath%>" alt="product cover image">
+        <h3><%=product.productName%> <br> CDN$ <%=parseFloat(product.price).toFixed(2)%></h3>
     </a>
     <%})%>
     <%}else {%>
