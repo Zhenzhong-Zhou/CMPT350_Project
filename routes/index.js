@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
         views: req.session.views++
     });
     let seller = Seller.findOne({username: req.user});
-    let query = Product.find();
+    let query = Product.find({});
     let name = req.query.product_name;
     let author = req.query.author;
     if (name != null && name !== "") {
@@ -26,7 +26,7 @@ router.get("/", async (req, res) => {
     try {
         await views.save();
         const page_views = await View.find({}).countDocuments();
-        const products = await query.exec();
+        const products = await query.populate("user").exec();
         const page = await Page.findOne({slug: "home"}).exec();
         res.render("index", {
             title: page.pageTitle,
@@ -51,7 +51,7 @@ router.get("/:slug", async (req, res) => {
         views: req.session.views++
     });
     let seller = Seller.findOne({username: req.user});
-    let query = Product.find();
+    let query = Product.find({}).populate("user").exec();
     let name = req.query.product_name;
     let author = req.query.author;
     if (name != null && name !== "") {
@@ -64,7 +64,7 @@ router.get("/:slug", async (req, res) => {
     try {
         await views.save();
         const page_views = await View.find({}).countDocuments();
-        const products = await query.exec();
+        const products = await query.populate("user").exec();
         const page = await Page.findOne({slug: slug}).exec();
         if (!page) {
             res.redirect("/");
