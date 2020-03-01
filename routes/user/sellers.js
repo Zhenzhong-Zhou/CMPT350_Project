@@ -45,9 +45,12 @@ router.post("/", async (req, res) => {
     }
 });
 
+/*
+ * GET Seller's Page Route
+ */
 router.get("/:id", async (req, res) => {
     const seller = await Seller.findById(req.params.id).populate("user").exec();
-    res.render("user/sellers/index", {
+    res.render("user/sellers/show", {
         login: "1",
         seller: seller
     })

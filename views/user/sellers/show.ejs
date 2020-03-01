@@ -1,6 +1,6 @@
-<h>Seller Info</h>
-<%=seller.user.username%>
+<h1>Seller Info</h1>
 
-<%sellers.forEach(seller => {%>
-    <img src="<%=seller.portraitPath%>">
-<%})%>
+<div>
+    <h1 style="float: left"><%=seller.user.username%></h1>
+    <img height="50px" width="50px" style="border-radius: 50px" src="<%=seller.portraitPath%>">
+</div>

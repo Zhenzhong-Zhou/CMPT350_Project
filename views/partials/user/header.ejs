@@ -9,11 +9,17 @@
                     <li><a href="/<%=page.slug%>"><%=page.pageTitle%></a></li>
                 <%}%>
             <%})%>
-            <li><a href="/markets/sellers">WANT TO BE A SELLER?</a></li>
-            <%if (typeof cart !== "undefined") {%>
-                <li><a href="/cart/checkout"><i class="fas fa-shopping-cart"></i> Sopping Cart (<%=cart.length%>)</a></li>
+            <%if (locals.user && locals.user.admin == 2) {%>
+                <%if (locals.seller != null) {%>
+                    <li><a href="/markets/sellers/<%=seller.id%>"><%=user.username%>'s Shop  NOT WORK Properly</a></li>
+                <%}%>
             <%}else {%>
-                <li><a href="/cart/checkout"><i class="fas fa-shopping-cart"></i> Sopping Cart </a></li>
+                <li><a href="/markets/sellers">WANT TO BE A SELLER?</a></li>
+                <%if (typeof cart !== "undefined") {%>
+                    <li><a href="/cart/checkout"><i class="fas fa-shopping-cart"></i> Sopping Cart (<%=cart.length%>)</a></li>
+                <%}else {%>
+                    <li><a href="/cart/checkout"><i class="fas fa-shopping-cart"></i> Sopping Cart </a></li>
+                <%}%>
             <%}%>
             <%if (locals.user != null) {%>
                 <%if (user) {%>

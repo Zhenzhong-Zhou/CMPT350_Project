@@ -3,6 +3,7 @@ const router = express.Router();
 const Page = require("../models/page");
 const Product = require("../models/product");
 const View = require("../models/view");
+const Seller = require("../models/seller");
 const {isUser} = require("../config/auth");
 
 /*
@@ -12,6 +13,7 @@ router.get("/", async (req, res) => {
     const views = new View({
         views: req.session.views++
     });
+    let seller = Seller.findOne({username: req.user});
     let query = Product.find();
     let name = req.query.product_name;
     let author = req.query.author;
@@ -29,6 +31,7 @@ router.get("/", async (req, res) => {
         res.render("index", {
             title: page.pageTitle,
             content: page.content,
+            seller: seller,
             products: products,
             searchOptions: req.query,
             user: req.user,
@@ -47,6 +50,7 @@ router.get("/:slug", async (req, res) => {
     const views = new View({
         views: req.session.views++
     });
+    let seller = Seller.findOne({username: req.user});
     let query = Product.find();
     let name = req.query.product_name;
     let author = req.query.author;
@@ -68,6 +72,7 @@ router.get("/:slug", async (req, res) => {
             res.render("index", {
                 title: page.pageTitle,
                 content: page.content,
+                seller: seller,
                 products: products,
                 searchOptions: req.query,
                 user: req.user,

@@ -10,6 +10,10 @@
             <li>Price: CDN$ <%=parseFloat(product.price).toFixed(2)%></li>
             <li>Description: <%=product.description%></li>
         </ul>
-        <a href="/cart/add/<%=product.slug%>">Add to Cart</a>
+        <%if (locals.user && locals.user.admin == 2) {%>
+            <h1>This is seller's account only can scan</h1>
+        <%}else {%>
+            <a href="/cart/add/<%=product.slug%>">Add to Cart</a>
+        <%}%>
     </div>
 </div>
