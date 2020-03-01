@@ -5,14 +5,8 @@ module.exports = {
         }
         res.redirect('/');
     },
-    checkAuthenticated: function (req, res, next) {
-        if (req.isAuthenticated()) {
-            return next();
-        }
-        res.redirect("/login");
-    },
     isUser: function(req, res, next) {
-        if (req.isAuthenticated()) {
+        if (req.isAuthenticated() && res.locals.user.admin === 0) {
             return next();
         }
         req.flash('error_msg', 'Please login');

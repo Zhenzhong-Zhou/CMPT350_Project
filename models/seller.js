@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
 
 const sellerSchema = new mongoose.Schema({
-    sellerName: {
-        type: String,
-        required: true
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "User"
     },
     gender: {
         type: String,
@@ -14,61 +14,31 @@ const sellerSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    portrait: {
-        type: String,
+    portraitImage: {
+        type: Buffer,
         required: true
     },
-    password: {
+    portraitImageType: {
         type: String,
         required: true
-    },
-    category: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: "Category"
     },
     phoneNumber: {
-        type: Number,
+        type: String,
         required: true
     },
     address: {
         type: String,
         required: true
     },
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: "User"
-    },
     seller: {
-        type: Number,
-        required: true
+        type: Number
     }
 });
 
-const Seller = module.exports = mongoose.model("Seller", sellerSchema);
+sellerSchema.virtual("portraitPath").get(function () {
+    if (this.portraitImage != null && this.portraitImageType != null) {
+        return `data:${this.portraitImageType};charset=utf-8;base64,${this.portraitImage.toString("base64")}`
+    }
+});
 
-module.exports.createSeller = function (newSeller, callback) {
-    bcrypt.genSalt(10, function(err, salt) {
-        bcrypt.hash(newSeller.password, salt, function (err, hash) {
-            newSeller.password = hash;
-            newSeller.save(callback);
-        });
-    });
-};
-
-module.exports.getSellerByName = function (sellerName, callback) {
-    const query = {sellerName: sellerName};
-    Seller.findOne(query, callback);
-};
-
-module.exports.getSellerById = function (id, callback) {
-    Seller.findById(id, callback);
-};
-
-module.exports.comparePassword = function (candidatePassword, hash, callback) {
-    bcrypt.compare(candidatePassword, hash, function (err, isMatch) {
-        if (err) throw err;
-        callback(null, isMatch);
-    });
-};
+module.exports = mongoose.model("Seller", sellerSchema);

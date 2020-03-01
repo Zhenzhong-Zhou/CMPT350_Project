@@ -1,20 +1,41 @@
 const express = require("express");
 const router = express.Router();
 const Page = require("../models/page");
+const Product = require("../models/product");
+const View = require("../models/view");
+const Seller = require("../models/seller");
 const {isUser} = require("../config/auth");
 
 /*
  * GET user side page index
  */
 router.get("/", async (req, res) => {
-    const views = req.session.views++;
+    const views = new View({
+        views: req.session.views++
+    });
+    let seller = Seller.findOne({username: req.user});
+    let query = Product.find();
+    let name = req.query.product_name;
+    let author = req.query.author;
+    if (name != null && name !== "") {
+        query = query.regex("productName", new RegExp(name, "i"));
+    }
+    if (author!= null && author !== "") {
+        query = query.regex("author", new RegExp(author, "i"));
+    }
     try {
+        await views.save();
+        const page_views = await View.find({}).countDocuments();
+        const products = await query.exec();
         const page = await Page.findOne({slug: "home"}).exec();
         res.render("index", {
             title: page.pageTitle,
             content: page.content,
+            seller: seller,
+            products: products,
+            searchOptions: req.query,
             user: req.user,
-            views: views,
+            views: page_views,
             login: "1"
         })
     }catch (e) {
@@ -26,9 +47,24 @@ router.get("/", async (req, res) => {
  * GET user side page content
  */
 router.get("/:slug", async (req, res) => {
-    const views = req.session.views++;
+    const views = new View({
+        views: req.session.views++
+    });
+    let seller = Seller.findOne({username: req.user});
+    let query = Product.find();
+    let name = req.query.product_name;
+    let author = req.query.author;
+    if (name != null && name !== "") {
+        query = query.regex("productName", new RegExp(name, "i"));
+    }
+    if (author!= null && author !== "") {
+        query = query.regex("author", new RegExp(author, "i"));
+    }
     const slug = req.params.slug;
     try {
+        await views.save();
+        const page_views = await View.find({}).countDocuments();
+        const products = await query.exec();
         const page = await Page.findOne({slug: slug}).exec();
         if (!page) {
             res.redirect("/");
@@ -36,8 +72,11 @@ router.get("/:slug", async (req, res) => {
             res.render("index", {
                 title: page.pageTitle,
                 content: page.content,
+                seller: seller,
+                products: products,
+                searchOptions: req.query,
                 user: req.user,
-                views: views,
+                views: page_views,
                 login: "1"
             });
         }
