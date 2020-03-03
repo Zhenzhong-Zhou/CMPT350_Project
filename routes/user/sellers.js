@@ -2,16 +2,20 @@ const express = require("express");
 const router = express.Router();
 const User = require("../../models/user");
 const Seller = require("../../models/seller");
-const {isUser} = require("../../config/auth");
+const Product = require("../../models/product");
+const {isSeller} = require("../../config/auth");
 const imageMimeTypes = ["image/jpg", "image/jpeg", "image/png", "images/gif"];
 
 /*
  * GET Sellers Route
  */
-router.get("/", async (req, res) => {
+router.get("/", isSeller, async (req, res) => {
     const sellers = await Seller.find({}).populate("user").exec();
+    const user = await User.findOne({username: req.user.username});
+    const products = await Product.find({user: user});
     res.render("user/sellers/index", {
         sellers: sellers,
+        products: products,
         login: "1"
     })
 });
@@ -24,7 +28,7 @@ router.get("/new", async (req, res) => {
 });
 
 /*
- * POST Create Product Route
+ * POST Create Seller Route
  */
 router.post("/", async (req, res) => {
     const seller = new Seller({
@@ -49,10 +53,13 @@ router.post("/", async (req, res) => {
  * GET Seller's Page Route
  */
 router.get("/:id", async (req, res) => {
-    const seller = await Seller.findById(req.params.id).populate("user").exec();
+    const seller = await Seller.findById(req.params.id).exec();
+    const user = await User.findOne({username: req.user.username});
+    const products = await Product.find({user: user});
     res.render("user/sellers/show", {
         login: "1",
-        seller: seller
+        seller: seller,
+        products: products
     })
 });
 

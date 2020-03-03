@@ -1,13 +1,21 @@
 <h1>Seller Info</h1>
 
 <div>
-    <h1 style="float: left"><%=seller.user.username%></h1>
-    <img height="50px" width="50px" style="border-radius: 50px" src="<%=seller.portraitPath%>">
+    <%if (locals.user != null) {%>
+        <h1 style="float: left"><%=seller.user.username%></h1>
+        <img height="50px" width="50px" style="border-radius: 50px" src="<%=seller.portraitPath%>">
+    <%}%>
 </div>
 
 <div>
     <ul>
-        <li><a>Add Product</a></li>
+        <li><a href="/markets/sellers/products/new">Add Product</a></li>
         <li><a></a></li>
     </ul>
+</div>
+
+<div>
+    <%products.forEach(product => {%>
+        <img height="150px" width="100px" src="<%=product.coverImagePath%>" alt="image">
+    <%})%>
 </div>
