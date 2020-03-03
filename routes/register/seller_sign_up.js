@@ -5,7 +5,7 @@ const {forwardAuthenticated} = require("../../config/auth");
 const { check, validationResult } = require('express-validator');
 
 router.get("/", (req, res) => {
-    res.render("register/sign_up", {login: "3"})
+    res.render("register/seller_sign_up", {login: "5"})
 });
 
 router.post("/", [
@@ -25,16 +25,20 @@ router.post("/", [
     };
     const result = validationResult(req).formatWith(errorFormatter);
     if (!result.isEmpty()) {
-        return res.render("register/sign_up", {
+        return res.render("register/seller_sign_up", {
             errorMessage: result.array(),
-            login: "3"
+            login: "5"
         });
     }
     const user = new User({
         username: username,
         email: email,
+        gender: req.body.gender,
+        age: req.body.age,
+        phoneNumber: req.body.phoneNumber,
+        address: req.body.address,
         password: password,
-        admin: 0
+        admin: 2,
     });
     User.createUser(user, function (err) {
         if (err) throw err;

@@ -39,11 +39,16 @@
         <%- include("../partials/errorMessage.ejs");%>
         <%- body%>
         <%- include("../partials/user/footer.ejs");%>
-    <%}else {%>
+    <%}else if (login === "4") {%>
         <%- include("../partials/user/header.ejs");%>
         <%- include("../partials/errorMessage.ejs");%>
         <%- body%>
         <%- include("../partials/user/footer.ejs");%>
+    <%}else {%>
+    <%- include("../partials/user/header.ejs");%>
+    <%- include("../partials/errorMessage.ejs");%>
+    <%- body%>
+    <%- include("../partials/user/footer.ejs");%>
     <%}%>
 <%}%>
 <br>
