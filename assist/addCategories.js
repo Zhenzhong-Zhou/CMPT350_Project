@@ -1,7 +1,10 @@
+if (process.env.NODE_ENV !== "production") {
+    require("dotenv").config();
+}
 const Category = require("../models/category");
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb+srv://bob:U6HxnPjpy2sYULjF@cluster0-hbynw.mongodb.net/test?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTopology: true});
 
 const categories = [
     new Category({
