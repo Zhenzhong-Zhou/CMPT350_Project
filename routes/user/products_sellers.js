@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../../models/user");
-const Seller = require("../../models/seller");
 const Product = require("../../models/product");
 const {isUser} = require("../../config/auth");
 const imageMimeTypes = ["image/jpg", "image/jpeg", "image/png", "images/gif"];
