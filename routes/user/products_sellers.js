@@ -53,8 +53,8 @@ router.post("/", async (req, res) => {
     });
     saveCover(product, req.body.cover);
     try {
-        const newProduct = await product.save();
-        res.redirect(`/markets/sellers/products/${newProduct.id}`);
+        await product.save();
+        res.redirect(`/markets/sellers/${req.body.user}`);
     }catch (e) {
         console.log(e);
         await renderNewProduct(res, product, true);
