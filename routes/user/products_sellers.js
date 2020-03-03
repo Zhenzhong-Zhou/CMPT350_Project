@@ -73,7 +73,7 @@ async function renderNewProduct(req, res, product, hasError = false) {
         res.render("user/products_sellers/new", params);
     }catch (e) {
         console.log(e);
-        res.redirect("/market/sellers/products")
+        res.redirect("")
     }
 }
 
