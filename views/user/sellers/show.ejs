@@ -7,15 +7,23 @@
     <%}%>
 </div>
 
+<%if (locals.user.admin === 2) {%>
 <div>
     <ul>
         <li><a href="/markets/sellers/products/new">Add Product</a></li>
         <li><a></a></li>
     </ul>
 </div>
+<%}else {%>
+    <div></div>
+<%}%>
 
-<div>
+<div style="display: flex;">
     <%products.forEach(product => {%>
         <img height="150px" width="100px" src="<%=product.coverImagePath%>" alt="image">
+        <div>
+            <li><%=product.productName%></li>
+            <li><%=product.price%></li>
+        </div>
     <%})%>
 </div>
