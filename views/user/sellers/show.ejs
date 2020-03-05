@@ -1,9 +1,8 @@
 <h1>Seller Info</h1>
-
 <div>
-    <%if (locals.user != null) {%>
-        <h1 style="float: left"><%=user.username%></h1>
-        <img height="50px" width="50px" style="border-radius: 50px" src="<%=user.portraitPath%>">
+    <%if (locals.seller != null) {%>
+        <img height="50px" width="50px" style="border-radius: 50px" src="<%=product.seller.portraitPath%>">
+        <%=product.seller.username%>
     <%}%>
 </div>
 

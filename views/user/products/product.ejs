@@ -1,8 +1,8 @@
 <div>
     <h1><%=product.productName%></h1>
-    <%if (product.user != null) {%>
-        <a href="/markets/sellers/<%=product.user.id%>">
-            <p>by <%=product.user.username%></p>
+    <%if (product.seller != null) {%>
+        <a href="/markets/sellers/<%=product.seller.id%>">
+            <p>by <%=product.seller.username%></p>
         </a>
     <%}%>
     <div>

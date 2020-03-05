@@ -10,8 +10,8 @@
                 <%}%>
             <%})%>
             <%if (locals.user && locals.user.admin == 2) {%>
-                <%if (locals.seller != null) {%>
-                    <li><a href="/markets/sellers/<%=seller.id%>"><%=user.username%>'s Shop  NOT WORK Properly</a></li>
+                <%if (locals.user != null) {%>
+                    <li><a href="/markets/sellers/<%=user.id%>"><%=user.username%>'s Shop  NOT WORK Properly</a></li>
                 <%}%>
             <%}else {%>
 <!--                <li><a href="/markets/sellers">WANT TO BE A SELLER?</a></li>-->
