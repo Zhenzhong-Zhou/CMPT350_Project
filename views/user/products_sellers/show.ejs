@@ -1,4 +1,3 @@
-
 <h2><%=product.productName%></h2>
 <img width="100" height="150" src="<%=product.coverImagePath%>" alt="product cover image">
 <div>Product: <%=product.productName%></div>
@@ -10,6 +9,13 @@
 <div>Page Count: <%=product.pageCount%></div>
 <div>Description: <%=product.description%></div>
 
-<a href="/admin/products/<%=product.id%>/edit">Edit</a>
-<%- include("../../partials/deleteForm.ejs", {url: `/markets/sellers/products/${product.id}`}); -%>
-<a href="/admin/categories/<%=product.category.id%>">View Product</a>
+<%if (locals.user == null) {%>
+    <div></div>
+<%} else if (locals.user != null && locals.user.admin === 0) {%>
+    <div></div>
+<%} else if (locals.user != null && locals.user.admin === 1) {%>
+    <div></div>
+<%}else {%>
+    <a href="/markets/sellers/products/<%=product.id%>/edit">Edit</a>
+    <%- include("../../partials/deleteForm.ejs", {url: `/markets/sellers/products/${product.id}`}); -%>
+<%}%>
