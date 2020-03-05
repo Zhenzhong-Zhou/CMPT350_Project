@@ -6,11 +6,7 @@
 </div>
 <%if (productsByCategory.length > 0) {%>
     <h2 class="page-header">Products By Category</h2>
-    <%productsByCategory.forEach(product => {%>
-        <a href="/admin/products/<%=product.id%>">
-            <img height="150" width="100" src="<%=product.coverImagePath%>" alt="product cover image">
-        </a>
-    <%})%>
+    <%- include("../../partials/productGrid", {products: productsByCategory})%>
 <%}else {%>
     <h2>This category does not have anything. Please upload it.</h2>
 <%}%>

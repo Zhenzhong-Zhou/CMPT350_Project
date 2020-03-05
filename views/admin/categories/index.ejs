@@ -13,11 +13,13 @@
 <br>
 <%if (locals.categories.length > 0) {%>
     <%categories.forEach(category => {%>
-        <div><%=category.categoryName%></div>
-        <div class="btn-row">
-            <a class="btn btn-primary" href="/admin/categories/<%=category.id%>">View</a>
-            <a class="btn btn-primary" href="/admin/categories/<%=category.id%>/edit">Edit</a>
-            <%- include("../../partials/deleteForm.ejs", {url: `/admin/categories/${category.id}`}); -%>
+        <div class="category-row">
+            <div class="category-name"><%=category.categoryName%></div>
+            <div class="btn-row">
+                <a class="btn btn-primary" href="/admin/categories/<%=category.id%>">View</a>
+                <a class="btn btn-primary" href="/admin/categories/<%=category.id%>/edit">Edit</a>
+                <%- include("../../partials/deleteForm.ejs", {url: `/admin/categories/${category.id}`}); -%>
+            </div>
         </div>
     <%})%>
 <%}else {%>
