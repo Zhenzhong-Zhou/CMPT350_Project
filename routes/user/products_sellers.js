@@ -6,18 +6,6 @@ const {isUser} = require("../../config/auth");
 const imageMimeTypes = ["image/jpg", "image/jpeg", "image/png", "images/gif"];
 
 /*
- * GET Seller's Product Index Route
- */
-router.get("/", async (req, res) => {
-    const user = await User.findOne({username: req.user.username});
-    const products = await Product.find({user: user});
-    res.render("/user/products_sellers", {
-        products: products,
-        login: "1"
-    });
-});
-
-/*
  * GET Add Seller's Product Route
  */
 router.get("/new", async (req, res) => {

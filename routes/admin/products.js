@@ -137,7 +137,7 @@ router.put("/:id", async (req, res) => {
 });
 
 /*
- * DELETE Show Product Route
+ * DELETE Product Route
  */
 router.delete("/:id", async (req, res) => {
     let product;
