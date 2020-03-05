@@ -16,7 +16,7 @@ router.get("/", isSeller, async (req, res) => {
             products: products,
             users: users,
             login: "1"
-        })
+        });
     }catch (e) {
         res.redirect("/")
     }
@@ -29,11 +29,14 @@ router.get("/:id", async (req, res) => {
     try {
         const products = await Product.find({seller: req.params.id}).populate("seller").exec();
         const product = await Product.findOne({seller: req.params.id}).populate("seller").exec();
+        // const check_exist = await Product.findOne({seller: {$exists: false, $ne: 11}}).hint({seller: 1}).populate("seller").exec();
         res.render("user/sellers/show", {
-            login: "1",
             product: product,
-            products: products
+            products: products,
+            // seller: check_exist,
+            login: "1"
         });
+        // console.log(check_exist, 11)
     }catch (e) {
         res.redirect("/");
     }

@@ -6,25 +6,6 @@ const {isUser} = require("../../config/auth");
 const imageMimeTypes = ["image/jpg", "image/jpeg", "image/png", "images/gif"];
 
 /*
- * GET Seller's Product Index Route
- */
-router.get("/display", async (req, res) => {
-    try {
-        const user = await User.findOne({username: req.user.username});
-        const products = await Product.find({seller: user});
-        // const seller = await User.findOne({username: req.user.username});
-        // const products = await Product.find({seller: seller}).populate("category").populate("seller").exec();
-        res.render("user/products_sellers/index", {
-            user: user,
-            products: products,
-            login: "1",
-        });
-    }catch (e) {
-        console.log(e);
-    }
-});
-
-/*
  * GET Add Seller's Product Route
  */
 router.get("/new", async (req, res) => {
@@ -83,6 +64,24 @@ router.get("/:id", async (req, res) => {
 });
 
 /*
+ * GET Seller's Product Index Route
+ */
+router.get("/:id/display", async (req, res) => {
+    try {
+        const products = await Product.find({seller: req.params.id}).populate("seller").exec();
+        const product = await Product.findOne({seller: req.params.id}).populate("seller").exec();
+        res.render("user/products_sellers/index", {
+            products: products,
+            product: product,
+            login: "1",
+        });
+        console.log(check)
+    }catch (e) {
+        console.log(e);
+    }
+});
+
+/*
  * GET Edit Seller's Product Route
  */
 router.get("/:id/edit", async (req, res) => {
@@ -95,7 +94,6 @@ router.get("/:id/edit", async (req, res) => {
             product: product,
             login: "1"
         });
-        // await renderEditProduct(res, product);
     }catch (e) {
         res.redirect("/");
     }
