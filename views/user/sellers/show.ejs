@@ -6,12 +6,16 @@
     <%}%>
 </div>
 
-<div>
-    <ul>
-        <li><a href="/markets/sellers/products/new">Add Product</a></li>
-        <li><a></a></li>
-    </ul>
-</div>
+<%if (locals.seller != null) {%>
+    <div>
+        <ul>
+            <li><a href="/markets/sellers/products/new">Add Product</a></li>
+            <li><a></a></li>
+        </ul>
+    </div>
+<%}else {%>
+    <br><br>
+<%}%>
 
 <div style="display: flex;">
     <%products.forEach(product => {%>
