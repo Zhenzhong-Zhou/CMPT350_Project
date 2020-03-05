@@ -29,14 +29,11 @@ router.get("/:id", async (req, res) => {
     try {
         const products = await Product.find({seller: req.params.id}).populate("seller").exec();
         const product = await Product.findOne({seller: req.params.id}).populate("seller").exec();
-        // const check_exist = await Product.findOne({seller: {$exists: false, $ne: 11}}).hint({seller: 1}).populate("seller").exec();
         res.render("user/sellers/show", {
             product: product,
             products: products,
-            // seller: check_exist,
             login: "1"
         });
-        // console.log(check_exist, 11)
     }catch (e) {
         res.redirect("/");
     }
