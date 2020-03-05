@@ -1,0 +1,11 @@
+<h2>Sellers Index</h2>
+
+<ul>
+    <%sellers.forEach(seller => {%>
+        <%if (seller.admin == 2) {%>
+            <li><a href="/admin/sellers/<%=seller.id%>"><%=seller.username%></a></li>
+        <%}%>
+    <%})%>
+</ul>
+
+

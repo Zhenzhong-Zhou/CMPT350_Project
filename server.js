@@ -21,12 +21,14 @@ const cartRouter = require("./routes/user/cart");
 const sellerRouter = require("./routes/user/sellers");
 const sellerProductRouter = require("./routes/user/products_sellers");
 const registerSignUpRouter = require("./routes/register/sign_up");
+const registerSellerSignUpRouter = require("./routes/register/seller_sign_up");
 const registerLoginRouter = require("./routes/register/login");
 const registerLogoutRouter = require("./routes/register/logout");
 const adminIndexRouter = require("./routes/admin/index");
 const adminPageRouter = require("./routes/admin/pages");
 const adminCategoryRouter = require("./routes/admin/categories");
 const adminProductRouter = require("./routes/admin/products");
+const adminSellerRouter = require("./routes/admin/sellers");
 
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
@@ -80,10 +82,12 @@ app.use("/markets/sellers/products", sellerProductRouter);
 app.use("/user/login", registerLoginRouter);
 app.use("/user/logout", registerLogoutRouter);
 app.use("/user/sign_up", registerSignUpRouter);
+app.use("/seller/sign_up", registerSellerSignUpRouter);
 app.use("/admin/dashboard", adminIndexRouter);
 app.use("/admin/pages", adminPageRouter);
 app.use("/admin/categories", adminCategoryRouter);
 app.use("/admin/products", adminProductRouter);
+app.use("/admin/sellers", adminSellerRouter);
 
 // The Last Middleware: 404 Page
 app.use((req, res, next) => {

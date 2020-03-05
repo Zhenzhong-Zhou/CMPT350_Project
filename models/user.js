@@ -16,6 +16,30 @@ const userSchema = new mongoose.Schema({
     },
     admin: {
         type: Number
+    },
+    gender: {
+        type: String
+    },
+    age: {
+        type: Number
+    },
+    portraitImage: {
+        type: Buffer
+    },
+    portraitImageType: {
+        type: String
+    },
+    phoneNumber: {
+        type: String
+    },
+    address: {
+        type: String
+    }
+});
+
+userSchema.virtual("portraitPath").get(function () {
+    if (this.portraitImage != null && this.portraitImageType != null) {
+        return `data:${this.portraitImageType};charset=utf-8;base64,${this.portraitImage.toString("base64")}`
     }
 });
 

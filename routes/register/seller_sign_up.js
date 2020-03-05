@@ -3,9 +3,10 @@ const router = express.Router();
 const User = require("../../models/user");
 const {forwardAuthenticated} = require("../../config/auth");
 const { check, validationResult } = require('express-validator');
+const imageMimeTypes = ["image/jpg", "image/jpeg", "image/png", "images/gif"];
 
 router.get("/", (req, res) => {
-    res.render("register/sign_up", {login: "3"})
+    res.render("register/seller_sign_up", {login: "5"})
 });
 
 router.post("/", [
@@ -25,22 +26,36 @@ router.post("/", [
     };
     const result = validationResult(req).formatWith(errorFormatter);
     if (!result.isEmpty()) {
-        return res.render("register/sign_up", {
+        return res.render("register/seller_sign_up", {
             errorMessage: result.array(),
-            login: "3"
+            login: "5"
         });
     }
     const user = new User({
         username: username,
         email: email,
+        gender: req.body.gender,
+        age: req.body.age,
+        phoneNumber: req.body.phoneNumber,
+        address: req.body.address,
         password: password,
-        admin: 0
+        admin: 2,
     });
+    savePortrait(user, req.body.portrait);
     User.createUser(user, function (err) {
         if (err) throw err;
     });
     req.flash("success_msg", "You are registered and can now login.");
     res.redirect("/user/login");
 });
+
+function savePortrait(user, portraitEncoded) {
+    if (portraitEncoded == null) return;
+    const portrait = JSON.parse(portraitEncoded);
+    if (portrait != null && imageMimeTypes.includes(portrait.type)) {
+        user.portraitImage = new Buffer.from(portrait.data, "base64");
+        user.portraitImageType = portrait.type;
+    }
+}
 
 module.exports = router;

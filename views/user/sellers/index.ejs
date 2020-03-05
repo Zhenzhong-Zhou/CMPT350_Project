@@ -1,12 +1,12 @@
 <h1>Sellers Index </h1>
 
-<li><a href="/markets/sellers/new">Register Sellers</a></li>
-<h1>Do i need to add recently add? if yes, where should be put?</h1>
-<%if (locals.sellers != null) {%>
-    <%sellers.forEach(seller => {%>
-        <li><a href="/markets/sellers/<%=seller.id%>"><%=seller.user.username%></a></li>
-        <a href="/markets/sellers/<%=seller.id%>">
-            <img height="50px" width="50" style="border-radius: 50px" src="<%=seller.portraitPath%>" alt="image">
+<h1>Seller List</h1>
+<%if (locals.users != null) {%>
+    <%users.forEach(user => {%>
+        <li><a href="/markets/sellers/<%=user.id%>"><%=user.username%></a></li>
+        <a href="/markets/sellers/<%=user.id%>">
+            <img height="50px" width="50" style="border-radius: 50px" src="<%=user.portraitPath%>" alt="image">
         </a>
     <%})%>
 <%}%>
+<h1>Do i need to add recently add? if yes, where should be put?</h1>

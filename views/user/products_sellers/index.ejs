@@ -1,13 +1,17 @@
-卖家上传有问题：
-应该在路由上
-productid
-sellerid
+<%=user.username%>
 
--》现在是卖家可以进入所有卖家的商店，和上传
-==》》卖家只能进入自己的商店和查看
-
-
-卖家和用户关系 可能存放了 =》 admin调不出来
-或者把admin也弄成object 再试试更改
-
-卖家权限：重新创建一个route 仅仅 去到卖家link 页面，然后改变admin数字。页面和正常注册页面一样
+<br>
+<br>
+<br>
+<br>
+<div style="display: flex;">
+    <%products.forEach(product => {%>
+    <a href="/markets/sellers/products/<%=product.id%>">
+        <img height="150px" width="100px" src="<%=product.coverImagePath%>" alt="image">
+    </a>
+    <div>
+        <li><%=product.productName%></li>
+        <li><%=product.price%></li>
+    </div>
+    <%})%>
+</div>

@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../../models/user");
-const Seller = require("../../models/seller");
 const Product = require("../../models/product");
 const {isUser} = require("../../config/auth");
 const imageMimeTypes = ["image/jpg", "image/jpeg", "image/png", "images/gif"];
@@ -9,13 +8,20 @@ const imageMimeTypes = ["image/jpg", "image/jpeg", "image/png", "images/gif"];
 /*
  * GET Seller's Product Index Route
  */
-router.get("/", async (req, res) => {
-    const user = await User.findOne({username: req.user.username});
-    const products = await Product.find({user: user});
-    res.render("/user/products_sellers", {
-        products: products,
-        login: "1"
-    });
+router.get("/display", async (req, res) => {
+    try {
+        const user = await User.findOne({username: req.user.username});
+        const products = await Product.find({seller: user});
+        // const seller = await User.findOne({username: req.user.username});
+        // const products = await Product.find({seller: seller}).populate("category").populate("seller").exec();
+        res.render("user/products_sellers/index", {
+            user: user,
+            products: products,
+            login: "1",
+        });
+    }catch (e) {
+        console.log(e);
+    }
 });
 
 /*
@@ -41,7 +47,7 @@ router.get("/new", async (req, res) => {
  */
 router.post("/", async (req, res) => {
     const product = new Product({
-        user: req.body.user,
+        seller: req.body.user,
         productName: req.body.product_name,
         category: req.body.category,
         slug: req.body.product_slug,
@@ -53,11 +59,45 @@ router.post("/", async (req, res) => {
     });
     saveCover(product, req.body.cover);
     try {
-        const newProduct = await product.save();
-        res.redirect(`/markets/sellers/products/${newProduct.id}`);
+        await product.save();
+        res.redirect(`/markets/sellers/${req.body.user}`);
     }catch (e) {
         console.log(e);
         await renderNewProduct(res, product, true);
+    }
+});
+
+/*
+ * GET Show Seller's Product Route
+ */
+router.get("/:id", async (req, res) => {
+    try{
+        const product = await Product.findById(req.params.id).populate("category").exec();
+        res.render("user/products_sellers/show", {
+            product: product,
+            login: "1"
+        })
+    }catch (e) {
+        res.redirect("/");
+    }
+});
+
+/*
+ * GET Edit Seller's Product Route
+ */
+router.get("/:id/edit", async (req, res) => {
+    try {
+        const sellerName = req.user;
+        const seller = await User.findOne({username: sellerName.username});
+        const product = await Product.findById(req.params.id);
+        res.render("user/products_sellers/edit", {
+            seller: seller,
+            product: product,
+            login: "1"
+        });
+        // await renderEditProduct(res, product);
+    }catch (e) {
+        res.redirect("/");
     }
 });
 
@@ -74,7 +114,7 @@ async function renderNewProduct(req, res, product, hasError = false) {
         res.render("user/products_sellers/new", params);
     }catch (e) {
         console.log(e);
-        res.redirect("/market/sellers/products")
+        res.redirect("")
     }
 }
 

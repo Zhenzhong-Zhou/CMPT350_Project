@@ -5,7 +5,7 @@ const Product = require("../../models/product");
 const {isAdmin} = require("../../config/auth");
 const imageMimeTypes = ["image/jpg", "image/jpeg", "image/png", "images/gif"];
 const { check, validationResult } = require('express-validator');
-//test
+
 /*
  * GET Products Route
  */
@@ -70,11 +70,11 @@ router.post("/", async (req, res) => {
  */
 router.get("/list", async (req, res) => {
     try {
-        const products = await Product.find({}).populate("category").exec();
+        const products = await Product.find({}).populate("category").populate("seller").exec();
         res.render("admin/products/list", {
             products: products,
             login: "2"
-        })
+        });
     }catch (e) {
         res.redirect("/");
     }
@@ -85,7 +85,7 @@ router.get("/list", async (req, res) => {
  */
 router.get("/:id", async (req, res) => {
     try{
-        const product = await Product.findById(req.params.id).populate("category").exec();
+        const product = await Product.findById(req.params.id).populate("category").populate("seller").exec();
         res.render("admin/products/show", {
             product: product,
             login: "2"
@@ -137,7 +137,7 @@ router.put("/:id", async (req, res) => {
 });
 
 /*
- * DELETE Show Product Route
+ * DELETE Product Route
  */
 router.delete("/:id", async (req, res) => {
     let product;

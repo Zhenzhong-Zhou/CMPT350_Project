@@ -1,0 +1,18 @@
+<h2><%=product.seller.username%>'s Product</h2>
+
+<h4><%=product.productName%></h4>
+<div>
+    <a href="/admin/sellers/products/<%=product.id%>">
+        <img height="150" width="100" src="<%=product.coverImagePath%>" alt="products images">
+    </a>
+    <div>Product: <%=product.productName%></div>
+    <div>Product: <%=product.price%></div>
+    <div>Product: <%=product.author%></div>
+    <div>Category: <%=product.category.categoryName%></div>
+    <div>Author: <%=product.author%></div>
+    <div>Slug: <%=product.slug%></div>
+    <div>Price: <%=product.price%></div>
+    <div>Publish Date: <%=product.publishDate.toDateString()%></div>
+    <div>Page Count: <%=product.pageCount%></div>
+    <div>Description: <%=product.description%></div>
+</div>
