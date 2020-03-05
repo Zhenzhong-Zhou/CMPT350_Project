@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
     const views = new View({
         views: req.session.views++
     });
-    let query = Product.find();
+    let query = Product.find({});
     let name = req.query.product_name;
     let author = req.query.author;
     if (name != null && name !== "") {
@@ -47,7 +47,7 @@ router.get("/:slug", async (req, res) => {
     const views = new View({
         views: req.session.views++
     });
-    let query = Product.find().exec();
+    let query = Product.find({});
     let name = req.query.product_name;
     let author = req.query.author;
     if (name != null && name !== "") {
