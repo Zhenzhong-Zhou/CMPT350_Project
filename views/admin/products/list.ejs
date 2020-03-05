@@ -18,7 +18,11 @@
         <%products.forEach(product => {%>
         <tr>
             <td><%=product.productName%></td>
-            <td><%=product.seller.username%></td>
+            <%if (product.seller != null) {%>
+                <td><%=product.seller.username%></td>
+            <%}else {%>
+                <td></td>
+            <%}%>
             <td><%=product.price%></td>
             <td><%=product.category.categoryName%></td>
             <td><%=product.author%></td>

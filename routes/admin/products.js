@@ -74,7 +74,7 @@ router.get("/list", async (req, res) => {
         res.render("admin/products/list", {
             products: products,
             login: "2"
-        })
+        });
     }catch (e) {
         res.redirect("/");
     }

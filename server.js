@@ -28,6 +28,7 @@ const adminIndexRouter = require("./routes/admin/index");
 const adminPageRouter = require("./routes/admin/pages");
 const adminCategoryRouter = require("./routes/admin/categories");
 const adminProductRouter = require("./routes/admin/products");
+const adminSellerRouter = require("./routes/admin/sellers");
 
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
@@ -86,6 +87,7 @@ app.use("/admin/dashboard", adminIndexRouter);
 app.use("/admin/pages", adminPageRouter);
 app.use("/admin/categories", adminCategoryRouter);
 app.use("/admin/products", adminProductRouter);
+app.use("/admin/sellers", adminSellerRouter);
 
 // The Last Middleware: 404 Page
 app.use((req, res, next) => {
