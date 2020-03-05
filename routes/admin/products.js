@@ -5,7 +5,7 @@ const Product = require("../../models/product");
 const {isAdmin} = require("../../config/auth");
 const imageMimeTypes = ["image/jpg", "image/jpeg", "image/png", "images/gif"];
 const { check, validationResult } = require('express-validator');
-//test
+
 /*
  * GET Products Route
  */
