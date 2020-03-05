@@ -1,4 +1,4 @@
-<h3>All Pages</h3>
+<h3 class="page-header">All Pages</h3>
 <form action="/admin/pages" method="get">
     <label>Page Title</label>
     <input type="text" name="page_title" value="<%=searchOptions.page_title%>">
@@ -8,13 +8,15 @@
 <%if (locals.pages.length > 0) {%>
     <%pages.forEach(page => {%>
         <div><%=page.pageTitle%></div>
-        <a href="/admin/pages/<%=page.id%>">View</a>
-        <a href="/admin/pages/<%=page.id%>/edit">Edit</a>
-        <%if (page.slug === "home") {%>
-            <td></td>
-        <%}else {%>
-            <%- include("../../partials/deleteForm.ejs", {url: `/admin/pages/${page.id}`}); -%>
-        <%}%>
+        <div class="btn-row">
+            <a class="btn btn-primary" href="/admin/pages/<%=page.id%>">View</a>
+            <a class="btn btn-primary" href="/admin/pages/<%=page.id%>/edit">Edit</a>
+            <%if (page.slug === "home") {%>
+                <td></td>
+            <%}else {%>
+                <%- include("../../partials/deleteForm.ejs", {url: `/admin/pages/${page.id}`}); -%>
+            <%}%>
+        </div>
     <%})%>
 <%}else {%>
     <h3>There is no page. Please add one.</h3>

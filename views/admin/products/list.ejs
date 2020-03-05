@@ -1,4 +1,4 @@
-<h3>List of Products</h3>
+<h3 class="page-header">List of Products</h3>
 <table class="table">
     <thead>
     <tr>
@@ -27,9 +27,11 @@
             <td><%=product.category.categoryName%></td>
             <td><%=product.author%></td>
             <td><img height="150" width="100" src="<%=product.coverImagePath%>"></td>
-            <td><a href="/admin/products/<%=product.id%>">View</a></td>
-            <td><a href="/admin/products/<%=product.id%>/edit">Edit</a></td>
-            <td><%- include("../../partials/deleteForm.ejs", {url: `/admin/products/${product.id}`}); -%></td>
+            <div class="btn-row">
+                <td><a class="btn btn-primary" href="/admin/products/<%=product.id%>">View</a></td>
+                <td><a class="btn btn-primary" href="/admin/products/<%=product.id%>/edit">Edit</a></td>
+                <td><%- include("../../partials/deleteForm.ejs", {url: `/admin/products/${product.id}`}); -%></td>
+            </div>
         </tr>
         <%})%>
     <%}else {%>
