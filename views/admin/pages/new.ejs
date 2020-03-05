@@ -1,6 +1,8 @@
 <h3 class="page-header">New Page</h3>
 <form action="/admin/pages" method="post">
     <%- include("_form_fields.ejs"); %>
-    <a href="/admin/pages">Cancel</a>
-    <button type="submit">Create</button>
+    <div class="form-row form-row-end btn-row">
+        <a class="btn btn-danger" href="/admin/pages">Cancel</a>
+        <button class="btn btn-primary" type="submit">Create</button>
+    </div>
 </form>

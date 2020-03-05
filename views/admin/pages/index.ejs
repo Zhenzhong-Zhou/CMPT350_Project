@@ -1,8 +1,14 @@
 <h3 class="page-header">All Pages</h3>
 <form action="/admin/pages" method="get">
-    <label>Page Title</label>
-    <input type="text" name="page_title" value="<%=searchOptions.page_title%>">
-    <button type="submit">Search</button>
+    <div class="form-row" >
+        <div class="form-item">
+            <label>Page Title</label>
+            <input type="text" name="page_title" value="<%=searchOptions.page_title%>">
+        </div>
+    </div>
+    <div class="form-row form-row-end">
+        <button class="btn btn-primary" type="submit">Search</button>
+    </div>
 </form>
 <br>
 <%if (locals.pages.length > 0) {%>

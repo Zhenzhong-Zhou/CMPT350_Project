@@ -1,7 +1,9 @@
 <a href="/admin/categories">Return Back</a>
 <h2 class="page-header"><%=category.categoryName%></h2>
-<a href="/admin/categories/<%=category.id%>/edit">Edit</a>
-<%- include("../../partials/deleteForm.ejs", {url: `/admin/categories/${category.id}`}); -%>
+<div class="btn-row">
+    <a class="btn btn-primary" href="/admin/categories/<%=category.id%>/edit">Edit</a>
+    <%- include("../../partials/deleteForm.ejs", {url: `/admin/categories/${category.id}`}); -%>
+</div>
 <%if (productsByCategory.length > 0) {%>
     <h2 class="page-header">Products By Category</h2>
     <%productsByCategory.forEach(product => {%>

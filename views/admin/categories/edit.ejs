@@ -1,6 +1,8 @@
 <h3 class="page-header">Edit Category</h3>
 <form action="/admin/categories/<%=category.id%>?_method=PUT" method="post">
     <%- include("_form_fields.ejs"); %>
-    <a href="/admin/categories/<%=category.id%>">Cancel</a>
-    <button type="submit">Update</button>
+    <div class="form-row form-row-end btn-row">
+        <a class="btn btn-danger" href="/admin/categories/<%=category.id%>">Cancel</a>
+        <button class="btn btn-primary" type="submit">Update</button>
+    </div>
 </form>
