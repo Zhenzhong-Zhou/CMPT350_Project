@@ -16,7 +16,7 @@ router.get("/", isSeller, async (req, res) => {
             products: products,
             users: users,
             login: "1"
-        })
+        });
     }catch (e) {
         res.redirect("/")
     }
@@ -30,9 +30,9 @@ router.get("/:id", async (req, res) => {
         const products = await Product.find({seller: req.params.id}).populate("seller").exec();
         const product = await Product.findOne({seller: req.params.id}).populate("seller").exec();
         res.render("user/sellers/show", {
-            login: "1",
             product: product,
-            products: products
+            products: products,
+            login: "1"
         });
     }catch (e) {
         res.redirect("/");

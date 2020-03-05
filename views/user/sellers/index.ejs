@@ -3,10 +3,20 @@
 <h1>Seller List</h1>
 <%if (locals.users != null) {%>
     <%users.forEach(user => {%>
-        <li><a href="/markets/sellers/<%=user.id%>"><%=user.username%></a></li>
-        <a href="/markets/sellers/<%=user.id%>">
+    <%if (locals.user.username == user.username) {%>
+        <div>
+            change order: who login get the first display
+            <li><a href="/markets/sellers/<%=user.id%>"><%=user.username%></a></li>
+            <a href="/markets/sellers/<%=user.id%>">
+                <img height="50px" width="50" style="border-radius: 50px" src="<%=user.portraitPath%>" alt="image">
+            </a>
+        </div>
+    <%}else {%>
+        <div>
+            <li><%=user.username%></li>
             <img height="50px" width="50" style="border-radius: 50px" src="<%=user.portraitPath%>" alt="image">
-        </a>
+        </div>
+    <%}%>
     <%})%>
 <%}%>
 <h1>Do i need to add recently add? if yes, where should be put?</h1>

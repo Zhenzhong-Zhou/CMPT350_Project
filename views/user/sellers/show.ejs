@@ -4,20 +4,21 @@
     which means if the whole app does not have any seller, no seller can upload products.</h2>
 
 <div>
-    <%if (product.seller != null) {%>
+    <%if (locals.user != null) {%>
         <div style="width: 90px">
-            <img height="50px" width="50px" style="border-radius: 50px" src="<%=product.seller.portraitPath%>">
-            <h3 style="float: right"><%=product.seller.username%></h3>
+            <img height="50px" width="50px" style="border-radius: 50px" src="<%=user.portraitPath%>">
+            <h3 style="float: right"><%=user.username%></h3>
         </div>
     <%}%>
 </div>
 
 <%if (locals.user != null) {%>
-    <%if (locals.user.admin === 2 && locals.user.username === product.seller.username) {%>
+    <%if (locals.user.admin === 2) {%>
         <div>
             <ul>
                 <li><a href="/markets/sellers/products/new">Add Product</a></li>
-                <li><a href="/markets/sellers/products/<%=product.id%>/edit">Edit</a></li>
+                <p>link: /markets/sellers/products/=product.seller.id%>/display necessary?</p>
+                <li><a href="#">Edit ? Seller</a></li>
             </ul>
         </div>
     <%}else {%>
@@ -27,7 +28,7 @@
     <br><br>
 <%}%>
 
-<h2>Products By <%=product.seller.username%></h2>
+<h2>Products By <%=locals.user.username%></h2>
 <div style="display: flex;">
     <%products.forEach(product => {%>
         <a href="/markets/sellers/products/<%=product.id%>">

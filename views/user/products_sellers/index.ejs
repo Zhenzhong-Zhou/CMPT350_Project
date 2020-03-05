@@ -1,9 +1,13 @@
-<%=user.username%>
-
 <br>
-<br>
-<br>
-<br>
+<div>
+    <%if (product.seller != null) {%>
+    <div style="width: 90px">
+        <img height="50px" width="50px" style="border-radius: 50px" src="<%=product.seller.portraitPath%>">
+        <h3 style="float: right"><%=product.seller.username%></h3>
+    </div>
+    <%}%>
+</div>
+<h2>Products By <%=product.seller.username%></h2>
 <div style="display: flex;">
     <%products.forEach(product => {%>
     <a href="/markets/sellers/products/<%=product.id%>">

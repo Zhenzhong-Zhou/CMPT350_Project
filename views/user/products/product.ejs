@@ -1,7 +1,7 @@
 <div>
     <h1><%=product.productName%></h1>
     <%if (product.seller != null) {%>
-        <a href="/markets/sellers/<%=product.seller.id%>">
+        <a href="/markets/sellers/products/<%=product.seller.id%>/display">
             <p>by <%=product.seller.username%></p>
         </a>
     <%}%>
