@@ -70,7 +70,7 @@ router.post("/", async (req, res) => {
  */
 router.get("/list", async (req, res) => {
     try {
-        const products = await Product.find({}).populate("category").exec();
+        const products = await Product.find({}).populate("category").populate("seller").exec();
         res.render("admin/products/list", {
             products: products,
             login: "2"
@@ -85,7 +85,7 @@ router.get("/list", async (req, res) => {
  */
 router.get("/:id", async (req, res) => {
     try{
-        const product = await Product.findById(req.params.id).populate("category").exec();
+        const product = await Product.findById(req.params.id).populate("category").populate("seller").exec();
         res.render("admin/products/show", {
             product: product,
             login: "2"

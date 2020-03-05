@@ -1,6 +1,9 @@
 <a href="/admin/products">Return Back</a>
 <h2><%=product.productName%></h2>
 <img width="100" height="150" src="<%=product.coverImagePath%>" alt="product cover image">
+<%if (product.seller != null) {%>
+    <div>Seller: <%=product.seller.username%></div>
+<%}%>
 <div>Product: <%=product.productName%></div>
 <div>Category: <%=product.category.categoryName%></div>
 <div>Author: <%=product.author%></div>
