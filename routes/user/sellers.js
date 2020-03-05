@@ -15,7 +15,6 @@ router.get("/", isSeller, async (req, res) => {
         res.render("user/sellers/index", {
             products: products,
             users: users,
-            user: user,
             login: "1"
         })
     }catch (e) {

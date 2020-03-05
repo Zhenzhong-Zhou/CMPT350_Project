@@ -75,6 +75,25 @@ router.get("/:id", async (req, res) => {
     }
 });
 
+/*
+ * GET Edit Seller's Product Route
+ */
+router.get("/:id/edit", async (req, res) => {
+    try {
+        const sellerName = req.user;
+        const seller = await User.findOne({username: sellerName.username});
+        const product = await Product.findById(req.params.id);
+        res.render("user/products_sellers/edit", {
+            seller: seller,
+            product: product,
+            login: "1"
+        });
+        // await renderEditProduct(res, product);
+    }catch (e) {
+        res.redirect("/");
+    }
+});
+
 async function renderNewProduct(req, res, product, hasError = false) {
     try {
         const sellerName = req.user;

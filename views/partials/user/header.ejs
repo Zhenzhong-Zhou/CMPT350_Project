@@ -11,10 +11,10 @@
             <%})%>
             <%if (locals.user && locals.user.admin == 2) {%>
                 <%if (locals.user != null) {%>
-                    <li><a href="/markets/sellers/<%=user.id%>"><%=user.username%>'s Shop  NOT WORK Properly</a></li>
+                    <li><a href="/markets/sellers">Sellers</a></li>
+                    <li><a href="/markets/sellers/<%=user.id%>"><%=user.username%>'s Shop</a></li>
                 <%}%>
             <%}else {%>
-<!--                <li><a href="/markets/sellers">WANT TO BE A SELLER?</a></li>-->
                 <li><a href="/seller/sign_up">WANT TO BE A SELLER?</a></li>
                 <%if (typeof cart !== "undefined") {%>
                     <li><a href="/cart/checkout"><i class="fas fa-shopping-cart"></i> Sopping Cart (<%=cart.length%>)</a></li>
