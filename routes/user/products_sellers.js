@@ -60,6 +60,21 @@ router.post("/", async (req, res) => {
     }
 });
 
+/*
+ * GET Show Seller's Product Route
+ */
+router.get("/:id", async (req, res) => {
+    try{
+        const product = await Product.findById(req.params.id).populate("category").exec();
+        res.render("user/products_sellers/show", {
+            product: product,
+            login: "1"
+        })
+    }catch (e) {
+        res.redirect("/");
+    }
+});
+
 async function renderNewProduct(req, res, product, hasError = false) {
     try {
         const sellerName = req.user;
