@@ -25,24 +25,32 @@ router.get("/", async (req, res) => {
  * GET Seller's Page Route
  */
 router.get("/:id", async (req, res) => {
-    const seller = await Seller.findById(req.params.id).exec();
-    const products = await Product.find({seller: req.params.id}).populate("category").populate("seller").exec();
-    res.render("admin/sellers/show", {
-        seller: seller,
-        products: products,
-        login: "2"
-    });
+    try {
+        const seller = await Seller.findById(req.params.id).exec();
+        const products = await Product.find({seller: req.params.id}).populate("category").populate("seller").exec();
+        res.render("admin/sellers/show", {
+            seller: seller,
+            products: products,
+            login: "2"
+        });
+    }catch (e) {
+        res.redirect("/");
+    }
 });
 
 /*
  * GET Seller's Products Route
  */
 router.get("/products/:id", async (req, res) => {
-    const product = await Product.findById(req.params.id).populate("category").populate("seller").exec();
-    res.render("admin/sellers/product", {
-        product: product,
-        login: "2"
-    });
+    try {
+        const product = await Product.findById(req.params.id).populate("category").populate("seller").exec();
+        res.render("admin/sellers/product", {
+            product: product,
+            login: "2"
+        });
+    }catch (e) {
+        res.redirect("/");
+    }
 });
 
 module.exports = router;
