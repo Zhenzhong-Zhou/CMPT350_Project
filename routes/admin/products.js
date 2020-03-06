@@ -29,7 +29,7 @@ router.get("/", async (req, res) => {
             products: products,
             searchOptions: req.query,
             login: "2"
-        })
+        });
     }catch (e) {
         res.redirect("/");
     }
@@ -89,7 +89,7 @@ router.get("/:id", async (req, res) => {
         res.render("admin/products/show", {
             product: product,
             login: "2"
-        })
+        });
     }catch (e) {
         res.redirect("/");
     }
@@ -128,7 +128,6 @@ router.put("/:id", async (req, res) => {
         await product.save();
         res.redirect(`/admin/products/${product.id}`);
     }catch (e) {
-        console.log(e);
         if (product != null) {
             await renderEditPage(res, product, true);
         }
@@ -146,7 +145,6 @@ router.delete("/:id", async (req, res) => {
         await product.remove();
         res.redirect("/admin/products");
     }catch (e) {
-        console.log(e);
         if (product != null) {
             res.render("admin/products/show", {
                 product: product,
@@ -160,11 +158,11 @@ router.delete("/:id", async (req, res) => {
 });
 
 async function renderNewPage(res, product, hasError = false) {
-    await renderFormPage(res, product, "new", hasError)
+    await renderFormPage(res, product, "new", hasError);
 }
 
 async function renderEditPage(res, product, hasError = false) {
-    await renderFormPage(res, product, "edit", hasError)
+    await renderFormPage(res, product, "edit", hasError);
 }
 
 async function renderFormPage(res, product, form, hasError = false) {
@@ -182,7 +180,7 @@ async function renderFormPage(res, product, form, hasError = false) {
                 params.errorMessage = "Error Creating Product";
             }
         }
-        res.render(`admin/products/${form}`, params)
+        res.render(`admin/products/${form}`, params);
     }catch (e) {
         res.redirect("/");
     }
