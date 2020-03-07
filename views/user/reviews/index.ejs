@@ -1,0 +1,16 @@
+<h1>Customer Review</h1>
+
+<%if (locals.reviews != null) {%>
+    <%reviews.forEach(review => {%>
+        <div>
+            <label>Username: <%=review.user.username%></label>
+            <h5 style="font-size: 20pt; font-weight: bolder; color: white">Subject: <%=review.subject%></h5>
+            <p>Review: <%=review.review%></p>
+        </div>
+        <hr style="background-color: yellowgreen; height: 10px"><br>
+    <%})%>
+<%}%>
+<p>Showing 1 comments</p>
+<hr>
+<p>admin  2 days ago</p>
+<p>It is a good product.</p>

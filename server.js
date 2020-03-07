@@ -17,6 +17,7 @@ db.once("open", () => console.log("Connected to Mongoose......"));
 
 const indexRouter = require("./routes/index");
 const productRouter = require("./routes/user/products");
+const productReviewRouter = require("./routes/user/reviews");
 const cartRouter = require("./routes/user/cart");
 const sellerRouter = require("./routes/user/sellers");
 const sellerProductRouter = require("./routes/user/products_sellers");
@@ -76,6 +77,7 @@ Category.find((err, categories) => {
 
 app.use("/", indexRouter);
 app.use("/categories/products", productRouter);
+app.use("/products/users/reviews", productReviewRouter);
 app.use("/cart", cartRouter);
 app.use("/markets/sellers", sellerRouter);
 app.use("/markets/sellers/products", sellerProductRouter);

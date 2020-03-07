@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Product = require("../../models/product");
 const Category = require("../../models/category");
+const Review = require("../../models/review");
 const {isAdmin} = require("../../config/auth");
 const { check, validationResult } = require('express-validator');
 
@@ -12,7 +13,7 @@ router.get("/", (req, res) => {
     Product.find((err, products) => {
         if (err) console.log(err);
         res.render("user/products/all_products", {
-            title: "All products",
+            title: "All Products",
             products: products,
             login: "1"
         });
@@ -43,8 +44,10 @@ router.get("/:category", async (req, res) => {
 router.get("/:category/:product", async (req, res) => {
     try {
         const product = await Product.findOne({slug: req.params.product}).populate("category").populate("seller").exec();
+        const reviews = await Review.find({product: product}).exec();
         res.render("user/products/product", {
             product: product,
+            reviews: reviews,
             login: "1"
         })
     }catch (e) {
