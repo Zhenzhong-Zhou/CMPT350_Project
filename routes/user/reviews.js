@@ -9,7 +9,7 @@ const {isUser} = require("../../config/auth");
  * GET Products' Reviews Page Index Route
  */
 router.get("/", async (req, res) => {
-    const reviews = await Review.find({}).populate("user").exec();
+    const reviews = await Review.find({}).populate("product").populate("user").exec();
     res.render("user/reviews/index", {
         reviews: reviews,
         login: "1"
@@ -21,8 +21,6 @@ router.get("/", async (req, res) => {
  */
 router.get("/create-review/:product", async (req, res) => {
     const product = await Product.findOne({slug: req.params.product}).exec();
-    console.log(product);
-    console.log(req.body.product);
     res.render("user/reviews/new", {
         product: product,
         login: "1"
