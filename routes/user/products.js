@@ -45,9 +45,11 @@ router.get("/:category/:product", async (req, res) => {
     try {
         const product = await Product.findOne({slug: req.params.product}).populate("category").populate("seller").exec();
         const reviews = await Review.find({product: product}).populate("user").exec();
+        const number = await Review.find({product: product}).countDocuments();
         res.render("user/products/product", {
             product: product,
             reviews: reviews,
+            number: number,
             login: "1"
         })
     }catch (e) {
