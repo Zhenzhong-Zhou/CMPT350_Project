@@ -36,11 +36,21 @@ router.post("/", [
         password: password,
         admin: 0
     });
+    savePortrait(user, req.body.portrait);
     User.createUser(user, function (err) {
         if (err) throw err;
     });
     req.flash("success_msg", "You are registered and can now login.");
     res.redirect("/user/login");
 });
+
+function savePortrait(user, portraitEncoded) {
+    if (portraitEncoded == null) return;
+    const portrait = JSON.parse(portraitEncoded);
+    if (portrait != null && imageMimeTypes.includes(portrait.type)) {
+        user.portraitImage = new Buffer.from(portrait.data, "base64");
+        user.portraitImageType = portrait.type;
+    }
+}
 
 module.exports = router;
