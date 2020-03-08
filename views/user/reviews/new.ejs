@@ -1,0 +1,20 @@
+<h2>Create Review</h2>
+<div>
+    <img height="150" width="100" src="<%=product.coverImagePath%>" alt="product image">
+    <p><%=product.productName%></p>
+</div>
+
+<hr>
+<h3>5 Star</h3>
+<hr>
+<p>Add a photo</p>
+<p>Shoppers find images and videos more helpful than text alone.</p>
+<img src="" alt="user's upload photo">
+<hr>
+<form action="/products/users/reviews" method="post">
+    <input name="product" value="<%=product.id%>" hidden>
+    <input name="user" value="<%=locals.user.id%>" hidden>
+    <%- include("_form_fields.ejs"); %>
+    <a href="/products/users/reviews">Cancel</a>
+    <button type="submit">Submit</button>
+</form>

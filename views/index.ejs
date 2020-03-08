@@ -2,7 +2,14 @@
 
 <h1>Save in db use count to calculate need to improve</h1>
 <h1>Views: <%=views%></h1>
-
+<div>
+    <%if (locals.user != null) {%>
+    <div style="width: 90px">
+        <img height="50px" width="50px" style="border-radius: 50px" src="<%=user.portraitPath%>">
+        <h3 style="float: right"><%=user.username%></h3>
+    </div>
+    <%}%>
+</div>
 <h1>Title</h1>
 <%=title%>
 <div>

@@ -81,7 +81,7 @@ router.get("/:id", async (req, res) => {
             category: category,
             productsByCategory: products,
             login: "2"
-        })
+        });
     }catch (e) {
         res.redirect("/")
     }

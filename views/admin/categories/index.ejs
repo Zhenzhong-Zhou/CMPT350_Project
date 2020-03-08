@@ -1,16 +1,26 @@
-<h3>All Categories</h3>
+<h3 class="page-header">All Categories</h3>
 <form action="/admin/categories" method="get">
-    <label>Category Name</label>
-    <input type="text" name="category_name" value="<%=searchOptions.category_name%>">
-    <button type="submit">Search</button>
+    <div class="form-row">
+        <div class="form-item">
+            <label>Category Name</label>
+            <input type="text" name="category_name" value="<%=searchOptions.category_name%>">
+        </div>
+    </div>
+    <div class="form-row form-row-end">
+        <button class="btn btn-primary" type="submit">Search</button>
+    </div>
 </form>
 <br>
 <%if (locals.categories.length > 0) {%>
     <%categories.forEach(category => {%>
-        <div><%=category.categoryName%></div>
-        <a href="/admin/categories/<%=category.id%>">View</a>
-        <a href="/admin/categories/<%=category.id%>/edit">Edit</a>
-        <%- include("../../partials/deleteForm.ejs", {url: `/admin/categories/${category.id}`}); -%>
+        <div class="category-row">
+            <div class="category-name"><%=category.categoryName%></div>
+            <div class="btn-row">
+                <a class="btn btn-primary" href="/admin/categories/<%=category.id%>">View</a>
+                <a class="btn btn-primary" href="/admin/categories/<%=category.id%>/edit">Edit</a>
+                <%- include("../../partials/deleteForm.ejs", {url: `/admin/categories/${category.id}`}); -%>
+            </div>
+        </div>
     <%})%>
 <%}else {%>
     <h3>There is no category. Please add one.</h3>

@@ -22,3 +22,27 @@
         <%}%>
     </div>
 </div>
+<br>
+<a href="/products/users/reviews/create-review/<%=product.slug%>">Write a Customer Review</a>
+<h1>Customer Review</h1>
+<p>Showing <%=number%> comments</p>
+<p>admin  2 days ago => sample</p>
+<%if (number > 0) {%>
+    <%reviews.forEach(review => {%>
+        <div>
+            <h2><%=review.product.productName%></h2>
+            <label>Username: <%=review.user.username%></label>
+            <h5 style="font-size: 20pt; font-weight: bolder; color: white">Subject: <%=review.subject%></h5>
+            <p>Review: <%=review.review%></p>
+            <p>Time: <%=review.createdAt.toISOString().split("T")[0]%></p>
+        </div>
+        <hr style="background-color: yellowgreen; height: 10px"><br>
+    <%})%>
+<hr>
+<%} else {%>
+    <div style="height: 200px; margin-top: 50px;">
+        <h1>Comments Area</h1>
+        <p>Waiting for the first person</p>
+        <p>Come for grabbing sofa</p>
+    </div>
+<%}%>

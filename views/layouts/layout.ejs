@@ -12,6 +12,7 @@
     <script defer src="https://unpkg.com/filepond/dist/filepond.js"></script>
     <script defer src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script defer src="/public/javascripts/fileUpload.js"></script>
+    <link id="admin_main-css" rel="stylesheet" type="text/css" href="/public/stylesheets/admin/main.css">
     <link rel="stylesheet" type="text/css" href="/public/stylesheets/main.css">
     <%if(locals.login != null) {%>
         <%if (login === "1") {%>
@@ -45,10 +46,10 @@
         <%- body%>
         <%- include("../partials/user/footer.ejs");%>
     <%}else {%>
-    <%- include("../partials/user/header.ejs");%>
-    <%- include("../partials/errorMessage.ejs");%>
-    <%- body%>
-    <%- include("../partials/user/footer.ejs");%>
+        <%- include("../partials/user/header.ejs");%>
+        <%- include("../partials/errorMessage.ejs");%>
+        <%- body%>
+        <%- include("../partials/user/footer.ejs");%>
     <%}%>
 <%}%>
 <br>
