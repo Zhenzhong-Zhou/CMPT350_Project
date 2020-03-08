@@ -28,15 +28,34 @@
 <p>Showing <%=number%> comments</p>
 <p>admin  2 days ago => sample</p>
 <%if (number > 0) {%>
-    <%reviews.forEach(review => {%>
-        <div>
-            <h2><%=review.product.productName%></h2>
-            <label>Username: <%=review.user.username%></label>
-            <h5 style="font-size: 20pt; font-weight: bolder; color: white">Subject: <%=review.subject%></h5>
-            <p>Review: <%=review.review%></p>
-            <p>Time: <%=review.createdAt.toISOString().split("T")[0]%></p>
-        </div>
-        <hr style="background-color: yellowgreen; height: 10px"><br>
+    <%replies.forEach(reply => {%>
+        <%reviews.forEach(review => {%>
+            <%=reply.review%>
+            <%if (reply.review.id === review.id) {%>
+                <div>
+                    <h2><%=review.product.productName%></h2>
+                    <label>Username: <%=review.user.username%></label>
+                    <h5 style="font-size: 20pt; font-weight: bolder; color: white">Subject: <%=review.subject%></h5>
+                    <p>Review: <%=review.review%></p>
+                    <p>Time: <%=review.createdAt.toISOString().split("T")[0]%></p>
+                    <p>Username: <%=reply.review.user.username%></p>
+                    <h1>Reply: <%=reply.reply%></h1>
+                    <p>Time: <%=reply.review.createdAt.toISOString().split("T")[0]%>
+                </div>
+                <a href="/products/users/reviews/<%=review.id%>">Comment</a>
+                <hr style="background-color: yellowgreen; height: 10px"><br>
+            <%}else {%>
+                <div>
+                    <h2><%=reply.review.product.productName%></h2>
+                    <label>Username: <%=reply.review.user.username%></label>
+                    <h5 style="font-size: 20pt; font-weight: bolder; color: white">Subject: <%=reply.review.subject%></h5>
+                    <p>Review: <%=reply.review.review%></p>
+                    <p>Time: <%=reply.review.createdAt.toISOString().split("T")[0]%></p>
+                </div>
+                <a href="/products/users/reviews/<%=reply.review.id%>">Comment</a>
+                <hr style="background-color: yellowgreen; height: 10px"><br>
+            <%}%>
+        <%})%>
     <%})%>
 <hr>
 <%} else {%>

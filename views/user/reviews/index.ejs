@@ -1,18 +1,28 @@
 <h1>Customer Review</h1>
 
 <p>Showing 2 comments</p>
-
-<%reviews.forEach(review => {%>
+<div>
     <div>
         <h2><%=review.product.productName%></h2>
-        <label>Username: <%=review.user.username%></label>
-        <h5 style="font-size: 20pt; font-weight: bolder; color: white">Subject: <%=review.subject%></h5>
-        <p>Review: <%=review.review%></p>
-        <p>Time: <%=review.createdAt.toISOString().split("T")[0]%></p>
+        <img height="150" width="100" src="<%=review.product.coverImagePath%>" alt="products images">
     </div>
-    <hr style="background-color: yellowgreen; height: 10px"><br>
-<%})%>
+    <label>Username: <%=review.user.username%></label>
+    <h5 style="font-size: 20pt; font-weight: bolder; color: white">Subject: <%=review.subject%></h5>
+    <p>Review: <%=review.review%></p>
+    <p>Time: <%=review.createdAt.toISOString().split("T")[0]%></p>
+</div>
+<hr style="background-color: yellowgreen; height: 10px"><br>
 
 <hr>
 <p>admin  2 days ago</p>
 <p>It is a good product.</p>
+
+<form action="/products/users/reviews/<%=review.id%>" method="post">
+    <input name="review" value="<%=review.id%>" hidden>
+    <textarea name="reply" placeholder="Talk about why you like this review, or ask a question."
+              required="required" cols="50" rows="5"
+              oninvalid="this.setCustomValidity('Reply is required.')"
+              oninput="this.setCustomValidity('')"></textarea>
+    <a href="/products/users/reviews/<%=review.id%>">Cancel</a>
+    <button type="submit">Submit</button>
+</form>
