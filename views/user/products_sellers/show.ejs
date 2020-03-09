@@ -16,6 +16,10 @@
 <%} else if (locals.user != null && locals.user.admin === 1) {%>
     <div></div>
 <%}else {%>
-    <a href="/markets/sellers/products/<%=product.id%>/edit">Edit</a>
-    <%- include("../../partials/deleteForm.ejs", {url: `/markets/sellers/products/${product.id}`}); -%>
+    <%if (product.seller != locals.user.id) {%>
+        <h1>this is not your products</h1>
+    <%}else {%>
+        <a href="/markets/sellers/products/<%=product.id%>/edit">Edit</a>
+        <%- include("../../partials/deleteForm.ejs", {url: `/markets/sellers/products/${product.id}`}); -%>
+    <%}%>
 <%}%>
