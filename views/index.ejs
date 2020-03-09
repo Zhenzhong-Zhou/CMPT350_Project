@@ -1,6 +1,24 @@
-<h1>User Home Page</h1>
+<h3>Categories</h3>
+<ul>
+    <li><a href="/categories/products">All Products</a></li>
+    <%categories.forEach(category => {%>
+    <li><a href="/categories/products/<%=category.slug%>"><%=category.categoryName%></a></li>
+    <%})%>
+</ul>
 
-<h1>Views: <%=views%></h1>
+<h3>Search Product</h3>
+<form action="/" method="get">
+    <div>
+        <label>Product Name</label>
+        <input type="text" name="product_name" value="<%=searchOptions.product_name%>">
+    </div>
+    <div>
+        <label>Author</label>
+        <input type="text" name="author" value="<%=searchOptions.author%>">
+    </div>
+    <button type="submit">Search</button>
+</form>
+
 <div>
     <%if (locals.user != null) {%>
     <div style="width: 90px">
@@ -16,19 +34,7 @@
     <%=content%>
 </div>
 
-<h3>Search Product</h3>
-<form action="/" method="get">
-    <div>
-        <h1>need to create a new scheme to save everything that user can search</h1>
-        <label>Product Name</label>
-        <input type="text" name="product_name" value="<%=searchOptions.product_name%>">
-    </div>
-    <div>
-        <label>Author</label>
-        <input type="text" name="author" value="<%=searchOptions.author%>">
-    </div>
-    <button type="submit">Search</button>
-</form>
+
 <br>
 <div style="display: flex;">
     <%if (locals.products.length > 0) {%>
@@ -42,11 +48,4 @@
         <h3>There is no product. Please upload it.</h3>
     <%}%>
 </div>
-
-<h3>Categories</h3>
-<ul>
-    <li><a href="/categories/products">All Products</a></li>
-    <%categories.forEach(category => {%>
-        <li><a href="/categories/products/<%=category.slug%>"><%=category.categoryName%></a></li>
-    <%})%>
-</ul>
+Views: <%=views%>

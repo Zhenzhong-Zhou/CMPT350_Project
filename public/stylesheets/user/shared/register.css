@@ -1,0 +1,67 @@
+.app-title-register {
+    text-align: center;
+}
+
+.app-title-register a {
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+.app-title-register a:hover {
+    font-size: 35pt;
+    background-color: hsl(var(--color-base-hue), 100%, 30%);
+}
+
+.register-title {
+    padding-top: 10px;
+}
+
+.register-form {
+    text-align: center;
+    border: 1px solid whitesmoke;
+}
+
+.register-input {
+    height: 30px;
+    width: 300px;
+    border: 2px solid peru;
+    border-radius: 10px;
+}
+
+.register-input:hover {
+    height: 30px;
+    width: 300px;
+    border: 2px solid greenyellow;
+    border-radius: 10px;
+}
+
+.register-footer {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.register-btn {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    height: 50px;
+    width: 200px;
+    font-size: 20px;
+    background-color: peru;
+    border: 1px solid black;
+    border-radius: 50px;
+}
+
+.register-btn:hover {
+    font-size: 25px;
+    background-color: lightgreen;
+    border-radius: 50px;
+}
+
+.register {
+    color: whitesmoke;
+}
+
+.register:hover {
+    color: greenyellow;
+    font-size: 18pt;
+}

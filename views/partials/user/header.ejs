@@ -1,7 +1,7 @@
 <header class="user">
     <nav>
-        <a href="/">Tian Mao</a>
-        <ul>
+        <a href="/" class="app-title">Tian Mao</a>
+        <ul class="user-nav">
             <%pages.forEach(page => {%>
                 <%if (page.slug == "home") {%>
                     <li><a href="/"><%=page.pageTitle%></a></li>
@@ -24,10 +24,13 @@
             <%}%>
             <%if (locals.user != null) {%>
                 <%if (user) {%>
-            <li><a href="#"><i class="fas fa-user" aria-hidden="true"></i>Dropdown menu: User Management</a></li>
-                    <li>Welcome, <%=user.username%></li>
+            <div class="dropdown">
+                <a class="drop_link"><i class="fas fa-user" aria-hidden="true"></i>Welcome, <%=user.username%></a>
+                <div class="dropdown-content">
                     <li><a href="/user/profile">Settings</a></li>
                     <li><a href="/user/logout">Logout</a></li>
+                </div>
+            </div>
                 <%}%>
             <%}else {%>
                 <li><a href="/user/login">Sign In / 登陆</a></li>

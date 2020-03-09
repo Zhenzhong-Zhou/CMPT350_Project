@@ -1,0 +1,16 @@
+.admin-footer {
+    text-align: center;
+}
+
+.admin-footer p {
+    font-size: 10pt;
+}
+
+.user-footer {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.user-footer p {
+    font-size: 10pt;
+}

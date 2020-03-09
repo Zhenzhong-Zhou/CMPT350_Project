@@ -1,36 +1,39 @@
-<h1>Register/ 注册</h1>
-<a href="/">Since this web is so simple users MUST REGISTER FIRST -- 必须先注册 ？ 貌似没有关闭连接</a>
+<h1 class="app-title-register"><a href="/">Tian Mao</a></h1>
 <br><br><br>
-<form action="/user/sign_up" method="post">
+<form class="register-form" action="/user/sign_up" method="post">
+    <h1>Register/ 注册</h1>
     <img src="public/images/icon/default.jpg" name="portrait" hidden>
     <div>
-        <label for="name">Username / 用户名</label>
-        <input type="text" id="username" name="username" placeholder="Username" required="required"
+        <label for="name">Username / 用户名</label><br>
+        <input class="register-input" type="text" id="username" name="username" placeholder="Username" required="required"
                oninvalid="this.setCustomValidity('Username is required.')"
                oninput="this.setCustomValidity('')">
     </div>
-
+    <br>
     <div>
-        <label for="email">Email / 邮箱</label>
-        <input type="email" id="email" name="email" placeholder="Email" required="required"
+        <label for="email">Email / 邮箱</label><br>
+        <input class="register-input" type="email" id="email" name="email" placeholder="Email" required="required"
                oninvalid="this.setCustomValidity('Email is required.')"
                oninput="this.setCustomValidity('')">
     </div>
-
+    <br>
     <div>
-        <label for="password">Password / 密码</label>
-        <input type="password" id="password" name="password" placeholder="Password" required="required"
+        <label for="password">Password / 密码</label><br>
+        <input class="register-input" type="password" id="password" name="password" placeholder="Password" required="required"
                oninvalid="this.setCustomValidity('Password is required.')"
                oninput="this.setCustomValidity('')">
     </div>
+    <br>
     <div>
-        <label for="password">Confirm Password / 再次确认</label>
-        <input type="password" id="password2" name="password2" placeholder="Confirm Password" required="required"
+        <label for="password">Confirm Password / 再次确认</label><br>
+        <input class="register-input" type="password" id="password2" name="password2" placeholder="Confirm Password" required="required"
                oninvalid="this.setCustomValidity('Passwords do not match.')"
                oninput="this.setCustomValidity('')">
     </div>
-    <button type="submit">Register / 注册</button>
+    <button type="submit" class="register-btn">Register / 注册</button>
 </form>
 
-<p>Already have an account?</p>
-<a href="/user/login">Login / 登陆</a>
+<div class="register-footer">
+    <p>Already have an account?</p>
+    <a href="/user/login" class="register">Login / 登陆</a>
+</div>
