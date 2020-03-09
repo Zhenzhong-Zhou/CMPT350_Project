@@ -1,5 +1,6 @@
 @import "shared/register.css";
 @import "shared/footer.css";
+@import "shared/category.css";
 
 :root {
     --color-base-hue: 200;
@@ -46,15 +47,14 @@ li a:hover, .app-title:hover {
 }
 
 .drop_link {
-    background-color: hsl(var(--color-base-hue), 100%, 10%);
     color: white;
     padding: 16px;
-    font-size: 16px;
+    font-size: 10pt;
     border: none;
 }
 
 .dropdown {
-    position: relative;
+    position: absolute;
     display: inline-block;
 }
 
@@ -62,8 +62,8 @@ li a:hover, .app-title:hover {
     display: none;
     position: absolute;
     background-color: #f1f1f1;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    width: 100px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     z-index: 1;
 }
 
@@ -71,12 +71,12 @@ li a:hover, .app-title:hover {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
-    display: block;
-    height: 100px;
+    display: inline-block;
+    height: 50px;
 }
 
 .dropdown-content a:hover {background-color: #ddd;}
 
 .dropdown:hover .dropdown-content {display: block;}
 
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
+.dropdown:hover .drop_link { background-color: hsl(var(--color-base-hue), 100%, 30%);}

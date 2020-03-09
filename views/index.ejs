@@ -1,10 +1,12 @@
 <h3>Categories</h3>
-<ul>
-    <li><a href="/categories/products">All Products</a></li>
-    <%categories.forEach(category => {%>
-    <li><a href="/categories/products/<%=category.slug%>"><%=category.categoryName%></a></li>
-    <%})%>
-</ul>
+<div class="dropdown_category">
+    <a class="drop_link_category" href="/categories/products">All Products</a>
+    <div class="dropdown-category-content">
+        <%categories.forEach(category => {%>
+            <li><a href="/categories/products/<%=category.slug%>"><%=category.categoryName%></a></li>
+        <%})%>
+    </div>
+</div>
 
 <h3>Search Product</h3>
 <form action="/" method="get">
