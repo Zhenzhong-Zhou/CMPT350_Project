@@ -8,7 +8,7 @@ const {isUser} = require("../../config/auth");
 /*
  * GET Products' Reviews Page Index Route
  */
-router.get("/:id", async (req, res) => {
+router.get("/:id", isUser, async (req, res) => {
     const review = await Review.findById(req.params.id).populate("product").populate("user").exec();
     res.render("user/reviews/index", {
         review: review,
@@ -19,7 +19,7 @@ router.get("/:id", async (req, res) => {
 /*
  * GET Create Review Page Route
  */
-router.get("/create-review/:product", async (req, res) => {
+router.get("/create-review/:product", isUser, async (req, res) => {
     const product = await Product.findOne({slug: req.params.product}).exec();
     res.render("user/reviews/new", {
         product: product,
