@@ -14,7 +14,6 @@
     display: flex;
 }
 
-
 .product-details-grid-user {
     display: grid;
     align-content: flex-start;
@@ -23,4 +22,12 @@
     grid-template-columns: auto auto;
     margin-left: 2rem;
     list-style: none;
+}
+
+.product {
+    text-align: center;
+}
+
+.comments {
+    text-align: center;
 }
