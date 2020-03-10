@@ -1,0 +1,24 @@
+<h1 class="app-title-register"><a href="/">Tian Mao</a></h1>
+<form class="register-form" style="padding-bottom: 50px" action="/user/reset" method="get">
+    <h1 class="register-title">Reset / 重置</h1>
+    <label for="password">Email / 邮箱</label><br>
+    <input type="text" class="register-input" name="email" value="<%=searchOptions.email%>">
+    <%if (email) {%>
+        <form action="/user/reset?_method=PUT" method="post">
+            <input type="text" name="email_id" value="<%=email.id%>" hidden>
+            <div>
+                <input type="text" name="username" value="<%=email.username%>" hidden>
+                <input type="text" name="email" value="<%=email.email%>" hidden><br>
+                <label for="password">Password / 密码</label><br>
+                <input class="register-input" type="password" id="password" name="password"
+                       placeholder="Password" required="required"
+                       oninvalid="this.setCustomValidity('Password is required.')"
+                       oninput="this.setCustomValidity('')">
+            </div>
+            <div class="reset">
+                <a href="/user/login" class="reset_cancel">Cancel</a>
+                <button type="submit" class="reset_btn">Reset</button>
+            </div>
+        </form>
+    <%}%>
+</form>

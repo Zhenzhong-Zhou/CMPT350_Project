@@ -5,7 +5,9 @@ const {forwardAuthenticated} = require("../../config/auth");
 const { check, validationResult } = require('express-validator');
 
 router.get("/", (req, res) => {
-    res.render("register/sign_up", {login: "3"})
+    res.render("register/sign_up", {
+        login: "3"
+    });
 });
 
 router.post("/", [

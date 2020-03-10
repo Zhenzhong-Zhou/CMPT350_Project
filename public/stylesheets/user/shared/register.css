@@ -40,6 +40,22 @@
     text-align: center;
 }
 
+.forgot {
+    margin-top: 20px;
+}
+
+.forgot a {
+    color: whitesmoke;
+}
+
+.forgot a:hover {
+    color: red;
+    background-color: greenyellow;
+    border-radius: 50px;
+    border: 1px solid yellow;
+    font-size: 18pt;
+}
+
 .register-btn {
     margin-top: 30px;
     margin-bottom: 30px;
@@ -64,4 +80,36 @@
 .register:hover {
     color: greenyellow;
     font-size: 18pt;
+}
+
+.reset {
+    margin-top: 30px;
+}
+
+.reset_cancel {
+    font-size: 15pt;
+    color: #1ff525;
+}
+
+.reset_cancel:hover {
+    font-size: 18pt;
+    color: rgb(172, 255, 139);
+}
+
+.reset_btn {
+    font-size: 13pt;
+    border-radius: 50px;
+    background-color: #ff403a;
+    color: #faff69;
+    border: 1px solid #ffca23;
+    margin-left: 50px;
+}
+
+.reset_btn:hover {
+    font-size: 18pt;
+    border-radius: 50px;
+    background-color: #9eff18;
+    color: #ff2f28;
+    border: 1px solid #ffa90e;
+    margin-left: 50px;
 }
