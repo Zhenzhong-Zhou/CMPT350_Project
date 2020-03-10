@@ -1,0 +1,26 @@
+.cover {
+    display: grid;
+    justify-content: center;
+    grid-gap: 2rem;
+    grid-template-columns: repeat(auto-fill, 20rem);
+}
+
+.cover a {
+    color: whitesmoke;
+    font-size: 15pt;
+}
+
+.product-details-user {
+    display: flex;
+}
+
+
+.product-details-grid-user {
+    display: grid;
+    align-content: flex-start;
+    align-items: center;
+    grid-gap: 1rem;
+    grid-template-columns: auto auto;
+    margin-left: 2rem;
+    list-style: none;
+}

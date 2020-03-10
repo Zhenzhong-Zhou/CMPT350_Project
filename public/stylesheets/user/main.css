@@ -1,6 +1,7 @@
 @import "shared/register.css";
 @import "shared/footer.css";
 @import "shared/category.css";
+@import "shared/products.css";
 
 :root {
     --color-base-hue: 200;
@@ -56,6 +57,7 @@ li a:hover, .app-title:hover {
 .dropdown {
     position: absolute;
     display: inline-block;
+    margin-top: 15px;
 }
 
 .dropdown-content {

@@ -1,25 +1,18 @@
-<h3>Categories</h3>
-<div class="dropdown_category">
-    <a class="drop_link_category" href="/categories/products">All Products</a>
-    <div class="dropdown-category-content">
-        <%categories.forEach(category => {%>
-            <li><a href="/categories/products/<%=category.slug%>"><%=category.categoryName%></a></li>
-        <%})%>
-    </div>
+<div  class="search-engine">
+    <form action="/" method="get">
+        <div class="dropdown_category">
+            <a class="drop_link_category" href="/categories/products">All Products</a>
+            <div class="dropdown-category-content">
+                <%categories.forEach(category => {%>
+                <li><a href="/categories/products/<%=category.slug%>"><%=category.categoryName%></a></li>
+                <%})%>
+            </div>
+        </div>
+        <input type="text" class="search-input" name="product_name" value="<%=searchOptions.product_name%>" placeholder="Search Products">
+        <input type="text" class="search-input" name="author" value="<%=searchOptions.author%>" placeholder="Search Author">
+        <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+    </form>
 </div>
-
-<h3>Search Product</h3>
-<form action="/" method="get">
-    <div>
-        <label>Product Name</label>
-        <input type="text" name="product_name" value="<%=searchOptions.product_name%>">
-    </div>
-    <div>
-        <label>Author</label>
-        <input type="text" name="author" value="<%=searchOptions.author%>">
-    </div>
-    <button type="submit">Search</button>
-</form>
 
 <div>
     <%if (locals.user != null) {%>
@@ -38,14 +31,14 @@
 
 
 <br>
-<div style="display: flex;">
+<div class="cover">
     <%if (locals.products.length > 0) {%>
-    <%products.forEach(product => {%>
-    <a href="/categories/products/<%=product.category%>/<%=product.slug%>">
-        <img height="150" width="100" src="<%=product.coverImagePath%>" alt="product cover image">
-        <h3><%=product.productName%> <br> CDN$ <%=parseFloat(product.price).toFixed(2)%></h3>
-    </a>
-    <%})%>
+        <%products.forEach(product => {%>
+            <a href="/categories/products/<%=product.category%>/<%=product.slug%>">
+                <img height="433" width="325" src="<%=product.coverImagePath%>" alt="product cover image">
+                <h3><%=product.productName%> <br> CDN$ <%=parseFloat(product.price).toFixed(2)%></h3>
+            </a>
+        <%})%>
     <%}else {%>
         <h3>There is no product. Please upload it.</h3>
     <%}%>
