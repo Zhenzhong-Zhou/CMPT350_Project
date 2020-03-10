@@ -1,0 +1,6 @@
+<h1><%user.username%></h1>
+<form action="/markets/sellers" method="post">
+    <%- include("_form_fields.ejs"); %>
+    <a href="/markets/sellers">Cancel</a>
+    <button type="submit">Create</button>
+</form>

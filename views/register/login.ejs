@@ -1,19 +1,4 @@
-<h1>Login / 登陆</h1>
-<div>
-    <h1>管理员账号： admin@admin.com</h1>
-    <h1>管理员密码： admin1</h1>
-</div>
-<div>
-    <h1>卖家： seller@seller.com</h1>
-    <h1>卖家： 123321</h1>
-</div>
-<a href="/">Since this web is so simple users MUST REGISTER FIRST -- 必须先注册 ？ 貌似没有关闭连接</a>
-<br><br><br>
-<div>
-    <%if (success_msg != null) {%>
-        <%=success_msg%>
-    <%}%>
-</div>
+<h1 class="app-title-register"><a href="/">Tian Mao</a></h1>
 <div>
     <%if (error_msg != null) {%>
     <%=error_msg%>
@@ -24,22 +9,26 @@
     <%=error%>
     <%}%>
 </div>
-<form action="/user/login" method="post">
+<form class="register-form" action="/user/login" method="post">
+    <h1 class="register-title">Login / 登陆</h1>
+    <br>
     <div>
-        <label for="email">Email / 邮箱</label>
-        <input type="email" id="email" name="email" required="required"
+        <label for="email">Email / 邮箱</label><br>
+        <input class="register-input" type="email" id="email" name="email" required="required"
                oninvalid="this.setCustomValidity('Email is required.')"
                oninput="this.setCustomValidity('')">
     </div>
-
+    <br>
     <div>
-        <label for="password">Password / 密码</label>
-        <input type="password" id="password" name="password" required="required"
+        <label for="password">Password / 密码</label><br>
+        <input class="register-input" type="password" id="password" name="password" required="required"
                oninvalid="this.setCustomValidity('Password is required.')"
                oninput="this.setCustomValidity('')">
     </div>
-    <button type="submit">Login / 登陆</button>
+    <button type="submit" class="register-btn">Login / 登陆</button>
 </form>
 
-<p>Sign up for an account?</p>
-<a href="/user/sign_up">Register / 注册</a>
+<div class="register-footer">
+    <p>Sign up for an account?</p>
+    <a href="/user/sign_up" class="register">Register / 注册</a>
+</div>

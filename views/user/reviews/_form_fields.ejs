@@ -9,10 +9,9 @@
     </div>
     <div>
         <label>Write Your Review</label>
-        <input type="text" name="review"
-               placeholder="What did you like or dislike? What did you use this product?" value=""
-               required="required"
+        <textarea name="review" placeholder="What did you like or dislike? What did you use this product?"
+               required="required" cols="50" rows="5"
                oninvalid="this.setCustomValidity('Review is required.')"
-               oninput="this.setCustomValidity('')">
+                  oninput="this.setCustomValidity('')"></textarea>
     </div>
 </div>

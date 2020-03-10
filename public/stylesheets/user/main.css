@@ -1,0 +1,84 @@
+@import "shared/register.css";
+@import "shared/footer.css";
+@import "shared/category.css";
+@import "shared/products.css";
+
+:root {
+    --color-base-hue: 200;
+}
+
+.user {
+    background-color: hsl(var(--color-base-hue), 100%, 10%);
+    color: black;
+    font-size: 10pt;
+}
+
+.user a {
+    color: whitesmoke;
+}
+
+.app-title {
+    float: left;
+    text-decoration: none;
+    font-size: 25pt;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover, .app-title:hover {
+    background-color: hsl(var(--color-base-hue), 100%, 30%);
+    border: 1px solid whitesmoke;
+}
+
+.drop_link {
+    color: white;
+    padding: 16px;
+    font-size: 10pt;
+    border: none;
+}
+
+.dropdown {
+    position: absolute;
+    display: inline-block;
+    margin-top: 15px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    width: 100px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: inline-block;
+    height: 50px;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .drop_link { background-color: hsl(var(--color-base-hue), 100%, 30%);}

@@ -1,0 +1,14 @@
+<h1><%=user.username%>'s Profile</h1>
+
+<%if (reviews.length > 0) {%>
+    <%reviews.forEach(review => {%>
+        <h1><%=review.product.productName%></h1>
+        <img height="150" width="100" src="<%=review.product.coverImagePath%>" alt="products images">
+        <h1><%=review.review%></h1>
+    <%})%>
+<%}else {%>
+    <h1>Do not have any review.</h1>
+<%}%>
+<br>cart info or order info<br>
+
+<a href="/user/profile/user_information">Add <%=user.username%>'s Information</a>

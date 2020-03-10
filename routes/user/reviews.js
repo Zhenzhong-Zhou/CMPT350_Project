@@ -1,17 +1,17 @@
 const express = require("express");
 const router = express.Router();
-const Page = require("../../models/page");
 const Product = require("../../models/product");
 const Review = require("../../models/review");
+const Reply = require("../../models/reply");
 const {isUser} = require("../../config/auth");
 
 /*
  * GET Products' Reviews Page Index Route
  */
-router.get("/", async (req, res) => {
-    const reviews = await Review.find({}).populate("product").populate("user").exec();
+router.get("/:id", async (req, res) => {
+    const review = await Review.findById(req.params.id).populate("product").populate("user").exec();
     res.render("user/reviews/index", {
-        reviews: reviews,
+        review: review,
         login: "1"
     });
 });
@@ -38,8 +38,24 @@ router.post("/", async (req, res) => {
         user: req.body.user
     });
     try {
-        await review.save();
-        res.redirect("/products/users/reviews")
+        const newReview = await review.save();
+        res.redirect(`/products/users/reviews/${newReview.id}`)
+    }catch (e) {
+        console.log(e)
+    }
+});
+
+/*
+ * POST Reply Review Route
+ */
+router.post("/:id", async (req, res) => {
+    const reply = new Reply({
+        reply: req.body.reply,
+        review: req.body.review
+    });
+    try {
+        await reply.save();
+        res.redirect(`/categories/products`)
     }catch (e) {
         console.log(e)
     }

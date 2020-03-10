@@ -13,6 +13,7 @@
     <script defer src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script defer src="/public/javascripts/fileUpload.js"></script>
     <link id="admin_main-css" rel="stylesheet" type="text/css" href="/public/stylesheets/admin/main.css">
+    <link rel="stylesheet" type="text/css" href="/public/stylesheets/user/main.css">
     <link rel="stylesheet" type="text/css" href="/public/stylesheets/main.css">
     <%if(locals.login != null) {%>
         <%if (login === "1") {%>
@@ -52,68 +53,5 @@
         <%- include("../partials/user/footer.ejs");%>
     <%}%>
 <%}%>
-<br>
-<br>
-<h1 style="color: red; background-color: yellowgreen; font-size: 40pt; font-weight: bolder">Priority Issues</h1>
-<br>
-<br>
-<ul>
-    <li>1. save cart into database</li>
-    <li>2. add chatting system</li>
-    <li>3. add validators => mistakes cannot crash server!</li>
-    <li>4. authenticated seller bugs</li>
-    <li>5. add css styles</li>
-</ul>
-<br>
-<h4 style="color: red; font-size: 30px">Bugs and Features: </h4>
-<br>
-admin page icon still NOT figure out!!!!!
-<br>
-add to cart will create a new page ===> need to fix it
-<br>
-login should be changed
-<br>
-add gallery ==> multer? filepond?
-<br>
-need more validations: check exist username and email
-<br>
-add route only for seller upload product
-<br>
-delete page should protect or not? add some conditions as category?
-<br>
-export user status interface
-<br>
-change time zone to SK
-<br>
-product list
-<br>
-面包碎 navbar: home>sth>sth... or highlight
-<br>
-分页 split or divide page
-<br>
-product list: category is id
-<br>
-ckeditor
-<br>
-forEach how get ref ObejctId name
-<br>
-cart should be stored into database
-<br>
-input change quantity
-<br>
-only first row product in the checkout page can change
-<br>
-find a way to change seller access control ********
-<br>
-product belongs sellers goes to seller
-<br>
-seller link => show all seller's products
-<br>
-add to cart will create a new page and go there; means user go back twice
-<br>
-seller creates a product then go to id, which make 404;
-user need return back then user can see it works
-<br>
-users can change their profiles like: username and passwords
 </body>
 </html>
