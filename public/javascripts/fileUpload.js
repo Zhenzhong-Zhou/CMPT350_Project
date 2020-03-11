@@ -4,7 +4,7 @@ if (rootStyles.getPropertyValue("--product-cover-width-large") != null
     && rootStyles.getPropertyValue("--product-cover-width-large") !== "") {
     ready();
 }else {
-    document.getElementById(("admin_main-css")).addEventListener("load", ready);
+    document.getElementById("main-css").addEventListener("load", ready);
 }
 
 function ready() {

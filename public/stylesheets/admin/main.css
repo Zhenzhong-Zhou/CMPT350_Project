@@ -6,6 +6,10 @@
 @import "shared/page.css";
 @import "shared/category.css";
 @import "shared/products.css";
+@import "../user/shared/register.css";
+@import "../user/shared/footer.css";
+@import "../user/shared/category.css";
+@import "../user/shared/products.css";
 
 :root {
       font-family: 'Gotham Rounded', sans-serif;
