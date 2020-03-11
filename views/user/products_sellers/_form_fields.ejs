@@ -62,11 +62,13 @@
     <input type="number" name="product_pageCount" placeholder="Page Count" min="1" step="1" value="<%=product.pageCount%>">
 </div>
 
-<div>
-    <label>Product Cover Image / 产品封面 (*)</label>
-    <input type="file" name="cover" class="filepond" multiple required="required"
-           oninvalid="this.setCustomValidity('Cover Image is required.')"
-           oninput="this.setCustomValidity('')">
+<div class="form-row">
+    <div class="form-item form-item-no-grow">
+        <label>Product Cover (*)</label>
+        <input type="file" name="cover" class="filepond" multiple required="required"
+               oninvalid="this.setCustomValidity('Cover Image is required.')"
+               oninput="this.setCustomValidity('')">
+    </div>
 </div>
 
 <div>
