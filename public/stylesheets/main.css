@@ -6,10 +6,6 @@
 @import "admin/shared/page.css";
 @import "admin/shared/category.css";
 @import "admin/shared/products.css";
-@import "user/shared/register.css";
-@import "user/shared/footer.css";
-@import "user/shared/category.css";
-@import "user/shared/products.css";
 @import "user/main.css";
 
 :root {
