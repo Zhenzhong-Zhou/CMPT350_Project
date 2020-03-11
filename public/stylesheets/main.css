@@ -1,15 +1,16 @@
-@import "shared/font.css";
-@import "shared/variables.css";
-@import "shared/header.css";
-@import "shared/buttons.css";
-@import "shared/form.css";
-@import "shared/page.css";
-@import "shared/category.css";
-@import "shared/products.css";
-@import "../user/shared/register.css";
-@import "../user/shared/footer.css";
-@import "../user/shared/category.css";
-@import "../user/shared/products.css";
+@import "admin/shared/font.css";
+@import "admin/shared/variables.css";
+@import "admin/shared/header.css";
+@import "admin/shared/buttons.css";
+@import "admin/shared/form.css";
+@import "admin/shared/page.css";
+@import "admin/shared/category.css";
+@import "admin/shared/products.css";
+@import "user/shared/register.css";
+@import "user/shared/footer.css";
+@import "user/shared/category.css";
+@import "user/shared/products.css";
+@import "user/main.css";
 
 :root {
       font-family: 'Gotham Rounded', sans-serif;

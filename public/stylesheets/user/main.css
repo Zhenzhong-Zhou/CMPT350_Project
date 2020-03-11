@@ -9,7 +9,6 @@
 
 .user {
     background-color: hsl(var(--color-base-hue), 100%, 10%);
-    color: black;
     font-size: 10pt;
 }
 
