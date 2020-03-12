@@ -1,6 +1,6 @@
 <h2 class="page-header"><%=seller.username%>'s Product Page</h2>
 
-<%products.forEach(product => {%>
+<%seller_products.forEach(product => {%>
     <div>
         <a href="/admin/sellers/products/<%=product.id%>">
             <img height="150" width="100" src="<%=product.coverImagePath%>" alt="products images">
