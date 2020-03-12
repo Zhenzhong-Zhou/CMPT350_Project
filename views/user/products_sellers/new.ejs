@@ -1,8 +1,10 @@
-<h2>Seller's Products</h2>
+<h2><%=seller.username%>'s New Product</h2>
 
-<h3>New Product</h3>
+<h3>Upload New Product</h3>
 <form action="/markets/sellers/products" method="post">
     <%- include("_form_fields.ejs"); %>
-    <a href="/markets/sellers/products">Cancel</a>
-    <button type="submit">Create</button>
+    <div class="form-row form-row-end btn-row">
+        <a class="btn btn-danger" href="/markets/sellers/products">Cancel</a>
+        <button class="btn btn-primary" type="submit">Create</button>
+    </div>
 </form>

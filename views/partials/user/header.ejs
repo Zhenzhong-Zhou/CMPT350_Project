@@ -41,4 +41,19 @@
             <%}%>
         </ul>
     </nav>
+    <div  class="search-engine">
+        <form action="/" method="get">
+            <div class="dropdown_category">
+                <a class="drop_link_category" href="/categories/products">All Products</a>
+                <div class="dropdown-category-content">
+                    <%categories.forEach(category => {%>
+                    <li><a href="/categories/products/<%=category.slug%>"><%=category.categoryName%></a></li>
+                    <%})%>
+                </div>
+            </div>
+            <input type="text" class="search-input" name="product_name" value="<%=searchOptions.product_name%>" placeholder="Search Products">
+            <input type="text" class="search-input" name="author" value="<%=searchOptions.author%>" placeholder="Search Author">
+            <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
 </header>
