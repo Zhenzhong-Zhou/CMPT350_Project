@@ -40,7 +40,7 @@
                oninput="this.setCustomValidity('')">
     </div>
     <div class="form-item">
-        <label>Product Publish Date / 出版日期 (*) why is necessary</label>
+        <label>Product Publish Date / 出版日期 (*)</label>
         <input type="date" name="product_publishDate"
                value="<%=product.publishDate == null ? "" : product.publishDate.toISOString().split("T")[0]%>" required="required"
                oninvalid="this.setCustomValidity('Date is required.')"

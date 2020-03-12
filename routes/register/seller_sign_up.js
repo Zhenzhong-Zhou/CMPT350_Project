@@ -6,7 +6,7 @@ const { check, validationResult } = require('express-validator');
 const imageMimeTypes = ["image/jpg", "image/jpeg", "image/png", "images/gif"];
 
 router.get("/", (req, res) => {
-    res.render("register/seller_sign_up", {login: "5"})
+    res.render("register/seller_sign_up", {login: "3"})
 });
 
 router.post("/", [
@@ -28,7 +28,7 @@ router.post("/", [
     if (!result.isEmpty()) {
         return res.render("register/seller_sign_up", {
             errorMessage: result.array(),
-            login: "5"
+            login: "3"
         });
     }
     const user = new User({
