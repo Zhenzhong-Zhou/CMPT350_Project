@@ -45,17 +45,34 @@ router.get("/add/:product", isUser, (req, res) => {
 /*
  * GET checkout page
  */
-router.get("/checkout", isUser, (req, res) => {
-    if (req.session.cart && req.session.cart.length === 0) {
-        delete req.session.cart;
-        res.redirect("/cart/checkout")
-    }else {
-        res.render("user/products/checkout", {
-            title: "Checkout",
-            cart: req.session.cart,
-            login: "1"
-        });
+router.get("/checkout", isUser, async (req, res) => {
+    let query = Product.find({});
+    let name = req.query.product_name;
+    let author = req.query.author;
+    if (name != null && name !== "") {
+        query = query.regex("productName", new RegExp(name, "i"));
     }
+    if (author!= null && author !== "") {
+        query = query.regex("author", new RegExp(author, "i"));
+    }
+    try {
+        if (req.session.cart && req.session.cart.length === 0) {
+            delete req.session.cart;
+            res.redirect("/cart/checkout")
+        }else {
+            const products = await query.exec();
+            res.render("user/products/checkout", {
+                title: "Checkout",
+                cart: req.session.cart,
+                products: products,
+                searchOptions: req.query,
+                login: "1"
+            });
+        }
+    }catch (e) {
+        res.redirect("/");
+    }
+
 });
 
 /*
