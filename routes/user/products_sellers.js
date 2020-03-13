@@ -9,13 +9,25 @@ const imageMimeTypes = ["image/jpg", "image/jpeg", "image/png", "images/gif"];
  * GET Add Seller's Product Route
  */
 router.get("/new", async (req, res) => {
+    let query = Product.find({});
+    let name = req.query.product_name;
+    let author = req.query.author;
+    if (name != null && name !== "") {
+        query = query.regex("productName", new RegExp(name, "i"));
+    }
+    if (author!= null && author !== "") {
+        query = query.regex("author", new RegExp(author, "i"));
+    }
     try {
         const sellerName = req.user;
         const seller = await User.findOne({username: sellerName.username});
         const product = Product.find({});
+        const products = await query.exec();
         res.render("user/products_sellers/new", {
             product: product,
             seller: seller,
+            products: products,
+            searchOptions: req.query,
             login: "1",
         });
     }catch (e) {
@@ -51,10 +63,22 @@ router.post("/", async (req, res) => {
  * GET Show Seller's Product Route
  */
 router.get("/:id", async (req, res) => {
+    let query = Product.find({});
+    let name = req.query.product_name;
+    let author = req.query.author;
+    if (name != null && name !== "") {
+        query = query.regex("productName", new RegExp(name, "i"));
+    }
+    if (author!= null && author !== "") {
+        query = query.regex("author", new RegExp(author, "i"));
+    }
     try{
         const product = await Product.findById(req.params.id).populate("category").exec();
+        const products = await query.exec();
         res.render("user/products_sellers/show", {
             product: product,
+            products: products,
+            searchOptions: req.query,
             login: "1"
         })
     }catch (e) {
@@ -66,11 +90,23 @@ router.get("/:id", async (req, res) => {
  * GET Seller's Product Index Route
  */
 router.get("/:id/display", async (req, res) => {
+    let query = Product.find({});
+    let name = req.query.product_name;
+    let author = req.query.author;
+    if (name != null && name !== "") {
+        query = query.regex("productName", new RegExp(name, "i"));
+    }
+    if (author!= null && author !== "") {
+        query = query.regex("author", new RegExp(author, "i"));
+    }
     try {
-        const products = await Product.find({seller: req.params.id}).populate("seller").exec();
+        const display_products = await Product.find({seller: req.params.id}).populate("seller").exec();
         const product = await Product.findOne({seller: req.params.id}).populate("seller").exec();
+        const products = await query.exec();
         res.render("user/products_sellers/index", {
+            display_products: display_products,
             products: products,
+            searchOptions: req.query,
             product: product,
             login: "1",
         });
@@ -83,13 +119,25 @@ router.get("/:id/display", async (req, res) => {
  * GET Edit Seller's Product Route
  */
 router.get("/:id/edit", async (req, res) => {
+    let query = Product.find({});
+    let name = req.query.product_name;
+    let author = req.query.author;
+    if (name != null && name !== "") {
+        query = query.regex("productName", new RegExp(name, "i"));
+    }
+    if (author!= null && author !== "") {
+        query = query.regex("author", new RegExp(author, "i"));
+    }
     try {
         const sellerName = req.user;
         const seller = await User.findOne({username: sellerName.username});
         const product = await Product.findById(req.params.id);
+        const products = await query.exec();
         res.render("user/products_sellers/edit", {
             seller: seller,
             product: product,
+            products: products,
+            searchOptions: req.query,
             login: "1"
         });
     }catch (e) {

@@ -1,4 +1,3 @@
-<br>
 <div>
     <%if (product.seller != null) {%>
     <div style="width: 90px">
@@ -9,7 +8,7 @@
 </div>
 <h2>Products By <%=product.seller.username%></h2>
 <div style="display: flex;">
-    <%products.forEach(product => {%>
+    <%display_products.forEach(product => {%>
     <a href="/markets/sellers/products/<%=product.id%>">
         <img height="150px" width="100px" src="<%=product.coverImagePath%>" alt="image">
     </a>
