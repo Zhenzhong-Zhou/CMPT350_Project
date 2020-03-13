@@ -4,6 +4,7 @@ const Product = require("../../models/product");
 const Category = require("../../models/category");
 const Review = require("../../models/review");
 const Reply = require("../../models/reply");
+const View = require("../../models/view");
 const {isAdmin} = require("../../config/auth");
 const { check, validationResult } = require('express-validator');
 
@@ -11,6 +12,9 @@ const { check, validationResult } = require('express-validator');
  * GET All Products Route
  */
 router.get("/", async (req, res) => {
+    const views = new View({
+        views: req.session.views++
+    });
     let query = Product.find({});
     let name = req.query.product_name;
     let author = req.query.author;
@@ -20,6 +24,8 @@ router.get("/", async (req, res) => {
     if (author!= null && author !== "") {
         query = query.regex("author", new RegExp(author, "i"));
     }
+    await views.save();
+    const page_views = await View.find({}).countDocuments();
     const products = await query.exec();
     Product.find((err, all_products) => {
         if (err) console.log(err);
@@ -28,6 +34,7 @@ router.get("/", async (req, res) => {
             all_products: all_products,
             products: products,
             searchOptions: req.query,
+            views: page_views,
             login: "1"
         });
     });
@@ -37,6 +44,9 @@ router.get("/", async (req, res) => {
  * GET Products By Categories Route
  */
 router.get("/:category", async (req, res) => {
+    const views = new View({
+        views: req.session.views++
+    });
     let query = Product.find({});
     let name = req.query.product_name;
     let author = req.query.author;
@@ -48,6 +58,8 @@ router.get("/:category", async (req, res) => {
     }
     const categorySlug = req.params.category;
     try {
+        await views.save();
+        const page_views = await View.find({}).countDocuments();
         const category = await Category.findOne({slug: categorySlug});
         const category_products = await Product.find({category: category._id}).exec();
         const products = await query.exec();
@@ -56,6 +68,7 @@ router.get("/:category", async (req, res) => {
             category_products: category_products,
             products: products,
             searchOptions: req.query,
+            views: page_views,
             login: "1"
         });
     }catch (e) {
@@ -67,6 +80,9 @@ router.get("/:category", async (req, res) => {
  * GET Products By Categories Route
  */
 router.get("/:category/:product", async (req, res) => {
+    const views = new View({
+        views: req.session.views++
+    });
     let query = Product.find({});
     let name = req.query.product_name;
     let author = req.query.author;
@@ -77,6 +93,8 @@ router.get("/:category/:product", async (req, res) => {
         query = query.regex("author", new RegExp(author, "i"));
     }
     try {
+        await views.save();
+        const page_views = await View.find({}).countDocuments();
         const products = await query.exec();
         const product = await Product.findOne({slug: req.params.product}).populate("category").populate("seller").exec();
         const reviews = await Review.find({product: product}).populate("user").exec();
@@ -90,6 +108,7 @@ router.get("/:category/:product", async (req, res) => {
             replies: replies,
             products: products,
             searchOptions: req.query,
+            views: page_views,
             login: "1"
         })
     }catch (e) {
