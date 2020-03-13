@@ -9,22 +9,54 @@ const {isUser} = require("../../config/auth");
  * GET Products' Reviews Page Index Route
  */
 router.get("/:id", isUser, async (req, res) => {
-    const review = await Review.findById(req.params.id).populate("product").populate("user").exec();
-    res.render("user/reviews/index", {
-        review: review,
-        login: "1"
-    });
+    let query = Product.find({});
+    let name = req.query.product_name;
+    let author = req.query.author;
+    if (name != null && name !== "") {
+        query = query.regex("productName", new RegExp(name, "i"));
+    }
+    if (author!= null && author !== "") {
+        query = query.regex("author", new RegExp(author, "i"));
+    }
+    try {
+        const review = await Review.findById(req.params.id).populate("product").populate("user").exec();
+        const products = await query.exec();
+        res.render("user/reviews/index", {
+            review: review,
+            products: products,
+            searchOptions: req.query,
+            login: "1"
+        });
+    }catch (e) {
+        res.redirect("/");
+    }
 });
 
 /*
  * GET Create Review Page Route
  */
 router.get("/create-review/:product", isUser, async (req, res) => {
-    const product = await Product.findOne({slug: req.params.product}).exec();
-    res.render("user/reviews/new", {
-        product: product,
-        login: "1"
-    });
+    let query = Product.find({});
+    let name = req.query.product_name;
+    let author = req.query.author;
+    if (name != null && name !== "") {
+        query = query.regex("productName", new RegExp(name, "i"));
+    }
+    if (author!= null && author !== "") {
+        query = query.regex("author", new RegExp(author, "i"));
+    }
+    try {
+        const product = await Product.findOne({slug: req.params.product}).exec();
+        const products = await query.exec();
+        res.render("user/reviews/new", {
+            product: product,
+            products: products,
+            searchOptions: req.query,
+            login: "1"
+        });
+    }catch (e) {
+        res.redirect("/");
+    }
 });
 
 /*
