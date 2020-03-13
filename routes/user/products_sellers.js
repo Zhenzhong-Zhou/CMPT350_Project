@@ -187,7 +187,7 @@ router.delete("/:id", async (req, res) => {
             res.render("user/products_sellers/show", {
                 product: product,
                 errorMessage: "Could not remove product",
-                login: "2"
+                login: "1"
             });
         }else {
             res.redirect("/");
@@ -209,7 +209,7 @@ async function renderFormPage(req, res, product, form, hasError = false) {
         const params = {
             user: user,
             product: product,
-            login: "2"
+            login: "1"
         };
         if (hasError) {
             if (form === "edit") {

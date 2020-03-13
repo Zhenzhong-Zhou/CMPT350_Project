@@ -3,9 +3,15 @@ const router = express.Router();
 const passport = require("../../config/passport");
 const { forwardAuthenticated } = require("../../config/auth");
 
-router.get("/", (req, res) => {
-    if (res.locals.user) res.redirect("/");
-    res.render("register/login", {login: "3"});
+router.get("/", async (req, res) => {
+    try {
+        if (res.locals.user) res.redirect("/");
+        res.render("register/login", {
+            login: "3"
+        });
+    }catch (e) {
+        res.redirect("/");
+    }
 });
 
 router.post("/", (req, res, next) => {

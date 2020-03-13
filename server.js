@@ -95,9 +95,24 @@ app.use("/admin/categories", adminCategoryRouter);
 app.use("/admin/products", adminProductRouter);
 app.use("/admin/sellers", adminSellerRouter);
 
+const Product = require("./models/product");
 // The Last Middleware: 404 Page
-app.use((req, res, next) => {
-    res.render("404", {login: "4"});
+app.use(async (req, res, next) => {
+    let query = Product.find({});
+    let name = req.query.product_name;
+    let author = req.query.author;
+    if (name != null && name !== "") {
+        query = query.regex("productName", new RegExp(name, "i"));
+    }
+    if (author!= null && author !== "") {
+        query = query.regex("author", new RegExp(author, "i"));
+    }
+    const products = await query.exec();
+    res.render("404", {
+        products: products,
+        searchOptions: req.query,
+        login: "4"
+    });
     next();
 });
 
