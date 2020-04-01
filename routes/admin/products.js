@@ -9,7 +9,7 @@ const { check, validationResult } = require('express-validator');
 /*
  * GET Products Route
  */
-router.get("/", async (req, res) => {
+router.get("/", isAdmin, async (req, res) => {
     let query = Product.find();
     if (req.query.product_name != null && req.query.product_name !== "") {
         query = query.regex("productName", new RegExp(req.query.product_name, "i"));
@@ -38,7 +38,7 @@ router.get("/", async (req, res) => {
 /*
  * GET New Product Route
  */
-router.get("/new", async (req, res) => {
+router.get("/new", isAdmin, async (req, res) => {
     await renderNewPage(res, new Product());
 });
 
@@ -68,7 +68,7 @@ router.post("/", async (req, res) => {
 /*
  * GET List of Products Route
  */
-router.get("/list", async (req, res) => {
+router.get("/list", isAdmin, async (req, res) => {
     try {
         const products = await Product.find({}).populate("category").populate("seller").exec();
         res.render("admin/products/list", {
@@ -83,7 +83,7 @@ router.get("/list", async (req, res) => {
 /*
  * GET Show Product Route
  */
-router.get("/:id", async (req, res) => {
+router.get("/:id", isAdmin, async (req, res) => {
     try{
         const product = await Product.findById(req.params.id).populate("category").populate("seller").exec();
         res.render("admin/products/show", {
@@ -98,7 +98,7 @@ router.get("/:id", async (req, res) => {
 /*
  * GET Edit Product Route
  */
-router.get("/:id/edit", async (req, res) => {
+router.get("/:id/edit", isAdmin, async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
         await renderEditPage(res, product);

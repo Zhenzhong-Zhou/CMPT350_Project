@@ -2,13 +2,13 @@ const express = require("express");
 const router = express.Router();
 const User = require("../../models/user");
 const Product = require("../../models/product");
-const {isUser} = require("../../config/auth");
+const {isSeller} = require("../../config/auth");
 const imageMimeTypes = ["image/jpg", "image/jpeg", "image/png", "images/gif"];
 
 /*
  * GET Add Seller's Product Route
  */
-router.get("/new", async (req, res) => {
+router.get("/new", isSeller, async (req, res) => {
     let query = Product.find({});
     let name = req.query.product_name;
     let author = req.query.author;
@@ -118,7 +118,7 @@ router.get("/:id/display", async (req, res) => {
 /*
  * GET Edit Seller's Product Route
  */
-router.get("/:id/edit", async (req, res) => {
+router.get("/:id/edit", isSeller, async (req, res) => {
     let query = Product.find({});
     let name = req.query.product_name;
     let author = req.query.author;

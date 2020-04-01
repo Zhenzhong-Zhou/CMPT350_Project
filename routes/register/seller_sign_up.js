@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../../models/user");
-const {forwardAuthenticated} = require("../../config/auth");
 const { check, validationResult } = require('express-validator');
 const imageMimeTypes = ["image/jpg", "image/jpeg", "image/png", "images/gif"];
 

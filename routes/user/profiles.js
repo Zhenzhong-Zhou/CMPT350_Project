@@ -3,12 +3,12 @@ const router = express.Router();
 const User = require("../../models/user");
 const Review = require("../../models/review");
 const Product = require("../../models/product");
-const {isSeller, isUser} = require("../../config/auth");
+const {isUser} = require("../../config/auth");
 
 /*
  * GET User's Profile Index Page Route
  */
-router.get("/", async (req, res) => {
+router.get("/", isUser, async (req, res) => {
     let query = Product.find({});
     let name = req.query.product_name;
     let author = req.query.author;

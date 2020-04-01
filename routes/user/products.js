@@ -4,8 +4,6 @@ const Product = require("../../models/product");
 const Category = require("../../models/category");
 const Review = require("../../models/review");
 const Reply = require("../../models/reply");
-const {isAdmin} = require("../../config/auth");
-const { check, validationResult } = require('express-validator');
 
 /*
  * GET All Products Route

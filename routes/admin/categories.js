@@ -28,7 +28,7 @@ router.get("/", isAdmin, async (req, res) => {
 /*
  * GET New Category Route
  */
-router.get("/new", (req, res) => {
+router.get("/new", isAdmin, (req, res) => {
     res.render("admin/categories/new", {category: new Category(), login: "2"});
 });
 
@@ -73,7 +73,7 @@ router.post("/", [
 /*
  * GET Show Category Route
  */
-router.get("/:id", async (req, res) => {
+router.get("/:id", isAdmin, async (req, res) => {
     try{
         let category = await Category.findById(req.params.id);
         let products = await Product.find({category: category.id}).limit(10).exec();
@@ -90,7 +90,7 @@ router.get("/:id", async (req, res) => {
 /*
  * GET Edit Category Route
  */
-router.get("/:id/edit", async (req, res) => {
+router.get("/:id/edit", isAdmin, async (req, res) => {
     try {
         const category = await Category.findById(req.params.id);
         res.render("admin/categories/edit", {category: category, login: "2"});

@@ -5,7 +5,7 @@ const Category = require("../../models/category");
 const Product = require("../../models/product");
 const {isAdmin} = require("../../config/auth");
 
-router.get("/", async (req, res) => {
+router.get("/", isAdmin, async (req, res) => {
     let pages;
     let categories;
     let products;
