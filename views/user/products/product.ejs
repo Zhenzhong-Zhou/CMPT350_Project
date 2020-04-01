@@ -28,10 +28,11 @@
 </div>
 <br>
 <div class="comments">
-    <a class="links" href="/products/users/reviews/create-review/<%=product.slug%>">Write a Customer Review</a>
+    <%if (locals.user && locals.user.admin == 0) {%>
+        <a class="links" href="/products/users/reviews/create-review/<%=product.slug%>">Write a Customer Review</a>
+    <%}%>
     <h1>Customer Review</h1>
     <p>Showing <%=number%> comments</p>
-    <p>admin  2 days ago => sample</p>
     <%if (number > 0) {%>
         <%replies.forEach(reply => {%>
             <%reviews.forEach(review => {%>
