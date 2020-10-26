@@ -32,6 +32,7 @@ router.get("/", isAdmin, async (req, res) => {
         });
     }catch (e) {
         res.redirect("/");
+        // test
     }
 });
 
